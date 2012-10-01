@@ -1,0 +1,171 @@
+<project name='V1TFS2010' default='compile'>
+
+	<property name='project.name' value='${project::get-name()}' />
+	
+	<property name='publish.dir' value='publish' unless="${property::exists('publish.dir')}" />
+	
+	<property name='msbuild.dir' value='Common\msbuild\3.5' />
+	
+	<!-- TODO possibly use MSBuild task and not provide the path -->
+	<property name='msbuild.exe' value="${environment::get-variable('SystemRoot')}\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"/>
+	<property name='devenv.com' value="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.com"/>
+
+	
+	<property name='msbuild.args' value='/v:q /consoleloggerparameters:NoSummary /nologo' />
+		
+	<property name='build.config' value='Debug' />
+	<target name='debug' description='Select Debug build'>
+		<property name='build.config' value='Debug' />
+	</target>
+	<target name='release' description='Select Release build'>
+		<property name='build.config' value='Release' />
+	</target>
+
+	<!--== SETVERSION ==-->
+	<property name='ver.major' value='1' />
+	<property name='ver.minor' value='0' />
+	<property name='ver.major.minor' value='${ver.major}.${ver.minor}' />
+	<property name='build.version' value='${ver.major.minor}' />
+ 	
+	<if test="${property::exists('build.number')}">
+		<property name='build.version' value='${ver.major.minor}.${build.number}' />
+		<if test="${property::exists('ver.revision') and int::parse(ver.revision) > 0}">
+			<property name='build.version' value='${ver.major.minor}.${build.number}.${ver.revision}' />
+		</if>
+	</if>
+		
+	<!--== CLEAN ==-->
+	<target name='clean'>
+		<call target='compile.clean' />
+		<call target='publish.clean' />
+		<call target='package.source.clean' />
+	</target>
+	
+	<!--== COMPILE ==-->
+	<target name='compile.init'>
+		<property name='msbuild.snk' value="${path::get-full-path('Common\SigningKey\VersionOne.snk')}"/>	
+		<property name='compile.sln' value='${project.name}.sln' />
+	</target>
+
+	<target name='compile' description='Compile all projects' depends='compile.init'>
+		<property name='msbuild.signargs' value='/p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${msbuild.snk}' />
+<!-- 		<exec program='${msbuild.exe}' commandline='${compile.sln} /t:Rebuild /p:Configuration=${build.config} ${msbuild.args} ${msbuild.signargs}' basedir='${msbuild.dir}' /> -->
+		<exec program='${msbuild.exe}' commandline='${compile.sln} /t:Rebuild /p:Configuration=${build.config} ${msbuild.args}' basedir='${msbuild.dir}' />
+	</target>
+	
+	<target name='compile.clean'>
+		<delete failonerror='false'>
+			<fileset>
+				<include name='**\obj\**' />
+				<include name='**\bin\**' />
+				<exclude name='VersionOneTFSServer\Bin\**'/>
+				<include name='VersionOne.TFSListener.Installer\Release\**' />
+				<include name='VersionOne.TFSListener.Installer\Debug\**' />
+			</fileset>
+		</delete>
+		<delete dir='PrecompiledWeb'/>
+	</target>
+
+	<!--== PACKAGE ==-->
+	<target name='package' depends='package.source'/>
+	
+	<target name='package.source.init'>
+		<property name='package.source.zipfile' value='V1TFS2010.Source-${build.version}.zip' />
+	</target>
+
+	<target name='package.source' depends='package.source.init'>
+		<zip zipfile='${package.source.zipfile}'>
+			<fileset>
+				<include name='**\*.cs' />
+
+				<include name='**\*.resx' />
+				<include name='**\*.rc' />
+				<include name='**\*.h' />
+				<include name='**\*.ctc' />
+
+				<include name='**\*.bmp' />
+				<include name='**\*.ico' />
+				<include name='**\*.gif' />
+
+				<include name='**\*.xml' />
+				<include name='**\*.config' />
+
+				<include name='**\*.csproj' />
+				<include name='**\*.vcproj' />
+				<include name='**\*.sln' />
+
+				<include name='*.build' />				
+				<include name='*.inc' />
+				<include name='Common\V1SDK\*.dll' />
+				<include name='Common\ServiceHost\*.dll'/>
+				<include name='VersionOneTFSServer\**\*'/>
+				<include name='VersionOne.TFSListener.Installer\*'/>
+				<include name='Doc\**\*'/>
+
+				<include name='**\*.refresh'/>
+
+				<exclude name='*.internal.build' />
+				<exclude name='Common\Tools\**\*' />
+				<exclude name='Common\msbuild\**\*' />
+				<exclude name='**\bin\**' />
+				<exclude name='PrecompiledWeb\**'/>
+			</fileset>
+			<fileset>
+				<include name='**\*.refresh'/>
+			</fileset>
+		</zip>
+	</target>
+
+	<target name='package.source.clean' depends='package.source.init'>
+		<delete file='${package.source.zipfile}' if='${file::exists(package.source.zipfile)}' failonerror='false' />
+	</target>
+	
+	<!--== PUBLISH ==-->	
+	<target name='publish.init'>
+		<property name='publish.temp' value='_publish'/>
+		<property name='publish.zipfile' value='${publish.dir}/V1TFS2010-${build.version}.zip'/>
+
+		<mkdir dir='${publish.temp}'/>
+		<mkdir dir='${publish.dir}'/>
+		<copy todir='${publish.temp}/VersionOneCheckinPolicy' flatten='true'>
+		    <fileset basedir="VersionOneTFSPolicyInstaller/bin/${build.config}">
+		        <include name="*.vsix" />
+		    </fileset>
+		</copy>
+
+		<copy todir='${publish.temp}/VersionOneTFSListener' flatten='true'>
+		    <fileset basedir="VersionOne.TFSListener.Installer/bin/${build.config}">
+		        <include name="*.msi" />
+		    </fileset>
+		</copy>
+
+		<copy todir='${publish.temp}/Doc' flatten='false'>
+		    <fileset basedir="Doc">
+		        <include name="*/**" />
+		    </fileset>
+		</copy>
+		
+	</target>
+	
+	<target name='publish' depends='publish.init'>	
+		<zip zipfile='${publish.zipfile}'>
+			<fileset basedir='${publish.temp}'>
+				<include name="**/*" />
+			</fileset>
+		</zip>		
+		<delete dir='${publish.temp}'/>
+		<move todir="${publish.dir}">
+		    <fileset basedir=".">
+		        <include name="${package.source.zipfile}" />
+		    </fileset>
+		</move>
+	</target>
+
+	<target name='publish.clean'>
+		<delete dir='${publish.dir}'/>
+	</target>
+
+	<!--== ALL ==-->
+	<target name='all' depends='clean, compile, package, publish' description='The works, from source to distributable binaries.' />
+	
+</project>

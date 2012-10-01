@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+  
+	<Product Id="70439564-5E37-4B38-AEF4-91D86F50B282" Name="VersionOne TFS Listener" Language="1033" Version="2.0.0.0" Manufacturer="VersionOne" UpgradeCode="003F3FE8-9A6D-445F-9ACB-5479FAD77A7D">
+
+    <Package Id="*" Keywords ="Installer" Description="VersionOne Installer for TFS 2010 Listener" InstallerVersion="200" Compressed="yes" />
+
+    <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
+
+    <Icon Id="icon.ico" SourceFile="logo.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <iis:WebAppPool Id="ASP_NET_4" Name="ASP.NET v4.0"/>
+    
+    <Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="VersionOne" Name="VersionOne">
+				  <Directory Id="INSTALLLOCATION" Name="TFSListener">
+            <Component Id="TFSListenerConfig" Guid="C2D48FB6-AA6D-4057-9C61-4506CDD2F521">
+              <File Id="VersionOneTFSServerConfigEXE" Name="$(var.VersionOneTFSServerConfig.TargetFileName)" DiskId="1" Vital="yes" KeyPath="yes" Source ="$(var.VersionOneTFSServerConfig.TargetPath)">
+                <Shortcut Id="desktopConfig" Directory="DesktopFolder" Name="Configure VersionOne Listener" Advertise="yes" Icon="icon.ico"/>
+                <Shortcut Id="startMenuConfigConfig" Directory="ProgramMenuDir" Name="Configure VersionOne Listener" Advertise="yes" Icon="icon.ico"/>
+              </File>              
+            </Component>
+            <Component Id="VersionOneSDKAPIClient" Guid="D871A7A4-626E-45B0-A871-6E72783E4866">
+              <File Id="VersionOneSDKAPIClientDLL" Name="VersionOne.SDK.APIClient.dll" DiskId="1" Vital="yes" KeyPath="yes" Source ="..\Common\V1SDK\VersionOne.SDK.APIClient.dll"/>
+            </Component>
+            <Component Id="VersionOneTFSDataLayer" Guid="D79297A6-B819-4065-81D4-FAC039CA702E">
+              <File Id="VersionOneTFSDataLayerDLL" Name="$(var.VersionOne.TFS2010.DataLayer.TargetFileName)" DiskId="1" Vital="yes" KeyPath="no" Source="$(var.VersionOne.TFS2010.DataLayer.TargetPath)"/>
+              <File Id="VersionOneServerConnectorDLL" Name="VersionOne.ServerConnector.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\Common\ServiceHost\VersionOne.ServerConnector.dll"/>
+              <File Id="VersionOneServiceHostCoreDLL" Name="VersionOne.ServiceHost.Core.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\Common\ServiceHost\VersionOne.ServiceHost.Core.dll"/>
+              <File Id="Log4NetDLL" Name="log4net.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\Common\ServiceHost\log4net.dll"/>
+            </Component>
+            <Directory Id="WebDir" Name="web">
+              <Component Id="ListenerWebSite" Guid="82E0F77A-ABBE-4247-A36D-468276FFFAB3" >
+                <CreateFolder/>
+                <iis:WebSite Id="TFSListenerSite" AutoStart="yes" Description="VersionOne TFS Listener" Directory="WebDir">
+                  <iis:WebAddress Id='AllUnassigned' Port='[LISTEN_PORT]'/>
+                  <iis:WebApplication Id='TFSListenerApp' WebAppPool='ASP_NET_4' Name='TFS Listener App'/>
+                </iis:WebSite>
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="VersionOne">
+          <Component Id="ProgramMenuDir" Guid="2582AF23-23C7-4616-8240-7C5E96D5463E">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+
+    <Feature Id="Complete" Title="VersionOne TFS Listener" Description="Install the VersionOne TFS Listener" Display="expand" ConfigurableDirectory="INSTALLLOCATION" Level="1">
+      <ComponentRef Id="TFSListenerConfig"/>
+      <ComponentRef Id="VersionOneSDKAPIClient"/>
+      <ComponentRef Id="VersionOneTFSDataLayer"/>
+      <ComponentRef Id="ProgramMenuDir"/>
+      <ComponentGroupRef Id="TFSListenerSite"/>
+      <ComponentRef Id="ListenerWebSite"/>
+    </Feature>
+    
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <UI Id="TFSListen_Install_UI">
+      <UIRef Id="WixUI_InstallDir" />
+      <DialogRef Id="PortSelectDialog"/>
+      <Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="PortSelectDialog" Order="4">1</Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="PortSelectDialog">1</Publish>
+    </UI>
+    
+  </Product>
+</Wix>
