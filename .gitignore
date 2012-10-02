@@ -3,6 +3,8 @@
 *.dll
 *.pdb
 *.exe
-bin/Debug/
-bin/Release/
+*/bin/Debug/
+*/bin/Release/
+*/obj/Debug/
+*/obj/Release/
 
