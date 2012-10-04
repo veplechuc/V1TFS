@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using VersionOne.SDK.APIClient;
 using VersionOne.ServerConnector;
 using VersionOne.ServerConnector.Entities;
 using VersionOne.ServerConnector.Filters;
+using VersionOne.ServiceHost.Core.Configuration;
 using VersionOne.ServiceHost.Core.Logging;
-using VersionOneProcessorSettings = VersionOne.ServerConnector.VersionOneSettings;
+using VersionOneProcessorSettings = VersionOne.ServiceHost.Core.Configuration.VersionOneSettings;
 
 namespace VersionOne.TFS2010.DataLayer 
 {
@@ -208,6 +210,8 @@ namespace VersionOne.TFS2010.DataLayer
             public void Log(string message, Exception exception) { }
             public void Log(LogMessage.SeverityType severity, string message) { }
             public void Log(LogMessage.SeverityType severity, string message, Exception exception) { }
+	        public void LogVersionOneConfiguration(LogMessage.SeverityType severity, XmlElement config) { }
+	        public void LogVersionOneConnectionInformation(LogMessage.SeverityType severity, string metaVersion, string memberOid, string defaultMemberRole) { }
         }
     }
 }

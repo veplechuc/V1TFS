@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS.Policy", "VersionOneTFSPolicy\VersionOne.TFS.Policy.csproj", "{24B4AF99-795B-4B33-AD1D-FD51F32E2AEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOneTFSPolicyInstaller", "VersionOneTFSPolicyInstaller\VersionOneTFSPolicyInstaller.csproj", "{5916965B-4870-42F0-A53B-652461C71785}"
@@ -14,6 +14,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS2010.DataLayer", "VersionOne.TFS2010.DataLayer\VersionOne.TFS2010.DataLayer.csproj", "{9B0896C0-DC42-44C0-B46D-813F34E55710}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS2010.Tests", "VersionOne.TFS2010.Tests\VersionOne.TFS2010.Tests.csproj", "{8FF7A1A5-EF9B-41D3-816F-DECE9FA7428E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0639B290-AE8A-4239-8EF5-F4DFB1639BCE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
