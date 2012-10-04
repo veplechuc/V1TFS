@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS2010.DataLaye
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS2010.Tests", "VersionOne.TFS2010.Tests\VersionOne.TFS2010.Tests.csproj", "{8FF7A1A5-EF9B-41D3-816F-DECE9FA7428E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0639B290-AE8A-4239-8EF5-F4DFB1639BCE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BED94B88-A3F9-4458-B8C6-C2FA22EA2F4F}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe

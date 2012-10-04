@@ -96,8 +96,6 @@
 
 				<include name='*.build' />				
 				<include name='*.inc' />
-				<include name='Common\V1SDK\*.dll' />
-				<include name='Common\ServiceHost\*.dll'/>
 				<include name='VersionOneTFSServer\**\*'/>
 				<include name='VersionOne.TFSListener.Installer\*'/>
 				<include name='Doc\**\*'/>
