@@ -38,7 +38,6 @@
 	<target name='clean'>
 		<call target='compile.clean' />
 		<call target='publish.clean' />
-		<call target='package.source.clean' />
 	</target>
 	
 	<!--== COMPILE ==-->
@@ -104,11 +103,6 @@
 			</fileset>
 		</zip>		
 		<delete dir='${publish.temp}'/>
-		<move todir="${publish.dir}">
-		    <fileset basedir=".">
-		        <include name="${package.source.zipfile}" />
-		    </fileset>
-		</move>
 	</target>
 
 	<target name='publish.clean'>
