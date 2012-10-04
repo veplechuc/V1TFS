@@ -67,56 +67,8 @@
 	</target>
 
 	<!--== PACKAGE ==-->
-	<target name='package' depends='package.source'/>
+	<target name='package' />
 	
-	<target name='package.source.init'>
-		<property name='package.source.zipfile' value='V1TFS2010.Source-${build.version}.zip' />
-	</target>
-
-	<target name='package.source' depends='package.source.init'>
-		<zip zipfile='${package.source.zipfile}'>
-			<fileset>
-				<include name='**\*.cs' />
-
-				<include name='**\*.resx' />
-				<include name='**\*.rc' />
-				<include name='**\*.h' />
-				<include name='**\*.ctc' />
-
-				<include name='**\*.bmp' />
-				<include name='**\*.ico' />
-				<include name='**\*.gif' />
-
-				<include name='**\*.xml' />
-				<include name='**\*.config' />
-
-				<include name='**\*.csproj' />
-				<include name='**\*.vcproj' />
-				<include name='**\*.sln' />
-
-				<include name='*.build' />				
-				<include name='*.inc' />
-				<include name='VersionOneTFSServer\**\*'/>
-				<include name='VersionOne.TFSListener.Installer\*'/>
-				<include name='Doc\**\*'/>
-
-				<include name='**\*.refresh'/>
-
-				<exclude name='*.internal.build' />
-				<exclude name='Common\Tools\**\*' />
-				<exclude name='Common\msbuild\**\*' />
-				<exclude name='**\bin\**' />
-				<exclude name='PrecompiledWeb\**'/>
-			</fileset>
-			<fileset>
-				<include name='**\*.refresh'/>
-			</fileset>
-		</zip>
-	</target>
-
-	<target name='package.source.clean' depends='package.source.init'>
-		<delete file='${package.source.zipfile}' if='${file::exists(package.source.zipfile)}' failonerror='false' />
-	</target>
 	
 	<!--== PUBLISH ==-->	
 	<target name='publish.init'>
