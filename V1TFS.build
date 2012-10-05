@@ -56,7 +56,7 @@
 		<delete failonerror='false'>
 			<fileset>
 				<include name='**\obj\**' />
-				<include name='**\bin\**' />
+				<include name='*\bin\**' />
 				<exclude name='VersionOneTFSServer\Bin\**'/>
 				<include name='VersionOne.TFSListener.Installer\Release\**' />
 				<include name='VersionOne.TFSListener.Installer\Debug\**' />
