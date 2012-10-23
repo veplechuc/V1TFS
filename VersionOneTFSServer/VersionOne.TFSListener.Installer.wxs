@@ -25,9 +25,15 @@
                 <Shortcut Id="startMenuConfigConfig" Directory="ProgramMenuDir" Name="Configure VersionOne Listener" Advertise="yes" Icon="icon.ico"/>
               </File>              
             </Component>
-						
-
-						
+            <Component Id="VersionOneSDKAPIClient" Guid="D871A7A4-626E-45B0-A871-6E72783E4866">
+              <File Id="VersionOneSDKAPIClientDLL" Name="VersionOne.SDK.APIClient.dll" DiskId="1" Vital="yes" KeyPath="yes" Source ="..\packages\VersionOne.SDK.APIClient.12.2.30.0\lib\net40\VersionOne.SDK.APIClient.dll"/>
+            </Component>
+            <Component Id="VersionOneTFSDataLayer" Guid="D79297A6-B819-4065-81D4-FAC039CA702E">
+              <File Id="VersionOneTFSDataLayerDLL" Name="$(var.VersionOne.TFS2010.DataLayer.TargetFileName)" DiskId="1" Vital="yes" KeyPath="no" Source="$(var.VersionOne.TFS2010.DataLayer.TargetPath)"/>
+              <File Id="VersionOneServerConnectorDLL" Name="VersionOne.ServerConnector.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\packages\VersionOne.ServiceHost.CoreDLLs.0.0.1\lib\VersionOne.ServerConnector.dll"/>
+              <File Id="VersionOneServiceHostCoreDLL" Name="VersionOne.ServiceHost.Core.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\packages\VersionOne.ServiceHost.CoreDLLs.0.0.1\lib\VersionOne.ServiceHost.Core.dll"/>
+              <File Id="Log4NetDLL" Name="log4net.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\packages\log4net.2.0.0\lib\net40-full\log4net.dll"/>
+            </Component>
             <Directory Id="WebDir" Name="web">
               <Component Id="ListenerWebSite" Guid="82E0F77A-ABBE-4247-A36D-468276FFFAB3" >
                 <CreateFolder/>
@@ -56,6 +62,8 @@
 
     <Feature Id="Complete" Title="VersionOne TFS Listener" Description="Install the VersionOne TFS Listener" Display="expand" ConfigurableDirectory="INSTALLLOCATION" Level="1">
       <ComponentRef Id="TFSListenerConfig"/>
+      <ComponentRef Id="VersionOneSDKAPIClient"/>
+      <ComponentRef Id="VersionOneTFSDataLayer"/>
       <ComponentRef Id="ProgramMenuDir"/>
       <ComponentGroupRef Id="TFSListenerSite"/>
       <ComponentRef Id="ListenerWebSite"/>
