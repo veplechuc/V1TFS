@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOne.TFS.Policy", "VersionOneTFSPolicy\VersionOne.TFS.Policy.csproj", "{24B4AF99-795B-4B33-AD1D-FD51F32E2AEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOneTFSPolicy", "VersionOneTFSPolicy\VersionOneTFSPolicy.csproj", "{24B4AF99-795B-4B33-AD1D-FD51F32E2AEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOneTFSPolicyInstaller", "VersionOneTFSPolicyInstaller\VersionOneTFSPolicyInstaller.csproj", "{5916965B-4870-42F0-A53B-652461C71785}"
 EndProject
