@@ -37,7 +37,7 @@ For instance, if the machine hosting your TFS Server is called "TFS2010" and you
 http://tfs2010:9090/Service.svc 
 ```
 You should see a page similar to the following:
-![Service Service](https://github.com/versionone/V1TFS/blob/master/Doc/images/ListenerWorks.png "Listener Works")
+![Service Service](https://github.com/versionone/V1TFS/blob/master/Doc/images/ListenerWorks.png?raw=true "Listener Works")
 
 ## Configure the TFS Listener
 
@@ -49,19 +49,19 @@ The utility has 3 tabs
 
 This tab allows you to to configure VersionOne connectivity. All of these parameters are required.
  
-![VersionOne Server Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/V1Config.jpg "VersionOne Server")
+![VersionOne Server Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/V1Config.jpg?raw=true "VersionOne Server")
 
 ### 2. TFS Server 
 
 This tab allows you to subscribe to TFS Events. All of these parameters are required
  
-![TFS Server Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFSConfig.jpg "TFS Server")
+![TFS Server Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFSConfig.jpg?raw=true "TFS Server")
 
 ### 3. Advanced 
 
 This tab allows you to configure the regular expression used to match VersionOne IDs in Check-in comments and enable a debug log. This configuration is optional since we set the default value to a working expression. We do not recommend you change this unless necessary.
  
-![Advanced Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/AdvancedConfig.jpg "Advanced")
+![Advanced Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/AdvancedConfig.jpg?raw=true "Advanced")
 
 ## Install the VersionOne Check-in policy
 
@@ -76,12 +76,12 @@ In order to be considered when performing a check-in, the VersionOne TFS Check-i
 ### 3. Right click on the desired project
 ### 4. Select "Team Project Settings"
 ### 5. Select "Source Control..."
-![Team Project Settings -> Source Control...](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.1.jpg "Team Project Settings -> Source Control...")
+![Team Project Settings -> Source Control...](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.1.jpg?raw=true "Team Project Settings -> Source Control...")
 ### 6. Select the "Check-in Policy" tab
-![Check-in Policy Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.2.jpg "Check-in Policy")
+![Check-in Policy Tab](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.2.jpg?raw=true "Check-in Policy")
 ### 7. Click "Add"
 ### 8. Select the "VersionOne Policy"
-![VersionOne Policy](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.3.jpg "VersionOne Policy")
+![VersionOne Policy](https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.3.jpg?raw=true "VersionOne Policy")
 ### 9. Click Ok to close the "Add Check-in Policy" dialog
 ### 10. Click Ok to close the "Source Control Settings" dialog
 
@@ -94,17 +94,18 @@ If you are using Team Edition, you need to manually create the Build Project. In
 ### 1. Log into the VersionOne application as admin
 ### 2. Navigate to the Admin -> Configuration -> System page
 ### 3. Check the "Enable Build Integration" checkbox and click the Apply button
-![Enable Build Integration](https://github.com/versionone/V1TFS/blob/master/Doc/images/EnableBuildIntegration.jpg "Enable Build Integration")
+![Enable Build Integration](https://github.com/versionone/V1TFS/blob/master/Doc/images/EnableBuildIntegration.jpg?raw=true "Enable Build Integration")
 ### 4. Navigate to the Admin -> Projects -> Build Project page
-![Build Projects](https://github.com/versionone/V1TFS/blob/master/Doc/images/BuildProjects.jpg "Build Projects")
+![Build Projects](https://github.com/versionone/V1TFS/blob/master/Doc/images/BuildProjects.jpg?raw=true "Build Projects")
 ### 5. Click Add to add a new Build Project
 ### 6. Specify the following
 1. Name: this is how the Build Project will be known to VersionOne users
 2. Reference: this is the Build Project is known to TFS
+
 ### 7. Click Ok to save the new Build Project
-### 8. Navigate to the Admin | Projects | Projects page
+### 8. Navigate to the Admin -> Projects -> Projects page
 ### 9. Click Edit on the row for the project you want associated with a Build Project
 ### 10. Using the "Build Projects" dropdown add the appropriate Build Project.
-![Assign Build Project to Project](https://github.com/versionone/V1TFS/blob/master/Doc/images/AssignBuildProjectToProject.jpg "Assign Build Project to Project")
+![Assign Build Project to Project](https://github.com/versionone/V1TFS/blob/master/Doc/images/AssignBuildProjectToProject.jpg?raw=true "Assign Build Project to Project")
 ### 11. Click Ok to accept the changes
 ### 12. Logout
