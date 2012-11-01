@@ -34,6 +34,22 @@
               <File Id="VersionOneServiceHostCoreDLL" Name="VersionOne.ServiceHost.Core.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\packages\VersionOne.ServiceHost.CoreDLLs.0.0.1\lib\VersionOne.ServiceHost.Core.dll"/>
               <File Id="Log4NetDLL" Name="log4net.dll" DiskId="1" Vital="yes" KeyPath="no" Source ="..\packages\log4net.2.0.0\lib\net40-full\log4net.dll"/>
             </Component>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
             <Directory Id="WebDir" Name="web">
               <Component Id="ListenerWebSite" Guid="82E0F77A-ABBE-4247-A36D-468276FFFAB3" >
                 <CreateFolder/>
@@ -46,8 +62,6 @@
           </Directory>
         </Directory>
       </Directory>
-
-
       <Directory Id="ProgramMenuFolder" Name="Programs">
         <Directory Id="ProgramMenuDir" Name="VersionOne">
           <Component Id="ProgramMenuDir" Guid="2582AF23-23C7-4616-8240-7C5E96D5463E">
@@ -58,8 +72,6 @@
       </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
     </Directory>
-
-
     <Feature Id="Complete" Title="VersionOne TFS Listener" Description="Install the VersionOne TFS Listener" Display="expand" ConfigurableDirectory="INSTALLLOCATION" Level="1">
       <ComponentRef Id="TFSListenerConfig"/>
       <ComponentRef Id="VersionOneSDKAPIClient"/>
@@ -68,7 +80,6 @@
       <ComponentGroupRef Id="TFSListenerSite"/>
       <ComponentRef Id="ListenerWebSite"/>
     </Feature>
-    
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <UI Id="TFSListen_Install_UI">

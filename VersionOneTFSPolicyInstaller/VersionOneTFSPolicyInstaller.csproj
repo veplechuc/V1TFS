@@ -72,9 +72,9 @@
       <Project>{9B0896C0-DC42-44C0-B46D-813F34E55710}</Project>
       <Name>VersionOne.TFS2010.DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VersionOneTFSPolicy\VersionOne.TFS.Policy.csproj">
+    <ProjectReference Include="..\VersionOneTFSPolicy\VersionOneTFSPolicy.csproj">
       <Project>{24B4AF99-795B-4B33-AD1D-FD51F32E2AEB}</Project>
-      <Name>VersionOne.TFS.Policy</Name>
+      <Name>VersionOneTFSPolicy</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
