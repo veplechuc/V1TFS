@@ -1,6 +1,6 @@
 @ECHO OFF
 SETLOCAL
-SET PROJECT="VersionOne.ServerConnector.csproj"
+SET PROJECT="V1TFS2010.csproj"
 FOR /D %%D IN (%SYSTEMROOT%\Microsoft.NET\Framework\*) DO SET MSBUILD="%%D\MSBuild.exe"
 REM SET MSBUILD=
 SET NUGET="%CD%\.nuget\NuGet.exe"
