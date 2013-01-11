@@ -2,7 +2,7 @@
 SETLOCAL
 SET PROJECT="V1TFS2010.sln"
 FOR /D %%D IN (%SYSTEMROOT%\Microsoft.NET\Framework\*) DO SET MSBUILD="%%D\MSBuild.exe"
-REM SET MSBUILD=
+REM SET MSBUILD=%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe
 SET NUGET="%CD%\.nuget\NuGet.exe"
 SET NUGET_SRC="http://packages.nuget.org/api/v2/;http://www.myget.org/F/versionone/"
 SET BUILD_TOOLS=%1
@@ -33,7 +33,6 @@ REM )
 /p:PackageSources=%NUGET_SRC% ^
 /p:RequireRestoreConsent=false ^
 /p:Configuration=Release ^
-/p:Platform="Any CPU" ^
 /p:Major=2 ^
 /p:Minor=0 ^
 /p:Revision=1 ^
