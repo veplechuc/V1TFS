@@ -1,4 +1,7 @@
 # Acknowledgements
+Communication with Team Foundation Server uses the TFS SDK, which ships with 
+Visual Studio and is commercially licensed.
+
 Package management support is provided by NuGet, which is open-source software.
 
 The original software is available from:
@@ -13,18 +16,20 @@ C. Two, Alexei A. Vorontsov, and Philip A. Craig, with respective
 copyrights.
 
 The original software is available from:
-   http://www.nunit.org/
+  http://www.nunit.org/
 
 This library is available under an NUnit License:
-   http://www.nunit.org/index.php?p=license&r=2.5.10
+  http://www.nunit.org/index.php?p=license&r=2.5.10
 
-Installer is created using the WiX Toolset, which is open source software.
+The TFS Listener Installer is created using the WiX Toolset, which is open-source software.
 
 The original software is available from:
-   http://wixtoolset.org/
+  http://wixtoolset.org/
 
 This software is available under a Microsoft Reciprocal License (Ms-RL):
-   http://wix.codeplex.com/license
+  http://wix.codeplex.com/license
 
-Communication with Team Foundation Server uses the TFS SDK, which ships with 
-Visual Studio and is commercially licensed.
+The TFS Policy Installer is created using the Visual Studio 2012 SDK, which is commercially licensed.
+
+The original software is available from:
+  http://www.microsoft.com/en-us/download/details.aspx?id=30668
