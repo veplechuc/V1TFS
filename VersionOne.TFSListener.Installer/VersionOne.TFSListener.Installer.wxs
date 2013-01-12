@@ -90,8 +90,11 @@
       </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
     </Directory>
-    <Feature Id="Complete" Title="VersionOne TFS Listener" Description="Install the VersionOne TFS Listener"
-             Display="expand" ConfigurableDirectory="INSTALLLOCATION" Level="1">
+    <Feature Id="Complete" Title="$(var.ProductName)" 
+             Description="Install $(var.ProductName)"
+             Display="expand" 
+             ConfigurableDirectory="INSTALLLOCATION" 
+             Level="1" >
       <ComponentRef Id="VersionOneSDKAPIClient" />
       <ComponentRef Id="VersionOneTFSDataLayer" />
       <ComponentRef Id="TFSListenerConfig" />
@@ -99,11 +102,6 @@
       <ComponentGroupRef Id="TFSListenerSite" />
       <ComponentRef Id="ListenerWebSite" />
     </Feature>
-    <Property Id="INSTALLLOCATION">
-      <RegistrySearch Id="RegistrySearch" Type="raw" Root="HKLM" Win64="$(var.Win64)"
-                Key="Software\Company\Product" Name="InstallLocation" />
-    </Property>
-
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <UI Id="TFSListen_Install_UI">
