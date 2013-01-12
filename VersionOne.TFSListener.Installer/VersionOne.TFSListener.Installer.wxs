@@ -35,7 +35,7 @@
             <Component Id="TFSListenerConfig" Guid="C2D48FB6-AA6D-4057-9C61-4506CDD2F521">
               <File Id="VersionOneTFSServerConfigEXE" 
                     Name="VersionOneTFSServerConfig.exe" 
-                    Source="$(var.VersionOne.TFS2010.DataLayer.TargetPath)"
+                    Source="$(var.VersionOne.TFS2010.DataLayer.TargetDir)"
                     DiskId="1" Vital="yes" KeyPath="yes" >
                 <Shortcut Id="desktopConfig" Directory="DesktopFolder" Name="Configure VersionOne Listener"
                           Advertise="yes" Icon="icon.ico" />

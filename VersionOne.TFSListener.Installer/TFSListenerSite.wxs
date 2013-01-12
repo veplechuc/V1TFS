@@ -7,12 +7,12 @@
       <ComponentRef Id="SiteBin"/>
     </ComponentGroup>
 
-    <DirectoryRef Id="WebDir" FileSource ="../VersionOneTFSServer">
+    <DirectoryRef Id="WebDir" FileSource ="$(var.VersionOneTFSServer.ProjectDir)">
       <Component Id="SiteRoot" Guid="{8FBC348B-7DCE-451D-970E-319930C89B72}">
         <File Id="WebConfig" Name="Web.config"/>
         <File Id="ServiceSVC" Name="Service.svc"/>
       </Component>
-      <Directory Id="WebDir_Bin" Name="bin" FileSource="$(var.VersionOneTFSServer.TargetDir">
+      <Directory Id="WebDir_Bin" Name="bin" FileSource="$(var.VersionOneTFSServer.TargetDir)">
         <Component Id="SiteBin" Guid="{B61F8CA4-457D-423D-AC00-667F525ABA6B}">
           <File Id="VersionOneTFSServerDLL" Name="VersionOneTFSServer.dll"/>
           <File Id="SiteVersionOneSDKAPIClientDLL" Name="VersionOne.SDK.APIClient.dll"/>
