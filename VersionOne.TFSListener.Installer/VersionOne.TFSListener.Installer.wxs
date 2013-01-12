@@ -3,13 +3,19 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
 
+  <?include $(sys.CURRENTDIR)\Config.wxi ?>
+
   <Product Name="VersionOne TFS Listener" Version="2.0.1.0" Manufacturer="VersionOne"
            Id="70439564-5E37-4B38-AEF4-91D86F50B282"
            UpgradeCode="003F3FE8-9A6D-445F-9ACB-5479FAD77A7D"
            Language="1033" >
 
-    <Package Id="*" Keywords="Installer" Description="VersionOne Installer for TFS 2012 Listener"
-             Manufacturer="VersionOne" InstallerVersion="201" Compressed="yes" />
+    <Package Id="*" Keywords="Installer" 
+             Description="$(var.ProductName)"
+             Manufacturer="VersionOne" 
+             InstallerVersion="200" Compressed="yes" 
+             InstallPrivileges="elevated"
+             InstallScope="perMachine" />
 
     <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
 
@@ -21,7 +27,7 @@
     <iis:WebAppPool Id="ASP_NET_4" Name="ASP.NET v4.0" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
         <Directory Id="VersionOne" Name="VersionOne">
           <Directory Id="INSTALLLOCATION" Name="TFSListener">
             <Component Id="TFSListenerConfig" Guid="C2D48FB6-AA6D-4057-9C61-4506CDD2F521">
@@ -91,6 +97,11 @@
       <ComponentGroupRef Id="TFSListenerSite" />
       <ComponentRef Id="ListenerWebSite" />
     </Feature>
+    <Property Id="INSTALLLOCATION">
+      <RegistrySearch Id="RegistrySearch" Type="raw" Root="HKLM" Win64="$(var.Win64)"
+                Key="Software\Company\Product" Name="InstallLocation" />
+    </Property>
+
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <UI Id="TFSListen_Install_UI">
