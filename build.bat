@@ -33,6 +33,7 @@ REM )
 /p:PackageSources=%NUGET_SRC% ^
 /p:RequireRestoreConsent=false ^
 /p:Configuration=Release ^
+/p:Platform="x86"
 /p:Major=2 ^
 /p:Minor=0 ^
 /p:Revision=1 ^
