@@ -13,7 +13,7 @@ ECHO Using msbuild at %MSBUILD%
 ECHO Using nuget at %NUGET%
 ECHO Using nuget sources %NUGET_SRC%
 ECHO Using V1BuildTools at %BUILD_TOOLS%
-ECHO %SIGNING_KEY%
+ECHO Using signing key at %SIGNING_KEY%
 ECHO.
 
 REM FOR %%P IN (VersionOne.TFS2010.DataLayer\VersionOne.TFS2010.DataLayer.csproj VersionOne.TFS2010.Tests\VersionOne.TFS2010.Tests.csproj VersionOneTFSPolicy\VersionOneTFSPolicy.csproj VersionOneTFSServer\VersionOneTFSServer.csproj VersionOneTFSServerConfig\VersionOneTFSServerConfig.csproj) DO (

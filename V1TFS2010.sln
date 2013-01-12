@@ -120,6 +120,7 @@ Global
 		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|x86.ActiveCfg = Release|Any CPU
+		{54C786E5-FD14-4036-92AE-E9F25B71534B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
