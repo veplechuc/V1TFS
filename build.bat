@@ -16,6 +16,8 @@ ECHO Using V1BuildTools at %BUILD_TOOLS%
 ECHO Using signing key at %SIGNING_KEY%
 ECHO.
 
+%MSBUILD% %PROJECT% /m /t:Clean
+
 REM FOR %%P IN (VersionOne.TFS2010.DataLayer\VersionOne.TFS2010.DataLayer.csproj VersionOne.TFS2010.Tests\VersionOne.TFS2010.Tests.csproj VersionOneTFSPolicy\VersionOneTFSPolicy.csproj VersionOneTFSServer\VersionOneTFSServer.csproj VersionOneTFSServerConfig\VersionOneTFSServerConfig.csproj) DO (
 REM %MSBUILD% %%P /t:RestorePackages ^
 REM /p:NuGetExePath=%NUGET% ^
