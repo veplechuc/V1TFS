@@ -33,7 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <WarningLevel>4</WarningLevel>
     <DeployIisAppPath>Default Web Site/VersionOneTFSListener</DeployIisAppPath>
   </PropertyGroup>
