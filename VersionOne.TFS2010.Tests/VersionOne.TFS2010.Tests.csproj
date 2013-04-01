@@ -66,10 +66,10 @@
       <HintPath>..\packages\VersionOne.SDK.APIClient.12.3.123.0\lib\net40\VersionOne.SDK.APIClient.dll</HintPath>
     </Reference>
     <Reference Include="VersionOne.ServerConnector">
-      <HintPath>..\packages\VersionOne.ServerConnector.1.0.84.0\lib\net40\VersionOne.ServerConnector.dll</HintPath>
+      <HintPath>..\packages\VersionOne.ServerConnector.1.0.97.0\lib\net40\VersionOne.ServerConnector.dll</HintPath>
     </Reference>
     <Reference Include="VersionOne.ServiceHost.Core">
-      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.122.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
+      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.141.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

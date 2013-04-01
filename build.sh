@@ -162,7 +162,7 @@ done
 # ---- Update NuGet Packages --------------------------------------------------
 
 #removing update step to prevent version conflicts between ServerConnector and ServiceHost.Core, which require the same version of APIClient
-update_nuget_deps
+#update_nuget_deps
 
 
 
