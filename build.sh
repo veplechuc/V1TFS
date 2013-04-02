@@ -123,7 +123,7 @@ function install_nuget_deps() {
     if [ -d $D ] && [ -f $D/packages.config ]; then
       PKGSCONFIGW=`winpath "$D/packages.config"`
       echo "NuGet.exe install $PKGSCONFIGW -o $PKGSDIRW -Source $NUGET_FETCH_URL"
-      NuGet.exe install '$PKGSCONFIGW' -o $PKGSDIRW -Source $NUGET_FETCH_URL
+      NuGet.exe install "$PKGSCONFIGW" -o $PKGSDIRW -Source $NUGET_FETCH_URL
     fi
   done
 }
