@@ -113,6 +113,11 @@ if [ -z "$BUILD_NUMBER" ]; then
 fi
 
 function update_nuget_deps() {
+  install_nuget_deps
+  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
+}
+
+function install_nuget_deps() {
   PKGSDIRW=`winpath "$WORKSPACE/packages"`
   for D in $WORKSPACE/*; do
     if [ -d $D ] && [ -f $D/packages.config ]; then
@@ -120,9 +125,7 @@ function update_nuget_deps() {
       NuGet.exe install $PKGSCONFIGW -o $PKGSDIRW -Source $NUGET_FETCH_URL
     fi
   done
-  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
 }
-
 
 
 # ---- Produce .NET Metadata --------------------------------------------------
@@ -163,6 +166,8 @@ done
 
 #removing update step to prevent version conflicts between ServerConnector and ServiceHost.Core, which require the same version of APIClient
 #update_nuget_deps
+
+install_nuget_deps
 
 
 
