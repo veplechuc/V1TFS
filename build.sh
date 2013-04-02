@@ -169,5 +169,6 @@ done
 # ---- Build solution using msbuild -------------------------------------------
 
 WIN_SIGNING_KEY="`winpath "$SIGNING_KEY"`"
-MSBuild.exe $SOLUTION_FILE -p:SignAssembly=$SIGN_ASSEMBLY -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY
+MSBuild.exe $SOLUTION_FILE -p:SignAssembly=$SIGN_ASSEMBLY -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY -p:RequireRestoreConsent=false
+
 
