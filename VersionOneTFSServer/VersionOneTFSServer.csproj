@@ -42,7 +42,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <WarningLevel>4</WarningLevel>
     <DeployIisAppPath>VersionOneTFSListener</DeployIisAppPath>
     <PublishDatabases>true</PublishDatabases>
