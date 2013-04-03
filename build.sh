@@ -178,4 +178,5 @@ MSBuild.exe $SOLUTION_FILE \
   -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY \
   -p:RequireRestoreConsent=false \
   -p:Configuration="$Configuration" \
-  -p:Platform="$Platform"
+  -p:Platform="$Platform" \
+  -p:Verbosity=Diagnostic
