@@ -33,5 +33,12 @@ namespace VersionOneTFSServer.Providers
             return settings;
         }
 
+        /// <summary>
+        /// Clears only V1 relevant settings from the web.config.
+        /// </summary>
+        public void ClearV1Settings()
+        {
+            
+        }
     }
 }
