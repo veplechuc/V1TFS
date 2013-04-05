@@ -26,7 +26,7 @@ public class DebuggerShim
     [Test]
     public void debug()
     {
-        var tagOrClassName = "configuration_service_specs";
+        var tagOrClassName = "ConfigurationProviderSpecs";
 
         var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
 
