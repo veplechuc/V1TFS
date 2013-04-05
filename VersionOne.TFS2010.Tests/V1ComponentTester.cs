@@ -17,9 +17,9 @@ namespace VersionOne.TFS2010.Tests {
         [TestFixtureSetUp]
         public void TestFixtureSetUp() {
             var settings = new VersionOneSettings {
-                Path = "http://integsrv01/VersionOne12/",
-                Username = "stanf",
-                Password = "exigen",
+                Path = "http://localhost/v1sdktests",
+                Username = "admin",
+                Password = "admin",
                 ProxySettings = null
             };
 
