@@ -180,3 +180,6 @@ MSBuild.exe $SOLUTION_FILE \
   -p:Configuration="$Configuration" \
   -p:Platform="$Platform" \
   -p:Verbosity=Diagnostic
+
+# ---- Execute NSpec Tests -------------------------------------------
+NSpecRunner.exe VersionOneTFSServer.Tests/bin/VersionOneTFSServer.Tests.dll
