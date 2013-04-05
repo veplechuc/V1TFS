@@ -11,6 +11,7 @@ using Microsoft.TeamFoundation.VersionControl.Common;
 using Microsoft.TeamFoundation.Build.Client;
 using VersionOne.ServerConnector.Entities;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFSServer.Interfaces;
 using Environment = System.Environment;
 
 namespace VersionOneTFSServer
