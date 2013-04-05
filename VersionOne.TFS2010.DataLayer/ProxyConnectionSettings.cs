@@ -1,6 +1,10 @@
-﻿namespace VersionOne.TFS2010.DataLayer 
+﻿using VersionOne.TFS2010.DataLayer.Interfaces;
+
+namespace VersionOne.TFS2010.DataLayer 
 {
-    public class ProxyConnectionSettings 
+    
+
+    public class ProxyConnectionSettings : IProxyConnectionSettings
     {
         public bool UseProxy { get; set; }
         public string Url { get; set; }

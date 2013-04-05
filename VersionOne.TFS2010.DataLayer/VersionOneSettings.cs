@@ -1,12 +1,16 @@
-﻿namespace VersionOne.TFS2010.DataLayer 
+﻿using VersionOne.TFS2010.DataLayer.Interfaces;
+
+namespace VersionOne.TFS2010.DataLayer 
 {
-    public class VersionOneSettings 
+    
+
+    public class VersionOneSettings : IVersionOneSettings
     {
         public bool Integrated { get; set; }
         public string Path { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public ProxyConnectionSettings ProxySettings { get; set; }
+        public IProxyConnectionSettings ProxySettings { get; set; }
 
         public VersionOneSettings() 
         {
