@@ -49,6 +49,7 @@
     <Compile Include="ConfigurationProviderSpecs.cs" />
     <Compile Include="DebuggerShim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebConfigProviderSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

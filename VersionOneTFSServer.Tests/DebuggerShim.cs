@@ -24,15 +24,23 @@ using NUnit.Framework;
 public class DebuggerShim
 {
     [Test]
-    public void debug()
+    public void DebugConfigurationProviderSpecs()
     {
-        var tagOrClassName = "ConfigurationProviderSpecs";
-
+        const string tagOrClassName = "ConfigurationProviderSpecs";
         var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-
         var contexts = invocation.Run();
-
         //assert that there aren't any failures
         contexts.Failures().Count().should_be(0);
     }
+
+    [Test]
+    public void DebugWebConfigProviderSpecs()
+    {
+        const string tagOrClassName = "WebConfigProviderSpecs";
+        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+        var contexts = invocation.Run();
+        //assert that there aren't any failures
+        contexts.Failures().Count().should_be(0);
+    }
+
 }
