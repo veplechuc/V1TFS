@@ -7,8 +7,6 @@ namespace VersionOneTFSServer.Tests
 {
     public class ConfigurationProviderSpecs : nspec
     {
-        //context methods require an underscore. For more info see DefaultConventions.cs.
-
         void given_configuration_settings_are_not_yet_saved()
         {
 
