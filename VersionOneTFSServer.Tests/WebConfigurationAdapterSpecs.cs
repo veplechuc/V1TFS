@@ -38,17 +38,41 @@ namespace VersionOneTFSServer.Tests
         public void given_app_settings_are_being_written_to_a_web_config()
         {
 
-            context["when i save a new setting the web config"] = () =>
+            context["when i create a single new setting in the web config"] = () =>
                 {
-                    var key = "MySettings";
+                    const string key = "MySetting";
+                    const string value = "MyValue";
                     it["then the value is saved successfully"] = () =>
                         {
-                            var settingsToSave = new Dictionary<string, string> {{key, "MyValue"}};
+                            var settingsToSave = new Dictionary<string, string> {{key, value}};
                             WebConfigurationAdapter.SaveAppSettings(settingsToSave);
                             var appSettings = WebConfigurationAdapter.GetAppSettings(key);
-                            appSettings[key].should_be("MyValue");
+                            appSettings[key].should_be(value);
                         };
+
+
+
                 };
+
+            context["when i update an existing setting in the web config"] = () =>
+                {
+                    const string key = "MySetting";
+                    const string value = "MyValue";
+
+                    before = () => WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>{{key, value}});
+
+                    it["then the updated setting is persisted successfully"] = () =>
+                        {
+                            const string myNewValue = "MyNewValue";
+                            var settingToUpdate = new Dictionary<string, string>{{key, myNewValue}};
+                            WebConfigurationAdapter.SaveAppSettings(settingToUpdate);
+                            var persistedValue = WebConfigurationAdapter.GetAppSettings(key);
+                            persistedValue[key].should_be(myNewValue);
+                        };
+
+                    after = WebConfigurationAdapter.ClearV1Settings;
+                };
+
         }
 
         public void given_relevant_app_settings_are_cleared_from_web_config()
