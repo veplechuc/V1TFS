@@ -33,7 +33,7 @@ namespace VersionOneTFSServer.Adapters
         /// Saves a set of keyvalue pairs to the appSettings element of a web.config.
         /// </summary>
         /// <param name="keyValuePairs"></param>
-        public static void Save(Dictionary<string,string> keyValuePairs)
+        public static void SaveAppSettings(Dictionary<string,string> keyValuePairs)
         {
 
             var rootWebConfig = GetRootWebConfig();

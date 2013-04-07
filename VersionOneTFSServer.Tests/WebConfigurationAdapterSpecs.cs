@@ -44,7 +44,7 @@ namespace VersionOneTFSServer.Tests
                     it["then the value is saved successfully"] = () =>
                         {
                             var settingsToSave = new Dictionary<string, string> {{key, "MyValue"}};
-                            WebConfigurationAdapter.Save(settingsToSave);
+                            WebConfigurationAdapter.SaveAppSettings(settingsToSave);
                             var appSettings = WebConfigurationAdapter.GetAppSettings(key);
                             appSettings[key].should_be("MyValue");
                         };
