@@ -16,7 +16,7 @@ namespace VersionOneTFSServer.Adapters
             if (keyNames.Length == 0) return null;
 
             var settings = new Dictionary<string, string>();
-            var rootWebConfig = GetWebConfig(null);
+            var rootWebConfig = GetRootWebConfig();
 
             keyNames.ToList().ForEach(key =>
                 {
@@ -29,9 +29,33 @@ namespace VersionOneTFSServer.Adapters
             return settings;
         }
 
-        private static Configuration GetWebConfig(string path)
+        /// <summary>
+        /// Saves a set of keyvalue pairs to the appSettings element of a web.config.
+        /// </summary>
+        /// <param name="keyValuePairs"></param>
+        public static void Save(Dictionary<string,string> keyValuePairs)
         {
-            return System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(path);
+
+            var rootWebConfig = GetRootWebConfig();
+
+            foreach (var keyValuePair in keyValuePairs)
+            {
+                if (rootWebConfig.AppSettings.Settings[keyValuePair.Key] == null)
+                {
+                    rootWebConfig.AppSettings.Settings.Add(new KeyValueConfigurationElement(keyValuePair.Key, keyValuePair.Value));
+                }
+                else
+                {
+                    rootWebConfig.AppSettings.Settings[keyValuePair.Key].Value = keyValuePair.Value;
+                }
+            }
+
+            rootWebConfig.Save(ConfigurationSaveMode.Modified);
+        }
+
+        private static Configuration GetRootWebConfig()
+        {
+            return System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
         }
 
         /// <summary>

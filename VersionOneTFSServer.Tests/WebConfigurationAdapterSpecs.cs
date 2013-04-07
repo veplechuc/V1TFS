@@ -1,9 +1,10 @@
-﻿using NSpec;
+﻿using System.Collections.Generic;
+using NSpec;
 using VersionOneTFSServer.Adapters;
 
 namespace VersionOneTFSServer.Tests
 {
-    public class WebConfigProviderSpecs : nspec
+    public class WebConfigurationAdapterSpecs : nspec
     {
 
         public void given_app_settings_are_being_retrieved_from_a_web_config()
@@ -39,9 +40,13 @@ namespace VersionOneTFSServer.Tests
 
             context["when i save a new setting the web config"] = () =>
                 {
+                    var key = "MySettings";
                     it["then the value is saved successfully"] = () =>
                         {
-
+                            var settingsToSave = new Dictionary<string, string> {{key, "MyValue"}};
+                            WebConfigurationAdapter.Save(settingsToSave);
+                            var appSettings = WebConfigurationAdapter.GetAppSettings(key);
+                            appSettings[key].should_be("MyValue");
                         };
                 };
         }

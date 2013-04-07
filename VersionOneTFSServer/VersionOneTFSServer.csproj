@@ -138,6 +138,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\WebConfigurationAdapter.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BuildCompletionEvent2.cs" />
     <Compile Include="ConfigurationController.cs" />
@@ -148,7 +149,6 @@
     </Compile>
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Providers\DefaultConfigurationProvider.cs" />
-    <Compile Include="Adapters\WebConfigAdapter.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>
