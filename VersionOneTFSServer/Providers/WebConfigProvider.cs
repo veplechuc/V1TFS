@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Configuration;
-using VersionOneTFSServer.Interfaces;
 
 namespace VersionOneTFSServer.Providers
 {
-    public class WebConfigProvider : IWebConfigProvider
+    public static class WebConfigProvider
     {
         /// <summary>
         /// Retrieves settings from the appSettings section of the root web.config file.
         /// </summary>
         /// <param name="keyNames"></param>
         /// <returns></returns>
-        public Dictionary<string, string> GetAppSettings(params string[] keyNames)
+        public static Dictionary<string, string> GetAppSettings(params string[] keyNames)
         {
             if (keyNames.Length == 0) return null;
 
             var settings = new Dictionary<string, string>();
-            var rootWebConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
-            //if (rootWebConfig.AppSettings.Settings.Count == 0) return null;
+            var rootWebConfig = GetWebConfig(null);
 
             keyNames.ToList().ForEach(key =>
                 {
@@ -33,10 +29,15 @@ namespace VersionOneTFSServer.Providers
             return settings;
         }
 
+        private static Configuration GetWebConfig(string path)
+        {
+            return System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(path);
+        }
+
         /// <summary>
         /// Clears only V1 relevant settings from the web.config.
         /// </summary>
-        public void ClearV1Settings()
+        public static void ClearV1Settings()
         {
             
         }
