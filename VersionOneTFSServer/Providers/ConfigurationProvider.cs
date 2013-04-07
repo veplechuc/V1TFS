@@ -1,5 +1,6 @@
 ﻿using System.Security.Policy;
 using VersionOne.TFS2010.DataLayer.Interfaces;
+using VersionOneTFSServer.Adapters;
 using VersionOneTFSServer.Interfaces;
 
 namespace VersionOneTFSServer.Providers
@@ -15,7 +16,7 @@ namespace VersionOneTFSServer.Providers
 
         public void ResetDefaults()
         {
-            WebConfigProvider.ClearV1Settings();
+            WebConfigurationAdapter.ClearV1Settings();
         }
     }
 }

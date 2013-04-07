@@ -1,6 +1,5 @@
 ﻿using NSpec;
-using VersionOneTFSServer.Interfaces;
-using VersionOneTFSServer.Providers;
+using VersionOneTFSServer.Adapters;
 
 namespace VersionOneTFSServer.Tests
 {
@@ -15,7 +14,7 @@ namespace VersionOneTFSServer.Tests
                     it["then a null value is returned for the key specified"] = () =>
                         {
                             const string keyNames = "SomeSettingThatDoesntExist";
-                            var values = WebConfigProvider.GetAppSettings(keyNames);
+                            var values = WebConfigurationAdapter.GetAppSettings(keyNames);
                             values.should_contain(x => x.Key == keyNames);
                             values[keyNames].should_be(null);
                         };
@@ -55,7 +54,7 @@ namespace VersionOneTFSServer.Tests
                 it["then there are no relevant values retained in the web config"] = () =>
                     {
 
-                        WebConfigProvider.ClearV1Settings();
+                        WebConfigurationAdapter.ClearV1Settings();
 
 
                         it["and no other settings are not disturbed"] = () =>

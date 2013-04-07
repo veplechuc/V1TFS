@@ -148,7 +148,7 @@
     </Compile>
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Providers\DefaultConfigurationProvider.cs" />
-    <Compile Include="Providers\WebConfigProvider.cs" />
+    <Compile Include="Adapters\WebConfigAdapter.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>

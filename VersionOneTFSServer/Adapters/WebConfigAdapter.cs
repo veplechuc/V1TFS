@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Configuration;
 
-namespace VersionOneTFSServer.Providers
+namespace VersionOneTFSServer.Adapters
 {
-    public static class WebConfigProvider
+    public static class WebConfigurationAdapter
     {
         /// <summary>
         /// Retrieves settings from the appSettings section of the root web.config file.
