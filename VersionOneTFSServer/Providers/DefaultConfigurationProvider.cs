@@ -37,7 +37,7 @@ namespace VersionOneTFSServer.Providers
 
         public void ResetDefaults()
         {
-           WebConfigurationAdapter.ClearV1Settings();
+           WebConfigurationAdapter.ClearAllAppSettings();
         }
     }
 }

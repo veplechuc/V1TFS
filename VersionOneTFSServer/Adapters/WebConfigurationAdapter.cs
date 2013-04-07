@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 
@@ -16,11 +17,11 @@ namespace VersionOneTFSServer.Adapters
             if (keyNames.Length == 0) return null;
 
             var settings = new Dictionary<string, string>();
-            var rootWebConfig = GetRootWebConfig();
+            var configuration = GetRootWebConfig();
 
             keyNames.ToList().ForEach(key =>
                 {
-                    var configuredSetting = rootWebConfig.AppSettings.Settings[key];
+                    var configuredSetting = configuration.AppSettings.Settings[key];
                     string valueToAdd = null;
                     if (configuredSetting != null) valueToAdd = configuredSetting.Value;
                     settings.Add(key, valueToAdd);
@@ -36,21 +37,22 @@ namespace VersionOneTFSServer.Adapters
         public static void SaveAppSettings(Dictionary<string,string> keyValuePairs)
         {
 
-            var rootWebConfig = GetRootWebConfig();
+            var configuration = GetRootWebConfig();
 
             foreach (var keyValuePair in keyValuePairs)
             {
-                if (rootWebConfig.AppSettings.Settings[keyValuePair.Key] == null)
+                if (configuration.AppSettings.Settings[keyValuePair.Key] == null)
                 {
-                    rootWebConfig.AppSettings.Settings.Add(new KeyValueConfigurationElement(keyValuePair.Key, keyValuePair.Value));
+                    configuration.AppSettings.Settings.Add(new KeyValueConfigurationElement(keyValuePair.Key, keyValuePair.Value));
                 }
                 else
                 {
-                    rootWebConfig.AppSettings.Settings[keyValuePair.Key].Value = keyValuePair.Value;
+                    configuration.AppSettings.Settings[keyValuePair.Key].Value = keyValuePair.Value;
                 }
             }
 
-            rootWebConfig.Save(ConfigurationSaveMode.Modified);
+            SaveConfiguration(configuration);
+
         }
 
         private static Configuration GetRootWebConfig()
@@ -58,12 +60,26 @@ namespace VersionOneTFSServer.Adapters
             return System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
         }
 
-        /// <summary>
-        /// Clears only V1 relevant settings from the web.config.
-        /// </summary>
-        public static void ClearV1Settings()
+        private static void SaveConfiguration(Configuration configuration)
         {
-            
+            if (configuration == null) throw new ArgumentNullException("configuration");
+            configuration.Save(ConfigurationSaveMode.Modified);
+        }
+
+        /// <summary>
+        /// Clears all appSettings from the web.config.
+        /// </summary>
+        public static void ClearAllAppSettings()
+        {
+            var configuration = GetRootWebConfig();
+
+            foreach (var key in configuration.AppSettings.Settings.AllKeys)
+            {
+                configuration.AppSettings.Settings.Remove(key);
+            }
+
+            SaveConfiguration(configuration);
+
         }
     }
 }
