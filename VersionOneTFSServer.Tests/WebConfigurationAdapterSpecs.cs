@@ -108,18 +108,23 @@ namespace VersionOneTFSServer.Tests
 
             const string setting1Key = "MyKey1";
             const string setting1Value = "MySettingValue1";
-            
-            before = () => WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string> { { setting1Key, setting1Value } });
 
             context["when settings are retrieved from the cleared web config"] = () =>
                 {
-                    WebConfigurationAdapter.ClearAllAppSettings();
 
+                    before = () => WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string> { { setting1Key, setting1Value } });
+                    
                     it["then no settings are returned on retrieval"] = () =>
-                        {
+                    {
                             var settings = WebConfigurationAdapter.GetAppSettings(setting1Key);
-                            //wip - failing settings[setting1Key].should_be(null);
+                            settings[setting1Key].should_be(setting1Value);
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            settings = WebConfigurationAdapter.GetAppSettings(setting1Key);
+                            settings[setting1Key].should_be(null);
                         };
+
+                    after = WebConfigurationAdapter.ClearAllAppSettings;
+
                 };
         }
 

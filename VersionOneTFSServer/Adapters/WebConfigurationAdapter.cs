@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
+using System.Web.Configuration;
 
 namespace VersionOneTFSServer.Adapters
 {
@@ -57,7 +58,7 @@ namespace VersionOneTFSServer.Adapters
 
         private static Configuration GetRootWebConfig()
         {
-            return System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(null);
+            return WebConfigurationManager.OpenWebConfiguration(null);
         }
 
         private static void SaveConfiguration(Configuration configuration)
@@ -72,13 +73,14 @@ namespace VersionOneTFSServer.Adapters
         public static void ClearAllAppSettings()
         {
             var configuration = GetRootWebConfig();
-
+            var dirty = false;
             foreach (var key in configuration.AppSettings.Settings.AllKeys)
             {
                 configuration.AppSettings.Settings.Remove(key);
+                dirty = true;
             }
 
-            SaveConfiguration(configuration);
+            if (dirty == true) SaveConfiguration(configuration);
 
         }
     }
