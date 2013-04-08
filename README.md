@@ -19,7 +19,7 @@ This product includes software developed at VersionOne (http://versionone.com/).
 Microsoft Team Foundation Server 2010, 2012
 
 ### Clients ###
-Visual Studio 2010, 2012
+Visual Studio 2010, 2012 (not including Team Explorer)
 
 ## Install TFS Listener
 
