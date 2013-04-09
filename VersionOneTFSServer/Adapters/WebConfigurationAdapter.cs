@@ -8,6 +8,21 @@ namespace VersionOneTFSServer.Adapters
 {
     public static class WebConfigurationAdapter
     {
+
+        /// <summary>
+        /// Returns all appSettings from the root web config.
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<string, string> GetAllAppSettings()
+        {
+            var configuration = GetRootWebConfig();
+            var appSettingsConfigCollection = configuration.AppSettings.Settings;
+            var settings = new Dictionary<string, string>();
+            if (appSettingsConfigCollection.Count == 0) return settings;
+            appSettingsConfigCollection.AllKeys.ToList().ForEach(key => settings.Add(key, appSettingsConfigCollection[key].Value));
+            return settings;
+        } 
+
         /// <summary>
         /// Retrieves settings from the appSettings section of the root web.config file.
         /// </summary>
@@ -56,17 +71,6 @@ namespace VersionOneTFSServer.Adapters
 
         }
 
-        private static Configuration GetRootWebConfig()
-        {
-            return WebConfigurationManager.OpenWebConfiguration(null);
-        }
-
-        private static void SaveConfiguration(Configuration configuration)
-        {
-            if (configuration == null) throw new ArgumentNullException("configuration");
-            configuration.Save(ConfigurationSaveMode.Modified);
-        }
-
         /// <summary>
         /// Clears all appSettings from the web.config.
         /// </summary>
@@ -82,6 +86,17 @@ namespace VersionOneTFSServer.Adapters
 
             if (dirty == true) SaveConfiguration(configuration);
 
+        }
+
+        private static Configuration GetRootWebConfig()
+        {
+            return WebConfigurationManager.OpenWebConfiguration(null);
+        }
+
+        private static void SaveConfiguration(Configuration configuration)
+        {
+            if (configuration == null) throw new ArgumentNullException("configuration");
+            configuration.Save(ConfigurationSaveMode.Modified);
         }
     }
 }

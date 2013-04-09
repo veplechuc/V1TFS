@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NSpec;
 using VersionOneTFSServer.Adapters;
+using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer.Tests
 {
@@ -23,16 +24,65 @@ namespace VersionOneTFSServer.Tests
 
             context["when i retrieve multiple settings that do exist"] = () =>
                 {
+
+                    const string key1 = "Key1";
+                    const string key2 = "Key2";
+                    const string val1 = "Value1";
+                    const string val2 = "Value2";
+
                     before = () =>
                         {
-                            //setup multiple settings
+                            var settingsToSave = new Dictionary<string, string>
+                                {
+                                    {key1, val1},
+                                    {key2, val2}
+                                };
+
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            WebConfigurationAdapter.SaveAppSettings(settingsToSave);
+
                         };
                     it["then each value is returned successfully"] = () =>
                         {
-
+                            var settings = WebConfigurationAdapter.GetAppSettings(key1, key2);
+                            settings.Count.should_be(2);
+                            settings[key1].should_be(val1);
+                            settings[key2].should_be(val2);
                         };
 
                 };
+
+            context["when i retrieve all settings from the appSettings section of the web config"] = () =>
+                {
+                    
+                    const string key1 = "Key1";
+                    const string key2 = "Key2";
+                    const string val1 = "Value1";
+                    const string val2 = "Value2";
+
+                    before = () =>
+                        {
+
+                            var settingsToSave = new Dictionary<string, string>
+                                {
+                                    {key1, val1},
+                                    {key2, val2}
+                                };
+
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            WebConfigurationAdapter.SaveAppSettings(settingsToSave);
+
+                        };
+
+                    it["then all settings are returned properly"] = () =>
+                        {
+                            var settings = WebConfigurationAdapter.GetAllAppSettings();
+                            settings.Count.should_be(2);
+                            settings[key1].should_be(val1);
+                            settings[key2].should_be(val2);
+                        };
+                };
+
         }
 
         public void given_app_settings_are_being_written_to_a_web_config()
@@ -103,13 +153,13 @@ namespace VersionOneTFSServer.Tests
 
         }
 
-        public void given_all_app_settings_are_cleared_from_the_web_config()
+        public void given_app_settings_are_cleared_from_the_web_config()
         {
 
             const string setting1Key = "MyKey1";
             const string setting1Value = "MySettingValue1";
 
-            context["when settings are retrieved from the cleared web config"] = () =>
+            context["when all settings are cleared from the app settings section of the web config"] = () =>
                 {
 
                     before = () => WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string> { { setting1Key, setting1Value } });
@@ -121,30 +171,45 @@ namespace VersionOneTFSServer.Tests
                             WebConfigurationAdapter.ClearAllAppSettings();
                             settings = WebConfigurationAdapter.GetAppSettings(setting1Key);
                             settings[setting1Key].should_be(null);
-                        };
+                     };
 
                     after = WebConfigurationAdapter.ClearAllAppSettings;
 
                 };
-        }
 
-        public void given_relevant_app_settings_are_cleared_from_web_config()
-        {
+            context["when specific settings are cleared from the app settings section of the web config"] = () =>
+                {
 
-            context["when settings are cleared"] = () =>
-            {
-                it["then there are no relevant values retained in the web config"] = () =>
-                    {
+                    //save four key value pairs to the web configs app settings section
 
-                        WebConfigurationAdapter.ClearAllAppSettings();
+                    before = () =>
+                        {
+                            WebConfigurationAdapter.ClearAllAppSettings();
+
+                            var tempSettings = new Dictionary<string, string>
+                                {
+                                    {AppSettingKeys.Integrated, "false"},
+                                    {AppSettingKeys.UserName, "admin"},
+                                    {AppSettingKeys.Password, "admin"},
+                                    {AppSettingKeys.V1Url, "http://www14.v1host.com/v1sdktesting/"}
+                                };
+
+                            WebConfigurationAdapter.SaveAppSettings(tempSettings);
 
 
-                        it["and no other settings are not disturbed"] = () =>
-                            {
+                        };
 
-                            };
-                    };
-            };
+
+                    it["then the settings cleared are no long available on retrieval"] = () =>
+                        {
+
+                            //clear the two settings previously created
+
+                            //test that the two settings are not available on retrieval
+
+                        };
+                };
+
         }
 
     }
