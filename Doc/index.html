@@ -80,6 +80,21 @@
 			box. The user may select from items they own in active iterations, or
 			from all items in active iterations.</p>
 
+<div class=wsd wsd_style="qsd">
+<pre>
+title V1TFS
+
+Developer->VS: Check In Changes
+VS->TFS: Check In Changes
+TFS->V1TFS: CheckinEvent
+V1TFS->VersionOne: ChangeSet
+TFS->TFS: Build Project
+TFS->V1TFS: BuildCompletionEvent2
+V1TFS->VersionOne: BuildRun
+</pre>
+</div>
+<script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>
+
 		<h2>
 			<a
 				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-SystemRequirements"></a>System
