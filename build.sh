@@ -113,17 +113,19 @@ if [ -z "$BUILD_NUMBER" ]; then
 fi
 
 function update_nuget_deps() {
+  install_nuget_deps
+  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
+}
+
+function install_nuget_deps() {
   PKGSDIRW=`winpath "$WORKSPACE/packages"`
   for D in $WORKSPACE/*; do
     if [ -d $D ] && [ -f $D/packages.config ]; then
       PKGSCONFIGW=`winpath "$D/packages.config"`
-      NuGet.exe install $PKGSCONFIGW -o $PKGSDIRW -Source $NUGET_FETCH_URL
+      NuGet.exe install "$PKGSCONFIGW" -o "$PKGSDIRW" -Source "$NUGET_FETCH_URL"
     fi
   done
-  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
 }
-
-
 
 # ---- Produce .NET Metadata --------------------------------------------------
 
@@ -164,11 +166,17 @@ done
 #removing update step to prevent version conflicts between ServerConnector and ServiceHost.Core, which require the same version of APIClient
 #update_nuget_deps
 
-
+install_nuget_deps
 
 # ---- Build solution using msbuild -------------------------------------------
 
 WIN_SIGNING_KEY="`winpath "$SIGNING_KEY"`"
-MSBuild.exe $SOLUTION_FILE -p:SignAssembly=$SIGN_ASSEMBLY -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY
-
-
+WIN_SIGNING_KEY="`winpath "$SIGNING_KEY"`"
+echo $Platform
+MSBuild.exe $SOLUTION_FILE \
+  -p:SignAssembly=$SIGN_ASSEMBLY \
+  -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY \
+  -p:RequireRestoreConsent=false \
+  -p:Configuration="$Configuration" \
+  -p:Platform="$Platform" \
+  -p:Verbosity=Diagnostic
