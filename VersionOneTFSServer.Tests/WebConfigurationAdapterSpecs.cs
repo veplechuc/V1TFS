@@ -184,18 +184,18 @@ namespace VersionOneTFSServer.Tests
 
                     before = () =>
                         {
+                            
                             WebConfigurationAdapter.ClearAllAppSettings();
 
                             var tempSettings = new Dictionary<string, string>
                                 {
                                     {AppSettingKeys.Integrated, "false"},
                                     {AppSettingKeys.UserName, "admin"},
-                                    {AppSettingKeys.Password, "admin"},
+                                    {AppSettingKeys.Password, "adminpw"},
                                     {AppSettingKeys.V1Url, "http://www14.v1host.com/v1sdktesting/"}
                                 };
 
                             WebConfigurationAdapter.SaveAppSettings(tempSettings);
-
 
                         };
 
@@ -203,14 +203,23 @@ namespace VersionOneTFSServer.Tests
                     it["then the settings cleared are no long available on retrieval"] = () =>
                         {
 
-                            //clear the two settings previously created
+                            //clear two settings previously created
+                            WebConfigurationAdapter.ClearAppSettings(AppSettingKeys.Integrated, AppSettingKeys.V1Url);
 
-                            //test that the two settings are not available on retrieval
+                            //test that the two settings are not available on retrieval 
+                            var settings = WebConfigurationAdapter.GetAllAppSettings();
+                            settings.Count.should_be(2);
+                            settings.Keys.should_not_contain(AppSettingKeys.Integrated);
+                            settings.Keys.should_not_contain(AppSettingKeys.V1Url);
 
+
+                            it["and the settings NOT cleared are still present and properly valued"] = () =>
+                                {
+                                    settings[AppSettingKeys.UserName].should_be("admin");
+                                    settings[AppSettingKeys.Password].should_be("adminpw");
+                                };
                         };
                 };
-
         }
-
     }
 }

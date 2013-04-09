@@ -76,15 +76,30 @@ namespace VersionOneTFSServer.Adapters
         /// </summary>
         public static void ClearAllAppSettings()
         {
+
             var configuration = GetRootWebConfig();
-            var dirty = false;
-            foreach (var key in configuration.AppSettings.Settings.AllKeys)
+
+            ClearSettings(configuration.AppSettings.Settings.AllKeys, configuration);
+
+        }
+
+        public static void ClearAppSettings(params string[] keys)
+        {
+            ClearSettings(keys, GetRootWebConfig());
+        }
+
+        private static void ClearSettings(IEnumerable<string> keys, Configuration configuration)
+        {
+            if (configuration == null) throw new ArgumentNullException("configuration");
+
+            var save = false;
+            foreach (var key in keys)
             {
                 configuration.AppSettings.Settings.Remove(key);
-                dirty = true;
+                save = true;
             }
 
-            if (dirty == true) SaveConfiguration(configuration);
+            if (save == true) SaveConfiguration(configuration);
 
         }
 
