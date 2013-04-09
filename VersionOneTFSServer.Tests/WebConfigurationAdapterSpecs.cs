@@ -123,7 +123,7 @@ namespace VersionOneTFSServer.Tests
 
                 };
 
-            context["when i retrieve multiple settings from the web config that exist already"] = () =>
+            context["when i retrieve multiple settings from the web config that already exist"] = () =>
                 {
 
                     const string setting1Key = "Setting1Key";
@@ -142,7 +142,7 @@ namespace VersionOneTFSServer.Tests
 
                     before = () => WebConfigurationAdapter.SaveAppSettings(settings);
 
-                    it["then all settings should be return accurately"] = () =>
+                    it["then all settings should be returned accurately"] = () =>
                         {
                             var retrievedSettings = WebConfigurationAdapter.GetAppSettings(setting1Key, setting2Key, setting3Key);
                             retrievedSettings[setting1Key].should_be(setting1Vlaue);
@@ -182,6 +182,15 @@ namespace VersionOneTFSServer.Tests
 
                     //save four key value pairs to the web configs app settings section
 
+                    const string key1 = "UserName";
+                    const string key2 = "Password";
+                    const string key3 = "Integrated";
+                    const string key4 = "V1Url";
+                    const string value1 = "admin";
+                    const string value2 = "adminpw";
+                    const string value3 = "false";
+                    const string value4 = "http://www14.v1host.com/v1sdktesting/";
+
                     before = () =>
                         {
                             
@@ -189,10 +198,10 @@ namespace VersionOneTFSServer.Tests
 
                             var tempSettings = new Dictionary<string, string>
                                 {
-                                    {AppSettingKeys.Integrated, "false"},
-                                    {AppSettingKeys.UserName, "admin"},
-                                    {AppSettingKeys.Password, "adminpw"},
-                                    {AppSettingKeys.V1Url, "http://www14.v1host.com/v1sdktesting/"}
+                                    {key1, value1},
+                                    {key2, value2},
+                                    {key3, value3},
+                                    {key4, value4}
                                 };
 
                             WebConfigurationAdapter.SaveAppSettings(tempSettings);
@@ -204,19 +213,18 @@ namespace VersionOneTFSServer.Tests
                         {
 
                             //clear two settings previously created
-                            WebConfigurationAdapter.ClearAppSettings(AppSettingKeys.Integrated, AppSettingKeys.V1Url);
+                            WebConfigurationAdapter.ClearAppSettings(key3, key4);
 
                             //test that the two settings are not available on retrieval 
                             var settings = WebConfigurationAdapter.GetAllAppSettings();
                             settings.Count.should_be(2);
-                            settings.Keys.should_not_contain(AppSettingKeys.Integrated);
-                            settings.Keys.should_not_contain(AppSettingKeys.V1Url);
-
+                            settings.Keys.should_not_contain(key3);
+                            settings.Keys.should_not_contain(key4);
 
                             it["and the settings NOT cleared are still present and properly valued"] = () =>
                                 {
-                                    settings[AppSettingKeys.UserName].should_be("admin");
-                                    settings[AppSettingKeys.Password].should_be("adminpw");
+                                    settings[key1].should_be(value1);
+                                    settings[key2].should_be(value2);
                                 };
                         };
                 };
