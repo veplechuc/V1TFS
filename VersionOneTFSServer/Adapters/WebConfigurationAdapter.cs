@@ -88,6 +88,11 @@ namespace VersionOneTFSServer.Adapters
             ClearSettings(keys, GetRootWebConfig());
         }
 
+        public static void ClearAppSettings(IEnumerable<string> keys)
+        {
+            ClearSettings(keys, GetRootWebConfig());
+        }
+
         private static void ClearSettings(IEnumerable<string> keys, Configuration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");

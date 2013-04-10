@@ -191,12 +191,7 @@ namespace VersionOneTFSServer.Tests
                     const string value3 = "false";
                     const string value4 = "http://www14.v1host.com/v1sdktesting/";
 
-                    before = () =>
-                        {
-                            
-                            WebConfigurationAdapter.ClearAllAppSettings();
-
-                            var tempSettings = new Dictionary<string, string>
+                    var tempSettings = new Dictionary<string, string>
                                 {
                                     {key1, value1},
                                     {key2, value2},
@@ -204,12 +199,15 @@ namespace VersionOneTFSServer.Tests
                                     {key4, value4}
                                 };
 
+                    before = () =>
+                        {
+                            
+                            WebConfigurationAdapter.ClearAllAppSettings();
                             WebConfigurationAdapter.SaveAppSettings(tempSettings);
 
                         };
 
-
-                    it["then the settings cleared are no long available on retrieval"] = () =>
+                    it["then the settings cleared are no longer available on retrieval"] = () =>
                         {
 
                             //clear two settings previously created
@@ -226,7 +224,17 @@ namespace VersionOneTFSServer.Tests
                                     settings[key1].should_be(value1);
                                     settings[key2].should_be(value2);
                                 };
+                    };
+
+                    it["then the setting cleared are no longer available on retrieval"] = () =>
+                        {
+
+                            WebConfigurationAdapter.ClearAppSettings(tempSettings.Keys);
+                            var settings = WebConfigurationAdapter.GetAllAppSettings();
+                            settings.Count.should_be(0);
+
                         };
+
                 };
         }
     }
