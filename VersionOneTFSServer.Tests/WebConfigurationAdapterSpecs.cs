@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using NSpec;
 using VersionOneTFSServer.Adapters;
-using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer.Tests
 {
@@ -11,15 +10,51 @@ namespace VersionOneTFSServer.Tests
         public void given_app_settings_are_being_retrieved_from_a_web_config()
         {
 
-            context["when i retrieve a setting that does not exist"] = () =>
+            context["when i retrieve multiple settings that do not exist"] = () =>
                 {
+
+                    const string key1 = "SomeSettingThatDoesntExist1";
+                    const string key2 = "SomeSettingThatDoesntExist2";
+                    var values = WebConfigurationAdapter.GetAppSettings(key1, key2);
+
+                    it["then a null value is returned for each key specified"] = () =>
+                        {
+                            values.should_contain(x => x.Key == key1);
+                            values[key1].should_be(null);
+                            values.should_contain(x => x.Key == key2);
+                            values[key2].should_be(null);
+                        };
+                };
+
+            context["when i retrieve a single value that doesn't exist"] = () =>
+                {
+
                     it["then a null value is returned for the key specified"] = () =>
                         {
-                            const string keyNames = "SomeSettingThatDoesntExist";
-                            var values = WebConfigurationAdapter.GetAppSettings(keyNames);
-                            values.should_contain(x => x.Key == keyNames);
-                            values[keyNames].should_be(null);
+                            var result = WebConfigurationAdapter.GetAppSetting("LookAwayIDontExist");
+                            result.should_be(null);
                         };
+                };
+
+            context["when i retrieve a single value that exists"] = () =>
+                {
+                    const string key1 = "MySetting1";
+                    const string val1 = "MyValue1";
+
+                    before = () =>
+                        {
+                            var settingsToSave = new Dictionary<string, string> {{key1, val1}};
+                            WebConfigurationAdapter.SaveAppSettings(settingsToSave);
+                        };
+
+                    it["then the value is retrieved successfully"] = () =>
+                        {
+                            var result = WebConfigurationAdapter.GetAppSetting("MySetting1");
+                            result.should_be(val1);
+                        };
+
+                    after = WebConfigurationAdapter.ClearAllAppSettings;
+
                 };
 
             context["when i retrieve multiple settings that do exist"] = () =>
@@ -226,7 +261,7 @@ namespace VersionOneTFSServer.Tests
                                 };
                     };
 
-                    it["then the setting cleared are no longer available on retrieval"] = () =>
+                    it["(overload) then the settings cleared are no longer available on retrieval"] = () =>
                         {
 
                             WebConfigurationAdapter.ClearAppSettings(tempSettings.Keys);

@@ -16,34 +16,38 @@ namespace VersionOneTFSServer.Adapters
         public static Dictionary<string, string> GetAllAppSettings()
         {
             var configuration = GetRootWebConfig();
-            var appSettingsConfigCollection = configuration.AppSettings.Settings;
-            var settings = new Dictionary<string, string>();
-            if (appSettingsConfigCollection.Count == 0) return settings;
-            appSettingsConfigCollection.AllKeys.ToList().ForEach(key => settings.Add(key, appSettingsConfigCollection[key].Value));
-            return settings;
+            var keys = configuration.AppSettings.Settings.AllKeys;
+            return keys.ToDictionary(key => key, GetAppSetting);
         } 
 
         /// <summary>
+        /// TODO:  Are these methods necessary that take a paramarray? 
+        /// 
         /// Retrieves settings from the appSettings section of the root web.config file.
         /// </summary>
         /// <param name="keyNames"></param>
         /// <returns></returns>
         public static Dictionary<string, string> GetAppSettings(params string[] keyNames)
         {
+            
             if (keyNames.Length == 0) return null;
 
             var settings = new Dictionary<string, string>();
-            var configuration = GetRootWebConfig();
 
-            keyNames.ToList().ForEach(key =>
-                {
-                    var configuredSetting = configuration.AppSettings.Settings[key];
-                    string valueToAdd = null;
-                    if (configuredSetting != null) valueToAdd = configuredSetting.Value;
-                    settings.Add(key, valueToAdd);
-                });
+            foreach (var key in keyNames)
+            {
+                settings.Add(key, GetAppSetting(key));
+            }
 
             return settings;
+
+        }
+
+        public static string GetAppSetting(string key)
+        {
+            var configuration = GetRootWebConfig();
+            var nameValuePair = configuration.AppSettings.Settings[key];
+            return nameValuePair == null ? null : nameValuePair.Value;
         }
 
         /// <summary>
@@ -76,11 +80,8 @@ namespace VersionOneTFSServer.Adapters
         /// </summary>
         public static void ClearAllAppSettings()
         {
-
             var configuration = GetRootWebConfig();
-
             ClearSettings(configuration.AppSettings.Settings.AllKeys, configuration);
-
         }
 
         public static void ClearAppSettings(params string[] keys)
