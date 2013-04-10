@@ -11,9 +11,8 @@ namespace VersionOneTFSServer.Interfaces
     {
         bool Integrated { get; }
         Url V1Url { get; }
-        string Username { get; }
+        string UserName { get; }
         string Password { get; }
         IProxyConnectionSettings ProxySettings { get; }
-        void ResetDefaults();
     }
 }
