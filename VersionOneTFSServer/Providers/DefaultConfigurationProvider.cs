@@ -6,7 +6,7 @@ using VersionOneTFSServer.Interfaces;
 
 namespace VersionOneTFSServer.Providers
 {
-    sealed class DefaultConfigurationProvider : IConfigurationProvider  
+    public sealed class DefaultConfigurationProvider : IConfigurationProvider  
     {
         public bool Integrated
         {
@@ -18,14 +18,14 @@ namespace VersionOneTFSServer.Providers
             get { return new Url("http://localhost/VersionOne/"); }
         }
 
-        public string Username
+        public string UserName
         {
-            get { return "admin"; }
+            get { return "remote"; }
         }
 
         public string Password
         {
-            get { return "admin"; }
+            get { return "remote"; }
         }
         public IProxyConnectionSettings ProxySettings
         {
@@ -35,9 +35,5 @@ namespace VersionOneTFSServer.Providers
             }
         }
 
-        public void ResetDefaults()
-        {
-           WebConfigurationAdapter.ClearAllAppSettings();
-        }
     }
 }

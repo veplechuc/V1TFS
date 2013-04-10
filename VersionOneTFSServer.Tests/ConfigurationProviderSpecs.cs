@@ -1,5 +1,6 @@
-﻿using System;
-using NSpec;
+﻿using NSpec;
+using VersionOneTFSServer.Collections;
+using VersionOneTFSServer.Adapters;
 using VersionOneTFSServer.Interfaces;
 using VersionOneTFSServer.Providers;
 
@@ -7,6 +8,8 @@ namespace VersionOneTFSServer.Tests
 {
     public class ConfigurationProviderSpecs : nspec
     {
+        private IConfigurationProvider _target = null;
+        private IConfigurationProvider _defaults = null;
 
         void given_app_setting_keys_are_needed_for_recursion()
         {
@@ -15,7 +18,8 @@ namespace VersionOneTFSServer.Tests
                 {
                     it["then i receive a collection to iterate over"] = () =>
                         {
-                            var keys = AppSettingKeysCollection.Retrieve();
+                            var keys = new AppSettingKeyCollection();
+
                             keys.Count.should_not_be(0);
                             foreach (var key in keys)
                             {
@@ -24,6 +28,26 @@ namespace VersionOneTFSServer.Tests
                                 key.Value.should_not_be(null);
                                 key.Value.should_not_be(string.Empty);
                             }
+                        };
+                };
+        }
+
+        void given_versionOne_specific_settings_are_cleared_from_the_web_config()
+        {
+
+            before = () =>
+                {
+                    _target = new ConfigurationProvider();
+                    _defaults = new DefaultConfigurationProvider();
+                    WebConfigurationAdapter.ClearAllAppSettings();
+                };
+
+            context["when i retrieve versionone specific settings"] = () =>
+                {
+
+                    it["then the defaults are returned"] = () =>
+                        {
+                            _target.UserName.should_be(_defaults.UserName);
                         };
                 };
         }
@@ -37,7 +61,7 @@ namespace VersionOneTFSServer.Tests
             before = () =>
             {
                 _target = new ConfigurationProvider();
-                _target.ResetDefaults();
+                WebConfigurationAdapter.ClearAllAppSettings();
             };
 
             //context["when settings are retrieved for the first time"] = () =>
