@@ -8,12 +8,12 @@ namespace VersionOneTFSServer.Providers
 {
     public sealed class DefaultConfigurationProvider : IConfigurationProvider  
     {
-        public bool Integrated
+        public bool WindowsIntegratedSecurity
         {
             get { return false; }
         }
 
-        public Url V1Url
+        public Url VersionOneUrl
         {
             get { return new Url("http://localhost/VersionOne/"); }
         }

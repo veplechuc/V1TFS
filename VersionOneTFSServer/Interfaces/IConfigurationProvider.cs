@@ -9,8 +9,8 @@ namespace VersionOneTFSServer.Interfaces
 {
     public interface IConfigurationProvider
     {
-        bool Integrated { get; }
-        Url V1Url { get; }
+        bool WindowsIntegratedSecurity { get; }
+        Url VersionOneUrl { get; }
         string UserName { get; }
         string Password { get; }
         IProxyConnectionSettings ProxySettings { get; }

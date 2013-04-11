@@ -219,8 +219,8 @@ namespace VersionOneTFSServer.Tests
 
                     const string key1 = "UserName";
                     const string key2 = "Password";
-                    const string key3 = "Integrated";
-                    const string key4 = "V1Url";
+                    const string key3 = "WindowsIntegratedSecurity";
+                    const string key4 = "VersionOneUrl";
                     const string value1 = "admin";
                     const string value2 = "adminpw";
                     const string value3 = "false";
