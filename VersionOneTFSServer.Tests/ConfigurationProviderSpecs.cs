@@ -11,27 +11,6 @@ namespace VersionOneTFSServer.Tests
         private IConfigurationProvider _target = null;
         private IConfigurationProvider _defaults = null;
 
-        void given_app_setting_keys_are_needed_for_recursion()
-        {
-
-            context["when i request a collection of app setting keys"] = () =>
-                {
-                    it["then i receive a collection to iterate over"] = () =>
-                        {
-                            var keys = new AppSettingKeyCollection();
-
-                            keys.Count.should_not_be(0);
-                            foreach (var key in keys)
-                            {
-                                key.should_not_be(null);
-                                key.should_not_be(string.Empty);
-                                key.Value.should_not_be(null);
-                                key.Value.should_not_be(string.Empty);
-                            }
-                        };
-                };
-        }
-
         void given_versionOne_specific_settings_are_cleared_from_the_web_config()
         {
 
@@ -48,6 +27,9 @@ namespace VersionOneTFSServer.Tests
                     it["then the defaults are returned"] = () =>
                         {
                             _target.UserName.should_be(_defaults.UserName);
+                            _target.Password.should_be(_defaults.Password);
+                            _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
+                            _target.WindowsIntegratedSecurity.should_be(_defaults.WindowsIntegratedSecurity);
                         };
                 };
         }

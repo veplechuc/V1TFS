@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Policy;
+using VersionOne.TFS2010.DataLayer;
 using VersionOne.TFS2010.DataLayer.Interfaces;
 using VersionOneTFSServer.Adapters;
 using VersionOneTFSServer.Collections;
@@ -15,36 +17,46 @@ namespace VersionOneTFSServer.Providers
     public class ConfigurationProvider : IConfigurationProvider
     {
 
-        private readonly IConfigurationProvider _defaults;
+        private readonly IConfigurationProvider _configurationDefaults;
 
         public ConfigurationProvider()
         {
-            _defaults = new DefaultConfigurationProvider();
+            _configurationDefaults = new DefaultConfigurationProvider();
         }
 
-        private T GetSetting<T>(T storedSetting)
+        private static T GetSetting<T>(string key, T defaultValue)
         {
-            var returnValue = default(T);
-            return returnValue;
+            var type = typeof (T);
+            var storedValue = WebConfigurationAdapter.GetAppSetting(key);
+            if (storedValue == null || string.IsNullOrEmpty(storedValue)) return defaultValue;
+            var setting = (T)Convert.ChangeType(storedValue, type);
+            return setting;
         }
 
-        public bool Integrated
+        public bool WindowsIntegratedSecurity
         {
-            get { return false; }
+            get { return GetSetting(AppSettingKeys.WindowsIntegratedSecurity, _configurationDefaults.WindowsIntegratedSecurity); }
         }
 
-        public Url V1Url { get; private set; }
+        public Url VersionOneUrl
+        {
+            get { return GetSetting(AppSettingKeys.VersionOneUrl, _configurationDefaults.VersionOneUrl); }
+        }
+
         public string UserName
         {
-            get
-            {
-                var userName = WebConfigurationAdapter.GetAppSettings(AppSettingKeys.UserName)[AppSettingKeys.UserName];
-                if (!string.IsNullOrEmpty(userName)) return userName;
-                return _defaults.UserName;
-            }
+            get { return GetSetting(AppSettingKeys.UserName, _configurationDefaults.UserName); }
         }
-        public string Password { get; private set; }
-        public IProxyConnectionSettings ProxySettings { get; private set; }
+
+        public string Password
+        {
+            get { return GetSetting(AppSettingKeys.Password, _configurationDefaults.Password); }
+        }
+
+        public IProxyConnectionSettings ProxySettings
+        {
+            get { return null; }
+        }
 
         public void ResetDefaults()
         {
