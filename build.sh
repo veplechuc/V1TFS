@@ -182,4 +182,5 @@ MSBuild.exe $SOLUTION_FILE \
   -p:Verbosity=Diagnostic
 
 # ---- Execute NSpec Tests -------------------------------------------
+NSpecRunner.exe Integration.Core.Tests/bin/Integration.Core.Tests.dll
 NSpecRunner.exe VersionOneTFSServer.Tests/bin/VersionOneTFSServer.Tests.dll

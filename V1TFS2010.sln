@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionOneTFSServer.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrations.Core", "Integrations.Core\Integrations.Core.csproj", "{7147C00A-3070-4619-8597-BD9832160191}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Core.Tests", "Integration.Core.Tests\Integration.Core.Tests.csproj", "{F6896641-771F-4021-9588-D15AB13E9D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,18 @@ Global
 		{7147C00A-3070-4619-8597-BD9832160191}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7147C00A-3070-4619-8597-BD9832160191}.Release|x64.ActiveCfg = Release|Any CPU
 		{7147C00A-3070-4619-8597-BD9832160191}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|x64.ActiveCfg = Release|Any CPU
+		{F6896641-771F-4021-9588-D15AB13E9D84}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

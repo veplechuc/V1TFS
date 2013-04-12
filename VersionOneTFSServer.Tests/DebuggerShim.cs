@@ -20,37 +20,32 @@ using NUnit.Framework;
  * Visual Studio will detect this and will give you a window which you can use to attach a debugger.
  */
 
-[TestFixture]
-public class DebuggerShim
+namespace VersionOneTFSServer.Tests
 {
-    [Test]
-    public void DebugConfigurationProviderSpecs()
-    {
-        const string tagOrClassName = "ConfigurationProviderSpecs";
-        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-        var contexts = invocation.Run();
-        //assert that there aren't any failures
-        contexts.Failures().Count().should_be(0);
-    }
 
-    [Test]
-    public void DebugWebConfigProviderSpecs()
+    [TestFixture]
+    public class DebuggerShim
     {
-        const string tagOrClassName = "WebConfigurationAdapterSpecs";
-        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-        var contexts = invocation.Run();
-        //assert that there aren't any failures
-        contexts.Failures().Count().should_be(0);
-    }
+        [Test]
+        public void DebugConfigurationProviderSpecs()
+        {
+            const string tagOrClassName = "ConfigurationProviderSpecs";
+            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+            var contexts = invocation.Run();
+            //assert that there aren't any failures
+            contexts.Failures().Count().should_be(0);
+        }
 
-    [Test]
-    public void DebugAppSettingKeyCollectionSpecs()
-    {
-        const string tagOrClassName = "AppSettingKeyCollectionSpecs";
-        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-        var contexts = invocation.Run();
-        //assert that there aren't any failures
-        contexts.Failures().Count().should_be(0);
+        [Test]
+        public void DebugAppSettingKeyCollectionSpecs()
+        {
+            const string tagOrClassName = "AppSettingKeyCollectionSpecs";
+            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+            var contexts = invocation.Run();
+            //assert that there aren't any failures
+            contexts.Failures().Count().should_be(0);
+        }
+
     }
 
 }
