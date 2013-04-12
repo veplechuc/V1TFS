@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Policy;
-using VersionOne.TFS2010.DataLayer;
-using VersionOne.TFS2010.DataLayer.Interfaces;
-using VersionOneTFSServer.Adapters;
+using Integrations.Core.Adapters;
+using Integrations.Core.Interfaces;
 using VersionOneTFSServer.Collections;
-using VersionOneTFSServer.Interfaces;
 
 namespace VersionOneTFSServer.Providers
 {

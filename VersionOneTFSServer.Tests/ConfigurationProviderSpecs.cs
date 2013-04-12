@@ -1,7 +1,6 @@
-﻿using NSpec;
-using VersionOneTFSServer.Collections;
-using VersionOneTFSServer.Adapters;
-using VersionOneTFSServer.Interfaces;
+﻿using Integrations.Core.Adapters;
+using Integrations.Core.Interfaces;
+using NSpec;
 using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer.Tests

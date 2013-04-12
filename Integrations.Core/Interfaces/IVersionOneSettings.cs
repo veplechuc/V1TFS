@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace VersionOne.TFS2010.DataLayer.Interfaces
+﻿namespace Integrations.Core.Interfaces
 {
     public interface IVersionOneSettings
     {

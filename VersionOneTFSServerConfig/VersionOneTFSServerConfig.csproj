@@ -141,6 +141,10 @@
     <Content Include="ProductIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Integrations.Core\Integrations.Core.csproj">
+      <Project>{7147c00a-3070-4619-8597-bd9832160191}</Project>
+      <Name>Integrations.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VersionOne.TFS2010.DataLayer\VersionOne.TFS2010.DataLayer.csproj">
       <Project>{9B0896C0-DC42-44C0-B46D-813F34E55710}</Project>
       <Name>VersionOne.TFS2010.DataLayer</Name>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Integrations.Core.Adapters;
 using NSpec;
-using VersionOneTFSServer.Adapters;
 
 namespace VersionOneTFSServer.Tests
 {

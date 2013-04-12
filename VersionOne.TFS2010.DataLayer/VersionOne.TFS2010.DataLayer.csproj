@@ -72,8 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IProxyConnectionSettings.cs" />
-    <Compile Include="Interfaces\IVersionOneSettings.cs" />
     <Compile Include="ProxyConnectionSettings.cs" />
     <Compile Include="RegistryProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +82,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Integrations.Core\Integrations.Core.csproj">
+      <Project>{7147c00a-3070-4619-8597-bd9832160191}</Project>
+      <Name>Integrations.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

@@ -1,8 +1,5 @@
 ﻿using System.Security.Policy;
-using VersionOne.TFS2010.DataLayer;
-using VersionOne.TFS2010.DataLayer.Interfaces;
-using VersionOneTFSServer.Adapters;
-using VersionOneTFSServer.Interfaces;
+using Integrations.Core.Interfaces;
 
 namespace VersionOneTFSServer.Providers
 {
@@ -31,7 +28,7 @@ namespace VersionOneTFSServer.Providers
         {
             get
             {
-                return new ProxyConnectionSettings();
+                return new ProxySettingsProvider();
             }
         }
 

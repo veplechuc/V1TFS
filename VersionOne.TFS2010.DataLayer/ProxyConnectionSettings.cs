@@ -1,4 +1,4 @@
-﻿using VersionOne.TFS2010.DataLayer.Interfaces;
+﻿using Integrations.Core.Interfaces;
 
 namespace VersionOne.TFS2010.DataLayer 
 {

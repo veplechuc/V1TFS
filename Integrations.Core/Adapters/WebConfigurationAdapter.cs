@@ -4,7 +4,7 @@ using System.Linq;
 using System.Configuration;
 using System.Web.Configuration;
 
-namespace VersionOneTFSServer.Adapters
+namespace Integrations.Core.Adapters
 {
     public static class WebConfigurationAdapter
     {
