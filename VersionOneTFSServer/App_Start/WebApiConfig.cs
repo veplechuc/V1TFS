@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace VersionOneTFSServer.App_Start
 {
@@ -18,5 +20,11 @@ namespace VersionOneTFSServer.App_Start
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
 
         }
+
+        public static void RegisterRoutesIgnores(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+        }
+
     }
 }
