@@ -1,6 +1,8 @@
-﻿using Integrations.Core.Adapters;
+﻿using System.Collections.Generic;
+using Integrations.Core.Adapters;
 using Integrations.Core.Interfaces;
 using NSpec;
+using VersionOneTFSServer.Collections;
 using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer.Tests
@@ -10,7 +12,7 @@ namespace VersionOneTFSServer.Tests
         private IConfigurationProvider _target = null;
         private IConfigurationProvider _defaults = null;
 
-        void given_versionOne_specific_settings_are_cleared_from_the_web_config()
+        void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
         {
 
             before = () =>
@@ -33,34 +35,47 @@ namespace VersionOneTFSServer.Tests
                 };
         }
 
-        void given_configuration_settings_are_not_yet_saved()
+        void given_versionOne_specific_settings_are_saved_in_the_web_config()
         {
 
-            IConfigurationProvider _target = null;
+            const string userName = "User1";
+            const string password = "P@ssword1";
+            const string url = "https://www14.v1host.com/v1sdktesting/";
+            const string useWindowsSecurity = "false";
 
-            //runs before each context
             before = () =>
-            {
-                _target = new ConfigurationProvider();
-                WebConfigurationAdapter.ClearAllAppSettings();
-            };
+                {
+                    _target = new ConfigurationProvider();
+                    WebConfigurationAdapter.ClearAllAppSettings();
+                    
+                    WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>()
+                        {
+                            {AppSettingKeys.UserName, userName}, 
+                            {AppSettingKeys.Password, password},
+                            {AppSettingKeys.VersionOneUrl, url},
+                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity}
+                        });
+                };
 
-            //context["when settings are retrieved for the first time"] = () =>
-            //    {
-            //        it["then the default settings are returned"] = () =>
-            //        {
-                        
-            //        };
-            //};
+            context["when i retrieve versionone specific settings"] = () =>
+                {
+                    var settings = WebConfigurationAdapter.GetAppSettings(
+                        AppSettingKeys.UserName,
+                        AppSettingKeys.Password,
+                        AppSettingKeys.VersionOneUrl,
+                        AppSettingKeys.WindowsIntegratedSecurity
+                        );
 
-            //context["when settings are saved for the first time"] = () =>
-            //    {
-            //        it["then the save completes successfully"] = () =>
-            //            {
-            //                //throw new NotImplementedException();
-            //            };
-            //};
+                    it["then the expected settings are returned"] = () =>
+                        {
+                            settings[AppSettingKeys.UserName].should_be(userName);
+                            settings[AppSettingKeys.Password].should_be(password);
+                            settings[AppSettingKeys.VersionOneUrl].should_be(url);
+                            settings[AppSettingKeys.WindowsIntegratedSecurity].should_be(useWindowsSecurity);
+                        };
+                };
 
         }
+
     }
 }
