@@ -12,7 +12,7 @@ namespace VersionOneTFSServer.Tests
         private IConfigurationProvider _target = null;
         private IConfigurationProvider _defaults = null;
 
-        void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
+        private void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
         {
 
             before = () =>
@@ -35,7 +35,7 @@ namespace VersionOneTFSServer.Tests
                 };
         }
 
-        void given_versionOne_specific_settings_are_saved_in_the_web_config()
+        private void given_versionOne_specific_settings_are_saved_in_the_web_config()
         {
 
             const string userName = "User1";
@@ -47,10 +47,10 @@ namespace VersionOneTFSServer.Tests
                 {
                     _target = new ConfigurationProvider();
                     WebConfigurationAdapter.ClearAllAppSettings();
-                    
+
                     WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>()
                         {
-                            {AppSettingKeys.UserName, userName}, 
+                            {AppSettingKeys.UserName, userName},
                             {AppSettingKeys.Password, password},
                             {AppSettingKeys.VersionOneUrl, url},
                             {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity}
@@ -59,23 +59,26 @@ namespace VersionOneTFSServer.Tests
 
             context["when i retrieve versionone specific settings"] = () =>
                 {
-                    var settings = WebConfigurationAdapter.GetAppSettings(
-                        AppSettingKeys.UserName,
-                        AppSettingKeys.Password,
-                        AppSettingKeys.VersionOneUrl,
-                        AppSettingKeys.WindowsIntegratedSecurity
+
+                    before = () =>
+                        {
+                            var settings = WebConfigurationAdapter.GetAppSettings(
+                                AppSettingKeys.UserName,
+                                AppSettingKeys.Password,
+                                AppSettingKeys.VersionOneUrl,
+                                AppSettingKeys.WindowsIntegratedSecurity
                         );
 
-                    it["then the expected settings are returned"] = () =>
-                        {
-                            settings[AppSettingKeys.UserName].should_be(userName);
-                            settings[AppSettingKeys.Password].should_be(password);
-                            settings[AppSettingKeys.VersionOneUrl].should_be(url);
-                            settings[AppSettingKeys.WindowsIntegratedSecurity].should_be(useWindowsSecurity);
+                            it["then the expected settings are returned"] = () =>
+                                {
+                                    settings[AppSettingKeys.UserName].should_be(userName);
+                                    settings[AppSettingKeys.Password].should_be(password);
+                                    settings[AppSettingKeys.VersionOneUrl].should_be(url);
+                                    settings[AppSettingKeys.WindowsIntegratedSecurity].should_be(useWindowsSecurity);
+                                };
                         };
+
                 };
-
         }
-
     }
 }
