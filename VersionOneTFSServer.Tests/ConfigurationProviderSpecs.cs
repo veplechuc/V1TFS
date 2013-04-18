@@ -41,7 +41,7 @@ namespace VersionOneTFSServer.Tests
             const string userName = "User1";
             const string password = "P@ssword1";
             const string url = "https://www14.v1host.com/v1sdktesting/";
-            const string useWindowsSecurity = "false";
+            const bool useWindowsSecurity = false;
 
             before = () =>
                 {
@@ -53,32 +53,22 @@ namespace VersionOneTFSServer.Tests
                             {AppSettingKeys.UserName, userName},
                             {AppSettingKeys.Password, password},
                             {AppSettingKeys.VersionOneUrl, url},
-                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity}
+                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity.ToString()}
                         });
                 };
 
             context["when i retrieve versionone specific settings"] = () =>
                 {
-
-                    before = () =>
+                    it["then the expected settings are returned"] = () =>
                         {
-                            var settings = WebConfigurationAdapter.GetAppSettings(
-                                AppSettingKeys.UserName,
-                                AppSettingKeys.Password,
-                                AppSettingKeys.VersionOneUrl,
-                                AppSettingKeys.WindowsIntegratedSecurity
-                        );
 
-                            it["then the expected settings are returned"] = () =>
-                                {
-                                    settings[AppSettingKeys.UserName].should_be(userName);
-                                    settings[AppSettingKeys.Password].should_be(password);
-                                    settings[AppSettingKeys.VersionOneUrl].should_be(url);
-                                    settings[AppSettingKeys.WindowsIntegratedSecurity].should_be(useWindowsSecurity);
-                                };
+                            _target.UserName.should_be(userName);
+                            _target.Password.should_be(password);
+                            _target.VersionOneUrl.ToString().should_be(url);
+                            _target.WindowsIntegratedSecurity.should_be(useWindowsSecurity);
                         };
-
                 };
+
         }
     }
 }

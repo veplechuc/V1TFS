@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using System;
+using System.Security.Policy;
 using Integrations.Core.Interfaces;
 
 namespace VersionOneTFSServer.Providers
@@ -10,9 +11,9 @@ namespace VersionOneTFSServer.Providers
             get { return false; }
         }
 
-        public Url VersionOneUrl
+        public Uri VersionOneUrl
         {
-            get { return new Url("http://localhost/VersionOne/"); }
+            get { return new Uri("http://localhost/VersionOne/"); }
         }
 
         public string UserName
