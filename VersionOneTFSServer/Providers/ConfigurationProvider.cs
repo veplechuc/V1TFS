@@ -5,13 +5,11 @@ using VersionOneTFSServer.Collections;
 
 namespace VersionOneTFSServer.Providers
 {
-
     /// <summary>
     /// Provides access to V1 specific settings in the appSettings section of the root web config.
     /// </summary>
     public class ConfigurationProvider : IConfigurationProvider
     {
-
         private readonly IConfigurationProvider _configurationDefaults;
 
         public ConfigurationProvider()
@@ -31,7 +29,7 @@ namespace VersionOneTFSServer.Providers
             var type = typeof (T);
             var storedValue = WebConfigurationAdapter.GetAppSetting(key);
             if (string.IsNullOrEmpty(storedValue)) return defaultValue;
-            return (T)Convert.ChangeType(storedValue, type);
+            return (T) Convert.ChangeType(storedValue, type);
         }
 
         /// <summary>
@@ -48,7 +46,11 @@ namespace VersionOneTFSServer.Providers
 
         public bool IsWindowsIntegratedSecurity
         {
-            get { return GetSetting(AppSettingKeys.WindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
+            get
+            {
+                return GetSetting(AppSettingKeys.WindowsIntegratedSecurity,
+                                  _configurationDefaults.IsWindowsIntegratedSecurity);
+            }
         }
 
         public Uri VersionOneUrl

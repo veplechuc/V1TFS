@@ -14,7 +14,6 @@ namespace VersionOneTFSServer.Tests
 
         private void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
         {
-
             before = () =>
                 {
                     _target = new ConfigurationProvider();
@@ -24,7 +23,6 @@ namespace VersionOneTFSServer.Tests
 
             context["when i retrieve versionone specific settings"] = () =>
                 {
-
                     it["then the defaults are returned"] = () =>
                         {
                             _target.UserName.should_be(_defaults.UserName);
@@ -37,7 +35,6 @@ namespace VersionOneTFSServer.Tests
 
         private void given_versionOne_specific_settings_are_saved_in_the_web_config()
         {
-
             const string userName = "User1";
             const string password = "P@ssword1";
             const string url = "https://www14.v1host.com/v1sdktesting/";
@@ -61,14 +58,12 @@ namespace VersionOneTFSServer.Tests
                 {
                     it["then the expected settings are returned"] = () =>
                         {
-
                             _target.UserName.should_be(userName);
                             _target.Password.should_be(password);
                             _target.VersionOneUrl.ToString().should_be(url);
                             _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
                         };
                 };
-
         }
     }
 }
