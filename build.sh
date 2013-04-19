@@ -184,4 +184,4 @@ MSBuild.exe $SOLUTION_FILE \
 
 # ---- Execute nspec tests -------------------------------------------
 
-tests.sh
+./tests.sh
