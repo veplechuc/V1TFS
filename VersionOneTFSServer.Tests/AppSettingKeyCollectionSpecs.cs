@@ -3,9 +3,9 @@ using VersionOneTFSServer.Collections;
 
 namespace VersionOneTFSServer.Tests
 {
-    internal class AppSettingKeyCollectionSpecs : nspec
+    public class AppSettingKeyCollectionSpecs : nspec
     {
-        private void given_app_setting_keys_are_needed_for_recursion()
+        public void given_app_setting_keys_are_needed_for_recursion()
         {
             context["when i request a collection of app setting keys"] = () =>
                 {

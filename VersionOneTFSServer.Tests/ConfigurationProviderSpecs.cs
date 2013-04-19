@@ -12,7 +12,7 @@ namespace VersionOneTFSServer.Tests
         private IConfigurationProvider _target = null;
         private IConfigurationProvider _defaults = null;
 
-        private void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
+        public void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
         {
             before = () =>
                 {
@@ -33,7 +33,7 @@ namespace VersionOneTFSServer.Tests
                 };
         }
 
-        private void given_versionOne_specific_settings_are_saved_in_the_web_config()
+        public void given_versionOne_specific_settings_are_saved_in_the_web_config()
         {
             const string userName = "User1";
             const string password = "P@ssword1";
