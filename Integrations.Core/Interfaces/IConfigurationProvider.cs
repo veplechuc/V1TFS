@@ -4,7 +4,7 @@ namespace Integrations.Core.Interfaces
 {
     public interface IConfigurationProvider
     {
-        bool WindowsIntegratedSecurity { get; }
+        bool IsWindowsIntegratedSecurity { get; }
         Uri VersionOneUrl { get; }
         string UserName { get; }
         string Password { get; }

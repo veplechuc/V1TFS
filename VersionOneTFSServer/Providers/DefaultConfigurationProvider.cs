@@ -6,7 +6,7 @@ namespace VersionOneTFSServer.Providers
 {
     public sealed class DefaultConfigurationProvider : IConfigurationProvider  
     {
-        public bool WindowsIntegratedSecurity
+        public bool IsWindowsIntegratedSecurity
         {
             get { return false; }
         }

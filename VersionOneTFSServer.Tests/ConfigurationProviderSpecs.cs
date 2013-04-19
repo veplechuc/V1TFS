@@ -30,7 +30,7 @@ namespace VersionOneTFSServer.Tests
                             _target.UserName.should_be(_defaults.UserName);
                             _target.Password.should_be(_defaults.Password);
                             _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
-                            _target.WindowsIntegratedSecurity.should_be(_defaults.WindowsIntegratedSecurity);
+                            _target.IsWindowsIntegratedSecurity.should_be(_defaults.IsWindowsIntegratedSecurity);
                         };
                 };
         }
@@ -65,7 +65,7 @@ namespace VersionOneTFSServer.Tests
                             _target.UserName.should_be(userName);
                             _target.Password.should_be(password);
                             _target.VersionOneUrl.ToString().should_be(url);
-                            _target.WindowsIntegratedSecurity.should_be(useWindowsSecurity);
+                            _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
                         };
                 };
 
