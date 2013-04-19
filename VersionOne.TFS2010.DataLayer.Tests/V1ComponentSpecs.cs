@@ -4,7 +4,7 @@ using VersionOneProcessorSettings = VersionOne.ServiceHost.Core.Configuration.Ve
 
 namespace VersionOne.TFS2010.DataLayer.Tests
 {
-    public class V1ComponentTests : nspec
+    public class V1ComponentSpecs : nspec
     {
         public void given_settings_are_being_converted()
         {
