@@ -2,10 +2,10 @@
 {
     public interface IProxyConnectionSettings
     {
-        bool UseProxy { get; set; }
-        string Url { get; set; }
-        string Domain { get; set; }
-        string Username { get; set; }
-        string Password { get; set; }
+        bool UseProxy { get; }
+        string Url { get; }
+        string Domain { get; }
+        string Username { get; }
+        string Password { get; }
     }
 }
