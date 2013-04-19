@@ -180,3 +180,5 @@ MSBuild.exe $SOLUTION_FILE \
   -p:Configuration="$Configuration" \
   -p:Platform="$Platform" \
   -p:Verbosity=Diagnostic
+
+  tests.sh
