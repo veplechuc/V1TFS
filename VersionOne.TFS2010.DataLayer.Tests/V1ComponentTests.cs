@@ -33,6 +33,13 @@ namespace VersionOne.TFS2010.DataLayer.Tests
                     {
                         destination.Url.should_be(source.Path);
                         destination.Username.should_be(source.Username);
+                        destination.IntegratedAuth.should_be(source.Integrated);
+                        destination.Password.should_be(source.Password);
+                        destination.ProxySettings.Domain.should_be(source.ProxySettings.Domain);
+                        destination.ProxySettings.Enabled.should_be(source.ProxySettings.UseProxy);
+                        destination.ProxySettings.Username.should_be(source.ProxySettings.Username);
+                        destination.ProxySettings.Password.should_be(source.ProxySettings.Password);
+                        destination.ProxySettings.Url.should_be(source.ProxySettings.Url.ToString());
                     };
             };
         }
