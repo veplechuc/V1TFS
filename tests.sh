@@ -1,3 +1,4 @@
 # ---- Execute NSpec Tests -------------------------------------------
-NSpecRunner.exe Integration.Core.Tests/bin/Integration.Core.Tests.dll
-NSpecRunner.exe VersionOneTFSServer.Tests/bin/VersionOneTFSServer.Tests.dll
+./packages/nspec.0.9.64/tools/NSpecRunner.exe Integration.Core.Tests/bin/Integration.Core.Tests.dll
+./packages/nspec.0.9.64/tools/NSpecRunner.exe VersionOneTFSServer.Tests/bin/VersionOneTFSServer.Tests.dll
+./packages/nspec.0.9.64/tools/NSpecRunner.exe VersionOne.TFS2010.DataLayer.Tests/bin/VersionOne.TFS2010.DataLayer.Tests.dll
