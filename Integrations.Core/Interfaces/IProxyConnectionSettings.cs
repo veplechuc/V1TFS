@@ -1,9 +1,11 @@
-﻿namespace Integrations.Core.Interfaces
+﻿using System;
+
+namespace Integrations.Core.Interfaces
 {
     public interface IProxyConnectionSettings
     {
         bool UseProxy { get; }
-        string Url { get; }
+        Uri Url { get; }
         string Domain { get; }
         string Username { get; }
         string Password { get; }

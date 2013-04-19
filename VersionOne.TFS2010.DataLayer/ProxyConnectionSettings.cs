@@ -1,4 +1,5 @@
-﻿using Integrations.Core.Interfaces;
+﻿using System;
+using Integrations.Core.Interfaces;
 
 namespace VersionOne.TFS2010.DataLayer 
 {
@@ -7,7 +8,7 @@ namespace VersionOne.TFS2010.DataLayer
     public class ProxyConnectionSettings : IProxyConnectionSettings
     {
         public bool UseProxy { get; set; }
-        public string Url { get; set; }
+        public Uri Url { get; set; }
         public string Domain { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
