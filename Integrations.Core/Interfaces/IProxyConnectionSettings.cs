@@ -4,7 +4,7 @@ namespace Integrations.Core.Interfaces
 {
     public interface IProxyConnectionSettings
     {
-        bool UseProxy { get; }
+        bool ProxyIsEnabled { get; }
         Uri Url { get; }
         string Domain { get; }
         string Username { get; }

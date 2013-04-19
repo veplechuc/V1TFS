@@ -23,7 +23,7 @@ namespace VersionOne.TFS2010.DataLayer.Tests
                                     Username = "ProxyAdmin",
                                     Password = "ProxyPass",
                                     Url = new Uri("http://localProxy:9999/"),
-                                    UseProxy = true
+                                    ProxyIsEnabled = true
                                 }
                         };
 
@@ -36,7 +36,7 @@ namespace VersionOne.TFS2010.DataLayer.Tests
                         destination.IntegratedAuth.should_be(source.Integrated);
                         destination.Password.should_be(source.Password);
                         destination.ProxySettings.Domain.should_be(source.ProxySettings.Domain);
-                        destination.ProxySettings.Enabled.should_be(source.ProxySettings.UseProxy);
+                        destination.ProxySettings.Enabled.should_be(source.ProxySettings.ProxyIsEnabled);
                         destination.ProxySettings.Username.should_be(source.ProxySettings.Username);
                         destination.ProxySettings.Password.should_be(source.ProxySettings.Password);
                         destination.ProxySettings.Url.should_be(source.ProxySettings.Url.ToString());

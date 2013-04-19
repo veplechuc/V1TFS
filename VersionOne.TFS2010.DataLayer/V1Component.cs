@@ -191,7 +191,7 @@ namespace VersionOne.TFS2010.DataLayer
                 Username = settings.Username,
                 Password = settings.Password,
                 IntegratedAuth = settings.Integrated,
-                ProxySettings = settings.ProxySettings == null || !settings.ProxySettings.UseProxy
+                ProxySettings = settings.ProxySettings == null || !settings.ProxySettings.ProxyIsEnabled
                                     ? null
                                     : new ProxySettings 
                                     {
@@ -199,7 +199,7 @@ namespace VersionOne.TFS2010.DataLayer
                                         Domain = settings.ProxySettings.Domain,
                                         Username = settings.ProxySettings.Username,
                                         Password = settings.ProxySettings.Password,
-                                        Enabled = settings.ProxySettings.UseProxy,
+                                        Enabled = settings.ProxySettings.ProxyIsEnabled,
                                     }
             };
         }

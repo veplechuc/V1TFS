@@ -23,7 +23,11 @@ namespace VersionOneTFSServer.Tests
             {
                 it["then the defaults are returned"] = () =>
                 {
-                    
+                    _target.ProxyIsEnabled.should_be(_defaults.ProxyIsEnabled);
+                    _target.Url.ToString().should_be(_defaults.Url.ToString());
+                    _target.Domain.should_be(_defaults.Domain);
+                    _target.Username.should_be(_defaults.Username);
+                    _target.Password.should_be(_defaults.Password);
                 };
             };
         }

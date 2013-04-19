@@ -234,7 +234,7 @@ namespace VersionOneTFSServerConfig
 
             return new ProxyConnectionSettings 
             { 
-                UseProxy = chkUseProxy.Checked, 
+                ProxyIsEnabled = chkUseProxy.Checked, 
                 Url = new Uri(txtProxyUrl.Text), 
                 Username = txtProxyUsername.Text, 
                 Password = txtProxyPassword.Text,

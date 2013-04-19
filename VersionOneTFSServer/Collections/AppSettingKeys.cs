@@ -14,7 +14,7 @@ namespace VersionOneTFSServer.Collections
         public const string VersionOneUrl = "V1_Url";
         public const string UserName = "V1_UserName";
         public const string Password = "V1_Password";
-        public const string ProxyEnabled = "V1_ProxyEnabled";
+        public const string ProxyIsEnabled = "V1_ProxyIsEnabled";
         public const string ProxyUrl = "V1_ProxyUrl";
         public const string ProxyDomain = "V1_ProxyDomain";
         public const string ProxyUserName = "V1_ProxyUserName";

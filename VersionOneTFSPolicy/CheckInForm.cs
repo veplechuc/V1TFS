@@ -446,7 +446,7 @@ namespace VersionOne.TFS.Policy
                 Integrated = integratedAuthentication,
                 ProxySettings = !useProxy ? null : new ProxyConnectionSettings
                 {
-                    UseProxy = useProxy,
+                    ProxyIsEnabled = useProxy,
                     Url = new Uri(proxyUrl),
                     Username = proxyUsername,
                     Password = proxyPassword,

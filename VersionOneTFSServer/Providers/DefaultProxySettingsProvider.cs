@@ -5,7 +5,7 @@ namespace VersionOneTFSServer.Providers
 {
     public class DefaultProxySettingsProvider : IProxyConnectionSettings
     {
-        public bool UseProxy
+        public bool ProxyIsEnabled
         {
             get { return false; }
         }

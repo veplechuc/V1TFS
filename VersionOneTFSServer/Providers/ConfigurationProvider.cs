@@ -23,8 +23,10 @@ namespace VersionOneTFSServer.Providers
         {
             get
             {
-                return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.WindowsIntegratedSecurity,
-                                  _configurationDefaults.IsWindowsIntegratedSecurity);
+                return WebConfigurationAdapter.GetAppSetting(
+                    AppSettingKeys.WindowsIntegratedSecurity,
+                    _configurationDefaults.IsWindowsIntegratedSecurity
+                    );
             }
         }
 
