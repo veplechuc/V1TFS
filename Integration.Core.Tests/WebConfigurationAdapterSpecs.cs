@@ -28,11 +28,15 @@ namespace VersionOneTFSServer.Tests
 
             context["when i retrieve a single value that doesn't exist"] = () =>
                 {
+                    const string key = "NonExistentKey";
+                    const string stringDefault = "DefaultValue1";
+                    const int intDefault = 7;
 
-                    it["then a null value is returned for the key specified"] = () =>
+                    it["then the expected value is returned for the key specified"] = () =>
                         {
-                            var result = WebConfigurationAdapter.GetAppSetting("LookAwayIDontExist");
-                            result.should_be(null);
+                            WebConfigurationAdapter.GetAppSetting(key).should_be(null);
+                            WebConfigurationAdapter.GetAppSetting(key, stringDefault).should_be(stringDefault);
+                            WebConfigurationAdapter.GetAppSetting(key, intDefault).should_be(intDefault);
                         };
                 };
 
@@ -40,17 +44,19 @@ namespace VersionOneTFSServer.Tests
                 {
                     const string key1 = "MySetting1";
                     const string val1 = "MyValue1";
+                    const string key2 = "MySetting2";
+                    const string val2 = "700";
 
                     before = () =>
                         {
-                            var settingsToSave = new Dictionary<string, string> {{key1, val1}};
+                            var settingsToSave = new Dictionary<string, string> {{key1, val1}, {key2, val2}};
                             WebConfigurationAdapter.SaveAppSettings(settingsToSave);
                         };
 
                     it["then the value is retrieved successfully"] = () =>
                         {
-                            var result = WebConfigurationAdapter.GetAppSetting("MySetting1");
-                            result.should_be(val1);
+                            WebConfigurationAdapter.GetAppSetting(key1).should_be(val1);
+                            WebConfigurationAdapter.GetAppSetting(key2, 0).should_be(int.Parse(val2));
                         };
 
                     after = WebConfigurationAdapter.ClearAllAppSettings;

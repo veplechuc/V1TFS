@@ -21,8 +21,6 @@ namespace Integrations.Core.Adapters
         } 
 
         /// <summary>
-        /// TODO:  Are these methods necessary that take a paramarray? 
-        /// 
         /// Retrieves settings from the appSettings section of the root web.config file.
         /// </summary>
         /// <param name="keyNames"></param>
@@ -48,6 +46,33 @@ namespace Integrations.Core.Adapters
             var configuration = GetRootWebConfig();
             var nameValuePair = configuration.AppSettings.Settings[key];
             return nameValuePair == null ? null : nameValuePair.Value;
+        }
+
+        /// <summary>
+        /// Generic method to retrieve settings of type T from a web.config.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static T GetAppSetting<T>(string key, T defaultValue)
+        {
+            var type = typeof(T);
+            var storedValue = GetAppSetting(key);
+            if (string.IsNullOrEmpty(storedValue)) return defaultValue;
+            return (T)Convert.ChangeType(storedValue, type);
+        }
+
+        /// <summary>
+        /// Can't cast a string directly to a URI through the generic <seealso cref="GetSettings">GetSettings</seealso> method.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static Uri GetUri(string key, Uri defaultValue)
+        {
+            var storedValue = GetAppSetting(key);
+            return string.IsNullOrEmpty(storedValue) ? defaultValue : new Uri(storedValue);
         }
 
         /// <summary>

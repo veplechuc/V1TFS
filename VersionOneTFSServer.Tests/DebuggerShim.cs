@@ -26,6 +26,17 @@ namespace VersionOneTFSServer.Tests
     [TestFixture]
     public class DebuggerShim
     {
+
+        [Test]
+        public void DebugProxySettingsProviderSpecs()
+        {
+            const string tagOrClassName = "ProxySettingsProviderSpecs";
+            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+            var contexts = invocation.Run();
+            //assert that there aren't any failures
+            contexts.Failures().Count().should_be(0);
+        }
+
         [Test]
         public void DebugConfigurationProviderSpecs()
         {
