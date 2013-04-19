@@ -447,7 +447,7 @@ namespace VersionOne.TFS.Policy
                 ProxySettings = !useProxy ? null : new ProxyConnectionSettings
                 {
                     UseProxy = useProxy,
-                    Url = proxyUrl,
+                    Url = new Uri(proxyUrl),
                     Username = proxyUsername,
                     Password = proxyPassword,
                     Domain = proxyDomain,

@@ -53,7 +53,7 @@ namespace VersionOneTFSServer
             return new ProxyConnectionSettings 
             { 
                 UseProxy = RegistryProcessor.GetBool(RegistryProcessor.V1UseProxyParameter, false), 
-                Url = RegistryProcessor.GetString(RegistryProcessor.V1ProxyUrlParameter, string.Empty), 
+                Url = new Uri(RegistryProcessor.GetString(RegistryProcessor.V1ProxyUrlParameter, string.Empty)), 
                 Username = RegistryProcessor.GetString(RegistryProcessor.V1ProxyUsernameParameter, string.Empty), 
                 Password = RegistryProcessor.GetString(RegistryProcessor.V1ProxyPasswordParameter, string.Empty),
                 Domain = RegistryProcessor.GetString(RegistryProcessor.V1ProxyDomainParameter, string.Empty)

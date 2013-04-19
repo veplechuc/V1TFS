@@ -9,9 +9,9 @@ namespace VersionOneTFSServer.Providers
         {
             get { return false; }
         }
-        public string Url
+        public Uri Url
         {
-            get { return "http://192.168.1.1/"; }
+            get { return new Uri("http://192.168.1.1/"); }
         }
         public string Domain
         {
