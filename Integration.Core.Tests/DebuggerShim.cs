@@ -26,12 +26,9 @@ public class DebuggerShim
     [Test]
     public void WebConfigurationAdapterSpecsDebugger()
     {
-        var tagOrClassName = "WebConfigurationAdapterSpecs";
-
+        const string tagOrClassName = "WebConfigurationAdapterSpecs";
         var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-
         var contexts = invocation.Run();
-
         //assert that there aren't any failures
         contexts.Failures().Count().should_be(0);
     }
