@@ -19,13 +19,7 @@ namespace VersionOneTFSServer.Providers
 
         public bool IsWindowsIntegratedSecurity
         {
-            get
-            {
-                return WebConfigurationAdapter.GetAppSetting(
-                    AppSettingKeys.WindowsIntegratedSecurity,
-                    _configurationDefaults.IsWindowsIntegratedSecurity
-                    );
-            }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.WindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
         }
 
         public Uri VersionOneUrl
