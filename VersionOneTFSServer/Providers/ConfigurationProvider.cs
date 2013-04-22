@@ -17,8 +17,6 @@ namespace VersionOneTFSServer.Providers
             _configurationDefaults = new DefaultConfigurationProvider();
         }
 
-        
-
         public bool IsWindowsIntegratedSecurity
         {
             get
@@ -43,6 +41,31 @@ namespace VersionOneTFSServer.Providers
         public string Password
         {
             get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.Password, _configurationDefaults.Password); }
+        }
+
+        public Uri TfsUrl
+        {
+            get { return WebConfigurationAdapter.GetUri(AppSettingKeys.TfsUrl, _configurationDefaults.TfsUrl); }
+        }
+        
+        public string TfsUserName
+        {
+            get{ return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.TfsUserName, _configurationDefaults.TfsUserName); }
+        }
+
+        public string TfsPassword
+        {
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
+        }
+
+        public string WorkItemRegex
+        {
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.WorkItemRegex); }
+        }
+
+        public bool DebugMode
+        {
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.DebugMode, _configurationDefaults.DebugMode); }
         }
 
         public IProxyConnectionSettings ProxySettings

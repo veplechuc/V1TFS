@@ -14,6 +14,11 @@ namespace VersionOneTFSServer.Collections
         public const string VersionOneUrl = "V1_Url";
         public const string UserName = "V1_UserName";
         public const string Password = "V1_Password";
+        public const string TfsUrl = "V1_TfsUrl";
+        public const string TfsUserName = "V1_TfsUser";
+        public const string TfsPassword = "V1_TfsPassword";
+        public const string WorkItemRegex = "V1_WorkItemRegex";
+        public const string DebugMode = "V1_DebugMode";
         public const string ProxyIsEnabled = "V1_ProxyIsEnabled";
         public const string ProxyUrl = "V1_ProxyUrl";
         public const string ProxyDomain = "V1_ProxyDomain";

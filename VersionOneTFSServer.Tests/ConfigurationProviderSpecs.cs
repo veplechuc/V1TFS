@@ -29,6 +29,9 @@ namespace VersionOneTFSServer.Tests
                             _target.Password.should_be(_defaults.Password);
                             _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
                             _target.IsWindowsIntegratedSecurity.should_be(_defaults.IsWindowsIntegratedSecurity);
+                            _target.TfsUrl.should_be(_defaults.TfsUrl);
+                            _target.TfsUserName.should_be(_defaults.TfsUserName);
+                            _target.TfsPassword.should_be(_defaults.TfsPassword);
                         };
                 };
         }
@@ -37,7 +40,10 @@ namespace VersionOneTFSServer.Tests
         {
             const string userName = "User1";
             const string password = "P@ssword1";
-            const string url = "https://www14.v1host.com/v1sdktesting/";
+            const string v1url = "https://www14.v1host.com/v1sdktesting/";
+            const string tfsurl = "http://vsts2012:8080/tfs/DefaultCollection/";
+            const string tfsuser = "TfsUser1";
+            const string tfspass = "MySecretPw";
             const bool useWindowsSecurity = false;
 
             before = () =>
@@ -49,8 +55,11 @@ namespace VersionOneTFSServer.Tests
                         {
                             {AppSettingKeys.UserName, userName},
                             {AppSettingKeys.Password, password},
-                            {AppSettingKeys.VersionOneUrl, url},
-                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity.ToString()}
+                            {AppSettingKeys.VersionOneUrl, v1url},
+                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity.ToString()},
+                            {AppSettingKeys.TfsUrl, tfsurl.ToString()},
+                            {AppSettingKeys.TfsUserName, tfsuser},
+                            {AppSettingKeys.TfsPassword, tfspass}
                         });
                 };
 
@@ -60,8 +69,11 @@ namespace VersionOneTFSServer.Tests
                         {
                             _target.UserName.should_be(userName);
                             _target.Password.should_be(password);
-                            _target.VersionOneUrl.ToString().should_be(url);
+                            _target.VersionOneUrl.ToString().should_be(v1url);
                             _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
+                            _target.TfsUrl.ToString().should_be(tfsurl);
+                            _target.TfsUserName.should_be(tfsuser);
+                            _target.TfsPassword.should_be(tfspass);
                         };
                 };
         }
