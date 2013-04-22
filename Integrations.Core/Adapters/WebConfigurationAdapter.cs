@@ -86,7 +86,7 @@ namespace Integrations.Core.Adapters
 
             foreach (var keyValuePair in keyValuePairs)
             {
-                if (configuration.AppSettings.Settings[keyValuePair.Key] == null)
+                if (!configuration.AppSettings.Settings.AllKeys.Contains(keyValuePair.Key))
                 {
                     configuration.AppSettings.Settings.Add(new KeyValueConfigurationElement(keyValuePair.Key, keyValuePair.Value));
                 }
