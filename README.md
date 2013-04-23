@@ -10,20 +10,7 @@ In order for the Listener to create associations in VersionOne, the check-in com
 
 This product includes software developed at VersionOne (http://versionone.com/). This product is open source and is licensed under a modified BSD license, which reflects our intent that software built with a dependency on V1TFS can be commercial or open source, as the authors see fit.
 
-<div class=wsd wsd_style="qsd">
-<pre>
-title V1TFS
-
-Developer->VS: Check In Changes
-VS->TFS: Check In Changes
-TFS->V1TFS: CheckinEvent
-V1TFS->VersionOne: ChangeSet
-TFS->TFS: Build Project
-TFS->V1TFS: BuildCompletionEvent2
-V1TFS->VersionOne: BuildRun
-</pre>
-</div>
-<script type="text/javascript" src="http://www.websequencediagrams.com/service.js"></script>
+![V1TFS Integration Sequence Diagram](https://raw.github.com/versionone/V1TFS/master/Doc/images/V1TFS_Integration_Sequence.png "V1TFS Integration Sequence Diagram")
 
 ## System Requirements ##
 
