@@ -9,8 +9,8 @@ namespace Integrations.Core.DTO
     {
         public bool IsWindowsIntegratedSecurity;
         public string VersionOneUrl;
-        public string UserName;
-        public string Password;
+        public string VersionOneUserName;
+        public string VersionOnePassword;
         public string TfsUrl;
         public string TfsUserName;
         public string TfsPassword;

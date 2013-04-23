@@ -3,6 +3,7 @@ using System.Reflection;
 using NSpec;
 using NSpec.Domain;
 using NSpec.Domain.Formatters;
+using NUnit.Framework;
 
 /*
  * Howdy,
@@ -20,23 +21,16 @@ using NSpec.Domain.Formatters;
  * Visual Studio will detect this and will give you a window which you can use to attach a debugger.
  */
 
-//[TestFixture]
+[TestFixture]
 public class DebuggerShim
 {
-    //[Test]
-    public void debug()
+    [Test]
+    public void DebugConfigurationSerializerSpecs()
     {
-        var tagOrClassName = "class_or_tag_you_want_to_debug";
-
-        var types = GetType().Assembly.GetTypes(); 
-        // OR
-        // var types = new Type[]{typeof(Some_Type_Containg_some_Specs)};
-        var finder = new SpecFinder(types, "");
-        var builder = new ContextBuilder(finder, new Tags().Parse(tagOrClassName), new DefaultConventions());
-        var runner = new ContextRunner(builder, new ConsoleFormatter(), false);
-        var results = runner.Run(builder.Contexts().Build());
-
+        const string tagOrClassName = "ConfigurationSerializerSpecs";
+        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+        var contexts = invocation.Run();
         //assert that there aren't any failures
-        results.Failures().Count().should_be(0);
+        contexts.Failures().Count().should_be(0);
     }
 }
