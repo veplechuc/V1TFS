@@ -1,6 +1,8 @@
 # VersionOne Integration with Microsoft Team Foundation Server #
 
-VersionOne's integration with Microsoft Team Foundation Server (V1TFS) provides your organization with visibility into change while freeing the development team to focus on deliverable. This integration is comprised of two parts: The TFS Listener and the VersionOne Check-in Policy.
+V1TFS links VersionOne Workitems to TFS Check-ins and Builds. The link from Workitems to Check-ins makes it easier to track down the source of a defect and perform code reviews. The link from Workitems to Builds enables teams to measure progress in terms of working software and to identify problems sooner. Using the links from Workitems to Builds, the VersionOne BuildRun Report can help a Release Manager select an appropriate build for release and can be the starting point for release notes.
+
+V1TFS has 2 components: The TFS Listener and the VersionOne Check-in Policy.
 
 The TFS Listener is responsible for responding to check-in and build events from TFS. For each qualifying check-in event the listener creates a "ChangeSet" in VersionOne, providing the team visibility into the code changes for a story or defect. This visibility can be useful when tracking down defects or performing code reviews. For each qualifying build event, the listener creates a "BuildRun" in VersionOne. If possible, BuildRuns are associated with stories and/or defects in VersionOne providing the organization visibility into build contents. This visibility is useful when selecting a build to release, identifying problem builds, or generating release notes.
 
