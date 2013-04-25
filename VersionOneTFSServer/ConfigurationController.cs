@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Web.Http;
+using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
-using Newtonsoft.Json;
+using VersionOneTFSServer.Collections;
 using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer
@@ -41,8 +41,21 @@ namespace VersionOneTFSServer
         }
 
         // POST <controller>
-        public void Post([FromBody]TfsServerConfiguration value)
+        public void Post([FromBody]TfsServerConfiguration config)
         {
+            var configToSave = new Dictionary<string, string>
+                {
+                    {AppSettingKeys.VersionOneUrl, config.VersionOneUrl},
+                    {AppSettingKeys.VersionOnePassword, config.VersionOnePassword},
+                    {AppSettingKeys.VersionOneUserName, config.VersionOneUserName},
+                    {AppSettingKeys.TfsUrl, config.TfsUrl},
+                    {AppSettingKeys.TfsUserName, config.TfsUserName},
+                    {AppSettingKeys.TfsPassword, config.TfsPassword},
+                    {AppSettingKeys.IsWindowsIntegratedSecurity, config.IsWindowsIntegratedSecurity.ToString()},
+                    {AppSettingKeys.DebugMode, config.DebugMode.ToString()}
+                };
+
+            WebConfigurationAdapter.SaveAppSettings(configToSave);
         }
 
     }
