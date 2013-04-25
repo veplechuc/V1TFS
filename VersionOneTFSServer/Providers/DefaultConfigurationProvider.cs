@@ -16,12 +16,12 @@ namespace VersionOneTFSServer.Providers
             get { return new Uri("http://localhost/VersionOne/"); }
         }
 
-        public string UserName
+        public string VersionOneUserName
         {
             get { return "remote"; }
         }
 
-        public string Password
+        public string VersionOnePassword
         {
             get { return "remote"; }
         }

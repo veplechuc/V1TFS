@@ -6,8 +6,8 @@ namespace Integrations.Core.Interfaces
     {
         bool IsWindowsIntegratedSecurity { get; }
         Uri VersionOneUrl { get; }
-        string UserName { get; } 
-        string Password { get; }
+        string VersionOneUserName { get; } 
+        string VersionOnePassword { get; }
         Uri TfsUrl { get; }
         string TfsUserName { get; }
         string TfsPassword { get; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Integrations.Core.Adapters;
 using Integrations.Core.Interfaces;
+using VersionOne.TFS2010.DataLayer;
 using VersionOneTFSServer.Collections;
 
 namespace VersionOneTFSServer.Providers
@@ -27,14 +28,14 @@ namespace VersionOneTFSServer.Providers
             get { return WebConfigurationAdapter.GetUri(AppSettingKeys.VersionOneUrl, _configurationDefaults.VersionOneUrl); }
         }
 
-        public string UserName
+        public string VersionOneUserName
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.UserName, _configurationDefaults.UserName); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.UserName, _configurationDefaults.VersionOneUserName); }
         }
 
-        public string Password
+        public string VersionOnePassword
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.Password, _configurationDefaults.Password); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.Password, _configurationDefaults.VersionOnePassword); }
         }
 
         public Uri TfsUrl
@@ -64,7 +65,7 @@ namespace VersionOneTFSServer.Providers
 
         public IProxyConnectionSettings ProxySettings
         {
-            get { return null; }
+            get { return new ProxySettingsProvider(); }
         }
 
         public void ResetDefaults()

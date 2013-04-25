@@ -25,8 +25,8 @@ namespace VersionOneTFSServer.Tests
                 {
                     it["then the defaults are returned"] = () =>
                         {
-                            _target.UserName.should_be(_defaults.UserName);
-                            _target.Password.should_be(_defaults.Password);
+                            _target.VersionOneUserName.should_be(_defaults.VersionOneUserName);
+                            _target.VersionOnePassword.should_be(_defaults.VersionOnePassword);
                             _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
                             _target.IsWindowsIntegratedSecurity.should_be(_defaults.IsWindowsIntegratedSecurity);
                             _target.TfsUrl.should_be(_defaults.TfsUrl);
@@ -67,8 +67,8 @@ namespace VersionOneTFSServer.Tests
                 {
                     it["then the expected settings are returned"] = () =>
                         {
-                            _target.UserName.should_be(userName);
-                            _target.Password.should_be(password);
+                            _target.VersionOneUserName.should_be(userName);
+                            _target.VersionOnePassword.should_be(password);
                             _target.VersionOneUrl.ToString().should_be(v1url);
                             _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
                             _target.TfsUrl.ToString().should_be(tfsurl);
