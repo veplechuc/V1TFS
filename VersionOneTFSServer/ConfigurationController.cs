@@ -1,35 +1,49 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Http;
+using Integrations.Core.DTO;
+using Newtonsoft.Json;
+using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer
 {
     public class ConfigurationController : ApiController
     {
         // GET <controller>
-        public IEnumerable<string> Get()
+        public TfsServerConfiguration Get()
         {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET <controller>/5
-        public string Get(int id)
-        {
-            return "value";
+            var configProvider = new ConfigurationProvider();
+
+            var config = new TfsServerConfiguration
+                {
+                    VersionOneUrl = configProvider.VersionOneUrl.ToString(),
+                    VersionOnePassword = configProvider.VersionOnePassword,
+                    VersionOneUserName = configProvider.VersionOneUserName,
+                    TfsUrl = configProvider.TfsUrl.ToString(),
+                    TfsUserName = configProvider.TfsUserName,
+                    TfsPassword = configProvider.TfsPassword,
+                    IsWindowsIntegratedSecurity = configProvider.IsWindowsIntegratedSecurity,
+                    DebugMode = configProvider.DebugMode
+                };
+            
+            if (configProvider.ProxySettings.ProxyIsEnabled)
+            {
+                config.ProxyDomain = configProvider.ProxySettings.Domain;
+                config.ProxyIsEnabled = configProvider.ProxySettings.ProxyIsEnabled;
+                config.ProxyUrl = configProvider.ProxySettings.Url.ToString();
+                config.ProxyUsername = configProvider.ProxySettings.Username;
+                config.ProxyPassword = configProvider.ProxySettings.Password;
+            }
+        
+            return config;
+
         }
 
         // POST <controller>
-        public void Post([FromBody]string value)
+        public void Post([FromBody]TfsServerConfiguration value)
         {
         }
 
-        // PUT <controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE <controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
