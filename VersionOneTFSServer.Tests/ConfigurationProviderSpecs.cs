@@ -53,10 +53,10 @@ namespace VersionOneTFSServer.Tests
 
                     WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>()
                         {
-                            {AppSettingKeys.UserName, userName},
-                            {AppSettingKeys.Password, password},
+                            {AppSettingKeys.VersionOneUserName, userName},
+                            {AppSettingKeys.VersionOnePassword, password},
                             {AppSettingKeys.VersionOneUrl, v1url},
-                            {AppSettingKeys.WindowsIntegratedSecurity, useWindowsSecurity.ToString()},
+                            {AppSettingKeys.IsWindowsIntegratedSecurity, useWindowsSecurity.ToString()},
                             {AppSettingKeys.TfsUrl, tfsurl.ToString()},
                             {AppSettingKeys.TfsUserName, tfsuser},
                             {AppSettingKeys.TfsPassword, tfspass}

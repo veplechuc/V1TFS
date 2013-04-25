@@ -10,10 +10,10 @@ namespace VersionOneTFSServer.Collections
     /// </summary>
     public struct AppSettingKeys
     {
-        public const string WindowsIntegratedSecurity = "V1_Integrated";
+        public const string IsWindowsIntegratedSecurity = "V1_IsWindowsIntegratedSecurity";
         public const string VersionOneUrl = "V1_Url";
-        public const string UserName = "V1_UserName";
-        public const string Password = "V1_Password";
+        public const string VersionOneUserName = "V1_UserName";
+        public const string VersionOnePassword = "V1_Password";
         public const string TfsUrl = "V1_TfsUrl";
         public const string TfsUserName = "V1_TfsUser";
         public const string TfsPassword = "V1_TfsPassword";

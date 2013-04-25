@@ -20,7 +20,7 @@ namespace VersionOneTFSServer.Providers
 
         public bool IsWindowsIntegratedSecurity
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.WindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.IsWindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
         }
 
         public Uri VersionOneUrl
@@ -30,12 +30,12 @@ namespace VersionOneTFSServer.Providers
 
         public string VersionOneUserName
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.UserName, _configurationDefaults.VersionOneUserName); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.VersionOneUserName, _configurationDefaults.VersionOneUserName); }
         }
 
         public string VersionOnePassword
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.Password, _configurationDefaults.VersionOnePassword); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.VersionOnePassword, _configurationDefaults.VersionOnePassword); }
         }
 
         public Uri TfsUrl
