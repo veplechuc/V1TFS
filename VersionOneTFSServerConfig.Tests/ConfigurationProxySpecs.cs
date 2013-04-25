@@ -10,12 +10,12 @@ using VersionOneTFSServerConfig.Configuration;
 namespace VersionOneTFSServer.Tests
 {
 
-    public class PretendsToBeConnectedToV1TfsServer : IV1TfsServerHttp
+    public class PretendsToBeConnectedToHttpClient : IHttpClient
     {
         private readonly Dictionary<string, TfsServerConfiguration> _stored = new Dictionary<string, TfsServerConfiguration>();
         private readonly JavaScriptSerializer _serializer;
 
-        public PretendsToBeConnectedToV1TfsServer()
+        public PretendsToBeConnectedToHttpClient()
         {
             _serializer = new JavaScriptSerializer();
         }
@@ -98,7 +98,7 @@ namespace VersionOneTFSServer.Tests
         /// </summary>
         public void given_data_is_being_sent_and_received_to_the_server()
         {
-            var mock = new PretendsToBeConnectedToV1TfsServer();
+            var mock = new PretendsToBeConnectedToHttpClient();
             var proxy = new ConfigurationProxy(mock);
             it["can submit valid configuration"] = () => proxy.Send(_serializationTarget);
             it["gets back the object it stored"] = () => proxy.Recieve().should_be(_serializationTarget);

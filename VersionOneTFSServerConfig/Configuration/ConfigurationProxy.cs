@@ -4,17 +4,17 @@ using Newtonsoft.Json;
 
 namespace VersionOneTFSServerConfig.Configuration
 {
-    public interface IV1TfsServerHttp
+    public interface IHttpClient
     {
         byte[] Put(string url, byte[] body);
         byte[] Get(string url);
     }
 
-    public class V1TfsServerHttp : IV1TfsServerHttp
+    public class HttpClient : IHttpClient
 {
         private readonly WebClient _client;
 
-        public V1TfsServerHttp(WebClient client = null)
+        public HttpClient(WebClient client = null)
         {
             _client = client ?? new WebClient();
         }
@@ -32,7 +32,7 @@ namespace VersionOneTFSServerConfig.Configuration
 
     public class ConfigurationProxy
     {
-        private readonly IV1TfsServerHttp _server;
+        private readonly IHttpClient _server;
         private readonly string _url;
 
         public static string ProbeServerConfig()
@@ -42,9 +42,9 @@ namespace VersionOneTFSServerConfig.Configuration
             // port-scan local box
             return "http://localhost:8711/";
         }
-        public ConfigurationProxy(IV1TfsServerHttp server = null, string url = null)
+        public ConfigurationProxy(IHttpClient server = null, string url = null)
         {
-            _server = server ?? new V1TfsServerHttp();
+            _server = server ?? new HttpClient();
             _url = url ?? ProbeServerConfig();
         }
 
