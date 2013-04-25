@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationSerializerSpecs.cs" />
+    <Compile Include="ConfigurationProxySpecs.cs" />
     <Compile Include="DebuggerShim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\Integrations.Core\Integrations.Core.csproj">
       <Project>{7147c00a-3070-4619-8597-bd9832160191}</Project>
       <Name>Integrations.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VersionOneTFSServerConfig\VersionOneTFSServerConfig.csproj">
+      <Project>{09ED3E0C-A814-4E44-87C0-14B5C20F4C8C}</Project>
+      <Name>VersionOneTFSServerConfig</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

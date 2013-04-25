@@ -29,7 +29,7 @@ public class DebuggerShim
     [Test]
     public void DebugConfigurationSerializerSpecs()
     {
-        const string tagOrClassName = "ConfigurationSerializerSpecs";
+        const string tagOrClassName = "ConfigurationProxySpecs";
         var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
         var contexts = invocation.Run();
         //assert that there aren't any failures
