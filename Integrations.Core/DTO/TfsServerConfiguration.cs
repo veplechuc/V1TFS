@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Integrations.Core.DTO
+﻿namespace Integrations.Core.DTO
 {
-    public class TfsServerConfiguration
+    public struct TfsServerConfiguration
     {
         public bool IsWindowsIntegratedSecurity;
         public string VersionOneUrl;
@@ -21,5 +16,6 @@ namespace Integrations.Core.DTO
         public string ProxyDomain;
         public string ProxyUsername;
         public string ProxyPassword;
+
     }
 }

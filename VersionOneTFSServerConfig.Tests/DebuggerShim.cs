@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Integrations.Core.DTO;
 using NSpec;
 using NSpec.Domain;
 using NSpec.Domain.Formatters;
 using NUnit.Framework;
+using Newtonsoft.Json;
 
 /*
  * Howdy,
@@ -33,4 +35,5 @@ public class DebuggerShim
         //assert that there aren't any failures
         contexts.Failures().Count().should_be(0);
     }
+
 }

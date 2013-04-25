@@ -2,65 +2,44 @@
 using NSpec;
 using Newtonsoft.Json;
 
-namespace VersionOneTFSServerConfig.Tests
+namespace VersionOneTFSServer.Tests
 {
-    public class ConfiguationSerializerSpecs : nspec
+    public class ConfigurationSerializerSpecs : nspec
     {
-        public void given_configuration_is_being_serialized()
+
+        readonly TfsServerConfiguration _serializationTarget = new TfsServerConfiguration()
         {
+            DebugMode = false,
+            IsWindowsIntegratedSecurity = true,
+            VersionOnePassword = "admin",
+            ProxyDomain = "AD",
+            ProxyIsEnabled = true,
+            ProxyPassword = "123456",
+            ProxyUrl = "http://myproxy:9191/proxy/",
+            ProxyUsername = "admin1",
+            TfsPassword = "abc123",
+            TfsUrl = "http://localhost/tfs/defaultcollection/",
+            TfsUserName = "admin3",
+            TfsWorkItemRegex = null,
+            VersionOneUserName = "admin2",
+            VersionOneUrl = "http://www.versionone.com/"
+        };
 
-            var serializationTarget = new TfsServerConfiguration();
-
+        public void given_configuration_settings_are_being_serialized()
+        {
             before = () =>
                 {
-                    serializationTarget.DebugMode = false;
-                    serializationTarget.IsWindowsIntegratedSecurity = true;
-                    serializationTarget.VersionOnePassword = "admin";
-                    serializationTarget.ProxyDomain = "AD";
-                    serializationTarget.ProxyIsEnabled = true;
-                    serializationTarget.ProxyPassword = "123456";
-                    serializationTarget.ProxyUrl = "http://myproxy:9191/proxy/";
-                    serializationTarget.ProxyUsername = "admin1";
-                    serializationTarget.TfsPassword = "abc123";
-                    serializationTarget.TfsUrl = "http://localhost/tfs/defaultcollection/";
-                    serializationTarget.TfsUserName = "admin3";
-                    serializationTarget.TfsWorkItemRegex = null;
-                    serializationTarget.VersionOneUserName = "admin2";
-                    serializationTarget.VersionOneUrl = "http://www.versionone.com/";
                 };
 
-            context["when i serialize the configuration to json"] = () =>
+            context["when i serialize configuration settings"] = () =>
                 {
-
-                    var json = JsonConvert.SerializeObject(serializationTarget);
-
                     it["then the json is valid"] = () =>
                         {
-                            //should we be testing the json serializer?
+                            var json = JsonConvert.SerializeObject(_serializationTarget);
+                            var o = JsonConvert.DeserializeObject<TfsServerConfiguration>(json);
+                            o.should_be(_serializationTarget);
                         };
                 };
-
         }
-
-        public void given_configuration_is_being_deserialized()
-        {
-            before = () =>
-                {
-
-                };
-
-            context["when i deserialize the configuration from json"] = () =>
-                {
-                    it["then a valid .net object results"] = () =>
-                        {
-
-                        };
-                };
-
-        }
-
     }
-
-    
-
 }
