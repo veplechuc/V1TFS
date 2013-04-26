@@ -13,7 +13,7 @@ namespace VersionOneTFSServer.Providers
 
         public Uri VersionOneUrl
         {
-            get { return new Uri("http://localhost/VersionOne/"); }
+            get { return new Uri("https://www14.v1host.com/v1sdktesting/"); }
         }
 
         public string VersionOneUserName
