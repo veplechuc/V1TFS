@@ -100,8 +100,8 @@ namespace VersionOneTFSServer.Tests
         {
             var mock = new PretendsToBeConnectedToHttpClient();
             var proxy = new ConfigurationProxy(mock);
-            it["can submit valid configuration"] = () => proxy.Send(_serializationTarget);
-            it["gets back the object it stored"] = () => proxy.Recieve().should_be(_serializationTarget);
+            it["can submit valid configuration"] = () => proxy.Store(_serializationTarget);
+            it["gets back the object it stored"] = () => proxy.Retrieve().should_be(_serializationTarget);
         }
 
 

@@ -48,7 +48,7 @@ namespace VersionOneTFSServerConfig.Configuration
             _url = url ?? ProbeServerConfig();
         }
 
-        public void Send(TfsServerConfiguration config)
+        public void Store(TfsServerConfiguration config)
         {
             var json = JsonConvert.SerializeObject(config);
             var result = _server.Put(_url, System.Text.Encoding.UTF8.GetBytes(json));
@@ -60,7 +60,7 @@ namespace VersionOneTFSServerConfig.Configuration
             }
         }
 
-        public TfsServerConfiguration Recieve()
+        public TfsServerConfiguration Retrieve()
         {
             var result = _server.Get(_url);
             var body = System.Text.Encoding.UTF8.GetString(result);
