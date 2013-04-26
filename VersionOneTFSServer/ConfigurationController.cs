@@ -4,6 +4,8 @@ using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
 using VersionOneTFSServer.Collections;
 using VersionOneTFSServer.Providers;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace VersionOneTFSServer
 {
@@ -41,8 +43,11 @@ namespace VersionOneTFSServer
         }
 
         // POST <controller>
-        public void Post([FromBody]TfsServerConfiguration config)
+        public Dictionary<string, string> Post([FromBody]TfsServerConfiguration config)
         {
+
+            var enumerable = ValidatePostData(config);
+
             var configToSave = new Dictionary<string, string>
                 {
                     {AppSettingKeys.VersionOneUrl, config.VersionOneUrl},
@@ -55,8 +60,31 @@ namespace VersionOneTFSServer
                     {AppSettingKeys.DebugMode, config.DebugMode.ToString()}
                 };
 
-            WebConfigurationAdapter.SaveAppSettings(configToSave);
+            var returnValue = enumerable.ToDictionary(x => x.Key, x => x.Value);
+            returnValue.Add("status", returnValue.Count == 0 ? "ok" : "exception");
+            if (returnValue["status"] == "ok") WebConfigurationAdapter.SaveAppSettings(configToSave);
+            
+            return returnValue;
         }
+
+        private IEnumerable<KeyValuePair<string, string>> ValidatePostData(TfsServerConfiguration config)
+        {
+            if (string.IsNullOrEmpty(config.VersionOneUrl))
+                yield return RequiredFieldError("VersionOneUrl");
+            if (string.IsNullOrEmpty(config.VersionOnePassword))
+                yield return RequiredFieldError("VersionOnePassword");
+            if (string.IsNullOrEmpty(config.VersionOneUserName))
+                yield return RequiredFieldError("VersionOneUserName");
+            if (string.IsNullOrEmpty(config.TfsUrl))
+                yield return RequiredFieldError("TfsUrl");
+            if (string.IsNullOrEmpty(config.TfsPassword))
+                yield return RequiredFieldError("TfsPassword");
+        }
+
+        private static KeyValuePair<string, string> RequiredFieldError(string fieldName)
+        {
+            return new KeyValuePair<string, string>(fieldName, "Required field missing.");
+        } 
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using Integrations.Core.Adapters;
+﻿using System.Collections.Generic;
+using System.Net;
+using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
 using NSpec;
 using Newtonsoft.Json;
@@ -19,11 +21,9 @@ namespace VersionOneTFSServer.Tests
         public void given_settings_are_being_sent_to_the_controller()
         {
 
-            before = WebConfigurationAdapter.ClearAllAppSettings;
-
             context["when a valid object is sent to the server"] = () =>
                 {
-                    //min acceptable data
+                    //min acceptable valid set of data
                     var postData = new TfsServerConfiguration()
                     {
                         TfsUrl = "http://www.mytfsserver.com/default/",
@@ -37,18 +37,45 @@ namespace VersionOneTFSServer.Tests
 
                     it["then the data is saved accurately"] = () =>
                         {
-                            new ConfigurationController().Post(postData);
+
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            var result = new ConfigurationController().Post(postData);
                             var getData = new ConfigurationController().Get();
+                            
                             //the data retrieved should equal the data posted
                             getData.should_be(postData);
+
+                            it["and the status of 'ok' is in the result data"] = () =>
+                                {
+                                    result.should_contain(kvp => kvp.Key == "status");
+                                    result["status"].should_be("ok");
+                                };
                         };
                 };
 
             context["when an invalid object is sent to the server"] = () =>
                 {
-                    it["then a proper exception message is recieved"] = () =>
+                    
+                    //invalid data missing v1url
+                    var postData = new TfsServerConfiguration()
+                    {
+                        TfsUrl = "http://www.mytfsserver.com/default/",
+                        TfsUserName = "admin1",
+                        TfsPassword = "password1",
+                        VersionOneUserName = "admin2",
+                        VersionOnePassword = "password2",
+                        ProxyIsEnabled = false
+                    };
+
+                    it["then a proper list of errors is received"] = () =>
                         {
 
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            var result = new ConfigurationController().Post(postData);
+
+                            result.should_contain(x => x.Key == "VersionOneUrl");
+                            result["VersionOneUrl"].should_be("Required field missing.");
+                            result["status"].should_be("exception");
                         };
                 };
 
