@@ -20,6 +20,38 @@ namespace VersionOneTFSServer.Tests
         public void given_settings_are_being_sent_to_the_controller()
         {
 
+            context["when a valid set of data including all possible fields"] = () =>
+                {
+
+                    //all possible fields are set
+                    var postData = new TfsServerConfiguration()
+                    {
+                        IsWindowsIntegratedSecurity = true,
+                        TfsUrl = "http://www.mytfsserver.com/default/",
+                        TfsUserName = "admin1",
+                        TfsPassword = "password1",
+                        VersionOneUrl = "http://www.versionone.com/",
+                        VersionOneUserName = "admin2",
+                        VersionOnePassword = "password2",
+                        ProxyIsEnabled = true,
+                        TfsWorkItemRegex = "[]",
+                        DebugMode = true,
+                        ProxyUrl = "http://192.168.1.1/home/",
+                        ProxyDomain = "AD1",
+                        ProxyUsername = "admin3",
+                        ProxyPassword = "password3"
+                    };
+
+                    it["then the data is saved accurately"] = () =>
+                        {
+                            WebConfigurationAdapter.ClearAllAppSettings();
+                            var postResult = new ConfigurationController().Post(postData);
+                            var getData = new ConfigurationController().Get();
+                            postResult[StatusKey.Status].should_be(StatusCode.Ok);
+                            getData.should_be(postData);
+                        };
+                };
+
             context["when a valid object is sent to the server"] = () =>
                 {
                     //min acceptable valid set of data
@@ -31,14 +63,15 @@ namespace VersionOneTFSServer.Tests
                         VersionOneUrl = "http://www.versionone.com/",
                         VersionOneUserName = "admin2",
                         VersionOnePassword = "password2",
-                        ProxyIsEnabled = false
+                        ProxyIsEnabled = false,
+                        TfsWorkItemRegex = "[]" //not a required field, but returns a default so needs to be set in order for a valid comparison to occur below.
                     };
 
                     it["then the data is saved accurately"] = () =>
                         {
 
                             WebConfigurationAdapter.ClearAllAppSettings();
-                            var result = new ConfigurationController().Post(postData);
+                            var postResult = new ConfigurationController().Post(postData);
                             var getData = new ConfigurationController().Get();
                             
                             //the data retrieved should equal the data posted
@@ -46,8 +79,8 @@ namespace VersionOneTFSServer.Tests
 
                             it["and the status of 'ok' is in the result data"] = () =>
                                 {
-                                    result.should_contain(kvp => kvp.Key == StatusKey.Status);
-                                    result[StatusKey.Status].should_be(StatusCode.Ok);
+                                    postResult.should_contain(kvp => kvp.Key == StatusKey.Status);
+                                    postResult[StatusKey.Status].should_be(StatusCode.Ok);
                                 };
                         };
                 };
@@ -69,10 +102,10 @@ namespace VersionOneTFSServer.Tests
                     it["then a proper list of errors is received"] = () =>
                         {
                             WebConfigurationAdapter.ClearAllAppSettings();
-                            var result = new ConfigurationController().Post(postData);
-                            result.should_contain(x => x.Key == "VersionOneUrl");
-                            result["VersionOneUrl"].should_be(StatusCode.Required);
-                            result[StatusKey.Status].should_be(StatusCode.Exception);
+                            var postResult = new ConfigurationController().Post(postData);
+                            postResult.should_contain(x => x.Key == "VersionOneUrl");
+                            postResult["VersionOneUrl"].should_be(StatusCode.Required);
+                            postResult[StatusKey.Status].should_be(StatusCode.Exception);
                         };
                 };
 

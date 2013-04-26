@@ -26,6 +26,7 @@ namespace VersionOneTFSServer
                     TfsUrl = configProvider.TfsUrl.ToString(),
                     TfsUserName = configProvider.TfsUserName,
                     TfsPassword = configProvider.TfsPassword,
+                    TfsWorkItemRegex = configProvider.TfsWorkItemRegex,
                     IsWindowsIntegratedSecurity = configProvider.IsWindowsIntegratedSecurity,
                     DebugMode = configProvider.DebugMode
                 };
@@ -58,7 +59,13 @@ namespace VersionOneTFSServer
                     {AppSettingKeys.TfsUserName, config.TfsUserName},
                     {AppSettingKeys.TfsPassword, config.TfsPassword},
                     {AppSettingKeys.IsWindowsIntegratedSecurity, config.IsWindowsIntegratedSecurity.ToString()},
-                    {AppSettingKeys.DebugMode, config.DebugMode.ToString()}
+                    {AppSettingKeys.DebugMode, config.DebugMode.ToString()},
+                    {AppSettingKeys.TfsWorkItemRegex, config.TfsWorkItemRegex},
+                    {AppSettingKeys.ProxyIsEnabled, config.ProxyIsEnabled.ToString()},
+                    {AppSettingKeys.ProxyUrl, config.ProxyUrl},
+                    {AppSettingKeys.ProxyUserName, config.ProxyUsername},
+                    {AppSettingKeys.ProxyPassword, config.ProxyPassword},
+                    {AppSettingKeys.ProxyDomain, config.ProxyDomain}
                 };
 
             var returnValue = enumerable.ToDictionary(x => x.Key, x => x.Value);
