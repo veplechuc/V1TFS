@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using Integrations.Core.Adapters;
+﻿using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
+using Integrations.Core.Structures;
 using NSpec;
-using Newtonsoft.Json;
+
 namespace VersionOneTFSServer.Tests
 {
 
@@ -47,8 +46,8 @@ namespace VersionOneTFSServer.Tests
 
                             it["and the status of 'ok' is in the result data"] = () =>
                                 {
-                                    result.should_contain(kvp => kvp.Key == "status");
-                                    result["status"].should_be("ok");
+                                    result.should_contain(kvp => kvp.Key == StatusKey.Status);
+                                    result[StatusKey.Status].should_be(StatusCode.Ok);
                                 };
                         };
                 };
@@ -69,13 +68,11 @@ namespace VersionOneTFSServer.Tests
 
                     it["then a proper list of errors is received"] = () =>
                         {
-
                             WebConfigurationAdapter.ClearAllAppSettings();
                             var result = new ConfigurationController().Post(postData);
-
                             result.should_contain(x => x.Key == "VersionOneUrl");
-                            result["VersionOneUrl"].should_be("Required field missing.");
-                            result["status"].should_be("exception");
+                            result["VersionOneUrl"].should_be(StatusCode.Required);
+                            result[StatusKey.Status].should_be(StatusCode.Exception);
                         };
                 };
 

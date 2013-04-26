@@ -2,13 +2,14 @@
 using System.Web.Http;
 using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
+using Integrations.Core.Structures;
 using VersionOneTFSServer.Collections;
 using VersionOneTFSServer.Providers;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace VersionOneTFSServer
 {
+
     public class ConfigurationController : ApiController
     {
         // GET <controller>
@@ -61,13 +62,13 @@ namespace VersionOneTFSServer
                 };
 
             var returnValue = enumerable.ToDictionary(x => x.Key, x => x.Value);
-            returnValue.Add("status", returnValue.Count == 0 ? "ok" : "exception");
-            if (returnValue["status"] == "ok") WebConfigurationAdapter.SaveAppSettings(configToSave);
+            returnValue.Add(StatusKey.Status, returnValue.Count == 0 ? StatusCode.Ok : StatusCode.Exception);
+            if (returnValue[StatusKey.Status] == StatusCode.Ok) WebConfigurationAdapter.SaveAppSettings(configToSave);
             
             return returnValue;
         }
 
-        private IEnumerable<KeyValuePair<string, string>> ValidatePostData(TfsServerConfiguration config)
+        private static IEnumerable<KeyValuePair<string, string>> ValidatePostData(TfsServerConfiguration config)
         {
             if (string.IsNullOrEmpty(config.VersionOneUrl))
                 yield return RequiredFieldError("VersionOneUrl");
@@ -83,7 +84,7 @@ namespace VersionOneTFSServer
 
         private static KeyValuePair<string, string> RequiredFieldError(string fieldName)
         {
-            return new KeyValuePair<string, string>(fieldName, "Required field missing.");
+            return new KeyValuePair<string, string>(fieldName, StatusCode.Required);
         } 
 
     }

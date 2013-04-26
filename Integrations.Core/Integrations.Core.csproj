@@ -48,6 +48,8 @@
     <Compile Include="Interfaces\IProxyConnectionSettings.cs" />
     <Compile Include="Interfaces\IVersionOneSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\StatusCode.cs" />
+    <Compile Include="Structures\StatusKey.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
