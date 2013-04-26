@@ -42,7 +42,7 @@ namespace VersionOneTFSServer.Providers
         {
             get { return string.Empty; }
         }
-        public string WorkItemRegex
+        public string TfsWorkItemRegex
         {
             get { return "[A-Z]{1,2}-[0-9]+"; }
         }

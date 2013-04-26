@@ -11,7 +11,7 @@ namespace Integrations.Core.Interfaces
         Uri TfsUrl { get; }
         string TfsUserName { get; }
         string TfsPassword { get; }
-        string WorkItemRegex { get; }
+        string TfsWorkItemRegex { get; }
         bool DebugMode { get; }
         IProxyConnectionSettings ProxySettings { get; }
     }

@@ -53,9 +53,9 @@ namespace VersionOneTFSServer.Providers
             get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
         }
 
-        public string WorkItemRegex
+        public string TfsWorkItemRegex
         {
-            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.WorkItemRegex); }
+            get { return WebConfigurationAdapter.GetAppSetting(AppSettingKeys.TfsWorkItemRegex, _configurationDefaults.TfsWorkItemRegex); }
         }
 
         public bool DebugMode
