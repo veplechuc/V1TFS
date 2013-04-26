@@ -40,7 +40,7 @@ namespace VersionOneTFSServerConfig.Configuration
             // look in web.config
             // return convention
             // port-scan local box
-            return "http://localhost:8711/";
+            return "http://localhost:9090/Configuration/";
         }
         public ConfigurationProxy(IHttpClient server = null, string url = null)
         {
