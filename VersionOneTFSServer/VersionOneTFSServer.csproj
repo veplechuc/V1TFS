@@ -186,6 +186,7 @@
       <DependentUpon>Diagnostics.aspx</DependentUpon>
     </Compile>
     <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="ModelBinders\TfsServerConfigurationModelBinder.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Global.asax.cs">

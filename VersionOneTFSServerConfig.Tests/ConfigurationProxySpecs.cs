@@ -20,7 +20,6 @@ namespace VersionOneTFSServer.Tests
             _serializer = new JavaScriptSerializer();
         }
 
-
         public new byte[] Put(string address, byte[] data)
         {
             var config = _serializer.Deserialize<TfsServerConfiguration>(
@@ -51,7 +50,6 @@ namespace VersionOneTFSServer.Tests
             }
             return System.Text.Encoding.UTF8.GetBytes(_serializer.Serialize(_stored[url]));
         }
-
 
     }
 

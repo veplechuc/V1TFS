@@ -36,4 +36,14 @@ public class DebuggerShim
         contexts.Failures().Count().should_be(0);
     }
 
+    [Test]
+    public void DebugConfigFormSpecs()
+    {
+        const string tagOrClassName = "ConfigFormSpecs";
+        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+        var contexts = invocation.Run();
+        //assert that there aren't any failures
+        contexts.Failures().Count().should_be(0);
+    }
+
 }

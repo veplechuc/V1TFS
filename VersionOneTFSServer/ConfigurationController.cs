@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using VersionOneTFSServer.Collections;
+using VersionOneTFSServer.ModelBinders;
 using VersionOneTFSServer.Providers;
 using System.Linq;
 
@@ -44,8 +46,8 @@ namespace VersionOneTFSServer
 
         }
 
-        // POST <controller>
-        public Dictionary<string, string> Post([FromBody]TfsServerConfiguration config)
+        //POST <controller>
+        public Dictionary<string, string> Post([ModelBinder(typeof(TfsServerConfigurationModelBinder))] TfsServerConfiguration config)
         {
 
             var enumerable = ValidatePostData(config);

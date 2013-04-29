@@ -5,10 +5,12 @@ using System.Net;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Integrations.Core.DTO;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.DirectoryServices;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFSServerConfig.Configuration;
 using Environment = System.Environment;
 
 namespace VersionOneTFSServerConfig
@@ -69,6 +71,16 @@ namespace VersionOneTFSServerConfig
 			// Debug Mode
             chkDebugMode.Checked = RegistryProcessor.GetBool(RegistryProcessor.DebugEnabledParameter, false);
             UpdateStatus();
+        }
+
+        public TfsServerConfiguration RetrieveConfigurationData()
+        {
+            return new ConfigurationProxy().Retrieve();
+        }
+
+        public void StoreConfigurationData(TfsServerConfiguration config)
+        {
+            new ConfigurationProxy().Store(config);
         }
 
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
