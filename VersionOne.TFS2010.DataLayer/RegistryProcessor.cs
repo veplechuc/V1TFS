@@ -37,11 +37,18 @@ namespace VersionOne.TFS2010.DataLayer
 
         public static object ReadRegistryKey(string key, string name, object def)
         {
+
+
+
             try
             {
-                var rk = Registry.LocalMachine;
-                rk = rk.OpenSubKey(key);
-
+                var reg64 = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey rk = reg64.OpenSubKey(key);
+                if (rk == null)
+                {
+                    var reg32 = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry32);
+                    rk = reg32.OpenSubKey(key);
+                }
                 if (rk != null)
                 {
                     return rk.GetValue(name, def);
