@@ -48,70 +48,49 @@ namespace VersionOneTFSServer.Providers
             if (File.Exists(Paths.ConfigurationPath)) File.Delete(Paths.ConfigurationPath);
         }
 
-        private string GetStoredSetting(string key)
-        {
-
-            if (_savedSettings == null || _savedSettings.ContainsKey(key) == false) return null;
-            return _savedSettings[key].Trim();
-        }
-
-        private T GetSetting<T>(string key, T defaultValue)
-        {
-            var type = typeof(T);
-            var storedValue = GetStoredSetting(key);
-            if (string.IsNullOrEmpty(storedValue)) return defaultValue;
-            return (T)Convert.ChangeType(storedValue, type);
-        }
-
-        private Uri GetUri(string key, Uri defaultValue)
-        {
-            var storedValue = GetStoredSetting(key);
-            return string.IsNullOrEmpty(storedValue) ? defaultValue : new Uri(storedValue);
-        }
-
         public bool IsWindowsIntegratedSecurity
         {
-            get { return GetSetting(AppSettingKeys.IsWindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.IsWindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
         }
 
         public Uri VersionOneUrl
         {
-            get { return GetUri(AppSettingKeys.VersionOneUrl, _configurationDefaults.VersionOneUrl); }
+            get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.VersionOneUrl, _configurationDefaults.VersionOneUrl); }
         }
 
         public string VersionOneUserName
         {
-            get { return GetSetting(AppSettingKeys.VersionOneUserName, _configurationDefaults.VersionOneUserName); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.VersionOneUserName, _configurationDefaults.VersionOneUserName); }
         }
 
         public string VersionOnePassword
         {
-            get { return GetSetting(AppSettingKeys.VersionOnePassword, _configurationDefaults.VersionOnePassword); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.VersionOnePassword, _configurationDefaults.VersionOnePassword); }
         }
 
         public Uri TfsUrl
         {
-            get { return GetUri(AppSettingKeys.TfsUrl, _configurationDefaults.TfsUrl); }
+            get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.TfsUrl, _configurationDefaults.TfsUrl); }
         }
         
         public string TfsUserName
         {
-            get{ return GetSetting(AppSettingKeys.TfsUserName, _configurationDefaults.TfsUserName); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.TfsUserName, _configurationDefaults.TfsUserName); }
         }
 
         public string TfsPassword
         {
-            get { return GetSetting(AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
         }
 
         public string TfsWorkItemRegex
         {
-            get { return GetSetting(AppSettingKeys.TfsWorkItemRegex, _configurationDefaults.TfsWorkItemRegex); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.TfsWorkItemRegex, _configurationDefaults.TfsWorkItemRegex); }
         }
 
         public bool DebugMode
         {
-            get { return GetSetting(AppSettingKeys.DebugMode, _configurationDefaults.DebugMode); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.DebugMode, _configurationDefaults.DebugMode); }
         }
 
         public IProxyConnectionSettings ProxySettings

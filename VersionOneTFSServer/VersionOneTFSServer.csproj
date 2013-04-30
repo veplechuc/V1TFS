@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Providers\DefaultConfigurationProvider.cs" />
     <Compile Include="Providers\DefaultProxySettingsProvider.cs" />
+    <Compile Include="Providers\ProviderUtilities.cs" />
     <Compile Include="Providers\ProxySettingsProvider.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>

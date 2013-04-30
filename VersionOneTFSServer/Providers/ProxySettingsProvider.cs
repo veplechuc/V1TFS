@@ -17,50 +17,29 @@ namespace VersionOneTFSServer.Providers
             _savedSettings = savedSettings;
         }
 
-        private string GetStoredSetting(string key)
-        {
-
-            if (_savedSettings == null || _savedSettings.ContainsKey(key) == false) return null;
-            return _savedSettings[key].Trim();
-        }
-
-        private T GetSetting<T>(string key, T defaultValue)
-        {
-            var type = typeof(T);
-            var storedValue = GetStoredSetting(key);
-            if (string.IsNullOrEmpty(storedValue)) return defaultValue;
-            return (T)Convert.ChangeType(storedValue, type);
-        }
-
-        private Uri GetUri(string key, Uri defaultValue)
-        {
-            var storedValue = GetStoredSetting(key);
-            return string.IsNullOrEmpty(storedValue) ? defaultValue : new Uri(storedValue);
-        }
-
         public bool ProxyIsEnabled
         {
-            get { return GetSetting(AppSettingKeys.ProxyIsEnabled, _defaults.ProxyIsEnabled); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.ProxyIsEnabled, _defaults.ProxyIsEnabled); }
         }
 
         public Uri Url
         {
-            get { return GetUri(AppSettingKeys.ProxyUrl, _defaults.Url); }
+            get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.ProxyUrl, _defaults.Url); }
         }
 
         public string Domain
         {
-            get { return GetSetting(AppSettingKeys.ProxyDomain, _defaults.Domain); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.ProxyDomain, _defaults.Domain); }
         }
 
         public string Username
         {
-            get { return GetSetting(AppSettingKeys.ProxyUserName, _defaults.Username); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.ProxyUserName, _defaults.Username); }
         }
 
         public string Password
         {
-            get { return GetSetting(AppSettingKeys.ProxyPassword, _defaults.Password); }
+            get { return ProviderUtilities.GetSetting(_savedSettings, AppSettingKeys.ProxyPassword, _defaults.Password); }
         }
 
     }
