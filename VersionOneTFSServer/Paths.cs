@@ -13,9 +13,12 @@ namespace VersionOneTFSServer
 
         public static string ConfigurationPath
         {
-            get { return Path.Combine(ConfigurationDirectory, "settings.ini"); }
+            get { return Path.Combine(ConfigurationDirectory, ConfigurationFileName); }
         }
 
-
+        public static string ConfigurationFileName
+        {
+            get { return "settings.ini"; }
+        }
     }
 }

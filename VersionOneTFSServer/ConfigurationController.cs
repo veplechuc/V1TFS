@@ -76,23 +76,9 @@ namespace VersionOneTFSServer
 
             var returnValue = enumerable.ToDictionary(x => x.Key, x => x.Value);
             returnValue.Add(StatusKey.Status, returnValue.Count == 0 ? StatusCode.Ok : StatusCode.Exception);
-            if (returnValue[StatusKey.Status] == StatusCode.Ok) SaveSettings(configToSave);
+            if (returnValue[StatusKey.Status] == StatusCode.Ok) SettingsFileAdapter.SaveSettings(configToSave, Paths.ConfigurationDirectory, Paths.ConfigurationFileName);
             
             return returnValue;
-        }
-
-        private static void SaveSettings(Dictionary<string, string> configToSave)
-        {
-
-            if (Directory.Exists(Paths.ConfigurationDirectory) == false) Directory.CreateDirectory(Paths.ConfigurationDirectory);
-
-            using (var sw = new StreamWriter(Paths.ConfigurationPath))
-            {
-                foreach (var entry in configToSave)
-                {
-                    sw.WriteLine(string.Format("{0}, {1}", entry.Key, entry.Value));
-                }
-            } 
         }
 
         private static IEnumerable<KeyValuePair<string, string>> ValidatePostData(TfsServerConfiguration config)

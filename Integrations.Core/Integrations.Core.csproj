@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\SettingsFileAdapter.cs" />
     <Compile Include="Adapters\WebConfigurationAdapter.cs" />
     <Compile Include="DTO\TfsServerConfiguration.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />

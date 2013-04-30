@@ -59,5 +59,9 @@ namespace VersionOneTFSServer.Providers
             }
         }
 
+        public void ClearAllSettings()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

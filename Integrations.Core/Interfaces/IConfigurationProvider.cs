@@ -14,5 +14,6 @@ namespace Integrations.Core.Interfaces
         string TfsWorkItemRegex { get; }
         bool DebugMode { get; }
         IProxyConnectionSettings ProxySettings { get; }
+        void ClearAllSettings();
     }
 }

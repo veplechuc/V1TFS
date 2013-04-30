@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Integrations.Core.Adapters;
 using Integrations.Core.Interfaces;
 using NSpec;
@@ -11,6 +13,7 @@ namespace VersionOneTFSServer.Tests
     {
         private IConfigurationProvider _target = null;
         private IConfigurationProvider _defaults = null;
+        private const string FileName = "settings.ini";
 
         public void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
         {
@@ -18,13 +21,14 @@ namespace VersionOneTFSServer.Tests
                 {
                     _target = new ConfigurationProvider();
                     _defaults = new DefaultConfigurationProvider();
-                    WebConfigurationAdapter.ClearAllAppSettings();
+                    _target.ClearAllSettings();
                 };
 
             context["when i retrieve versionone specific settings"] = () =>
                 {
                     it["then the defaults are returned"] = () =>
                         {
+                            _target = new ConfigurationProvider();
                             _target.VersionOneUserName.should_be(_defaults.VersionOneUserName);
                             _target.VersionOnePassword.should_be(_defaults.VersionOnePassword);
                             _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
@@ -49,9 +53,9 @@ namespace VersionOneTFSServer.Tests
             before = () =>
                 {
                     _target = new ConfigurationProvider();
-                    WebConfigurationAdapter.ClearAllAppSettings();
+                    _target.ClearAllSettings();
 
-                    WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>()
+                    SettingsFileAdapter.SaveSettings(new Dictionary<string, string>()
                         {
                             {AppSettingKeys.VersionOneUserName, userName},
                             {AppSettingKeys.VersionOnePassword, password},
@@ -60,13 +64,14 @@ namespace VersionOneTFSServer.Tests
                             {AppSettingKeys.TfsUrl, tfsurl.ToString()},
                             {AppSettingKeys.TfsUserName, tfsuser},
                             {AppSettingKeys.TfsPassword, tfspass}
-                        });
+                        }, Paths.ConfigurationDirectory, FileName);
                 };
 
             context["when i retrieve versionone specific settings"] = () =>
                 {
                     it["then the expected settings are returned"] = () =>
                         {
+                            _target = new ConfigurationProvider();
                             _target.VersionOneUserName.should_be(userName);
                             _target.VersionOnePassword.should_be(password);
                             _target.VersionOneUrl.ToString().should_be(v1url);
