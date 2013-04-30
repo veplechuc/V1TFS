@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="ModelBinders\TfsServerConfigurationModelBinder.cs" />
+    <Compile Include="Paths.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Global.asax.cs">
