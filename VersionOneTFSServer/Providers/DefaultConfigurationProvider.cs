@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Policy;
 using Integrations.Core.Interfaces;
 
 namespace VersionOneTFSServer.Providers
@@ -28,10 +27,7 @@ namespace VersionOneTFSServer.Providers
 
         public Uri TfsUrl
         {
-            get
-            {
-                return new Uri("http://localhost:8080/tfs/DefaultCollection/");
-            }
+            get { return new Uri("http://localhost:8080/tfs/DefaultCollection/"); }
         }
 
         public string TfsUserName
@@ -55,7 +51,7 @@ namespace VersionOneTFSServer.Providers
         {
             get
             {
-                return new ProxySettingsProvider();
+                return new DefaultProxySettingsProvider();
             }
         }
 

@@ -55,7 +55,7 @@ namespace VersionOneTFSServer.Providers
             return _savedSettings[key].Trim();
         }
 
-        private T GetAppSetting<T>(string key, T defaultValue)
+        private T GetSetting<T>(string key, T defaultValue)
         {
             var type = typeof(T);
             var storedValue = GetStoredSetting(key);
@@ -71,7 +71,7 @@ namespace VersionOneTFSServer.Providers
 
         public bool IsWindowsIntegratedSecurity
         {
-            get { return GetAppSetting(AppSettingKeys.IsWindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
+            get { return GetSetting(AppSettingKeys.IsWindowsIntegratedSecurity, _configurationDefaults.IsWindowsIntegratedSecurity); }
         }
 
         public Uri VersionOneUrl
@@ -81,12 +81,12 @@ namespace VersionOneTFSServer.Providers
 
         public string VersionOneUserName
         {
-            get { return GetAppSetting(AppSettingKeys.VersionOneUserName, _configurationDefaults.VersionOneUserName); }
+            get { return GetSetting(AppSettingKeys.VersionOneUserName, _configurationDefaults.VersionOneUserName); }
         }
 
         public string VersionOnePassword
         {
-            get { return GetAppSetting(AppSettingKeys.VersionOnePassword, _configurationDefaults.VersionOnePassword); }
+            get { return GetSetting(AppSettingKeys.VersionOnePassword, _configurationDefaults.VersionOnePassword); }
         }
 
         public Uri TfsUrl
@@ -96,27 +96,27 @@ namespace VersionOneTFSServer.Providers
         
         public string TfsUserName
         {
-            get{ return GetAppSetting(AppSettingKeys.TfsUserName, _configurationDefaults.TfsUserName); }
+            get{ return GetSetting(AppSettingKeys.TfsUserName, _configurationDefaults.TfsUserName); }
         }
 
         public string TfsPassword
         {
-            get { return GetAppSetting(AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
+            get { return GetSetting(AppSettingKeys.TfsPassword, _configurationDefaults.TfsPassword); }
         }
 
         public string TfsWorkItemRegex
         {
-            get { return GetAppSetting(AppSettingKeys.TfsWorkItemRegex, _configurationDefaults.TfsWorkItemRegex); }
+            get { return GetSetting(AppSettingKeys.TfsWorkItemRegex, _configurationDefaults.TfsWorkItemRegex); }
         }
 
         public bool DebugMode
         {
-            get { return GetAppSetting(AppSettingKeys.DebugMode, _configurationDefaults.DebugMode); }
+            get { return GetSetting(AppSettingKeys.DebugMode, _configurationDefaults.DebugMode); }
         }
 
         public IProxyConnectionSettings ProxySettings
         {
-            get { return new ProxySettingsProvider(); }
+            get { return new ProxySettingsProvider(_savedSettings); }
         }
 
     }

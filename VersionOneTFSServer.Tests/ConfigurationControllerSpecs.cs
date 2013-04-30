@@ -2,6 +2,7 @@
 using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using NSpec;
+using VersionOneTFSServer.Providers;
 
 namespace VersionOneTFSServer.Tests
 {
@@ -44,11 +45,11 @@ namespace VersionOneTFSServer.Tests
 
                     it["then the data is saved accurately"] = () =>
                         {
-                            WebConfigurationAdapter.ClearAllAppSettings();
+                            new ConfigurationProvider().ClearAllSettings();
                             var postResult = new ConfigurationController().Post(postData);
                             var getData = new ConfigurationController().Get();
                             postResult[StatusKey.Status].should_be(StatusCode.Ok);
-                            //getData.should_be(postData);
+                            getData.should_be(postData);
                         };
                 };
 
@@ -70,12 +71,12 @@ namespace VersionOneTFSServer.Tests
                     it["then the data is saved accurately"] = () =>
                         {
 
-                            WebConfigurationAdapter.ClearAllAppSettings();
+                            new ConfigurationProvider().ClearAllSettings();
                             var postResult = new ConfigurationController().Post(postData);
                             var getData = new ConfigurationController().Get();
                             
                             //the data retrieved should equal the data posted
-                            //getData.should_be(postData);
+                            getData.should_be(postData);
 
                             it["and the status of 'ok' is in the result data"] = () =>
                                 {
@@ -101,7 +102,7 @@ namespace VersionOneTFSServer.Tests
 
                     it["then a proper list of errors is received"] = () =>
                         {
-                            WebConfigurationAdapter.ClearAllAppSettings();
+                            new ConfigurationProvider().ClearAllSettings();
                             var postResult = new ConfigurationController().Post(postData);
                             postResult.should_contain(x => x.Key == "VersionOneUrl");
                             postResult["VersionOneUrl"].should_be(StatusCode.Required);

@@ -17,7 +17,7 @@ namespace VersionOneTFSServer.Tests
         {
             before = () =>
             {
-                _target = new ProxySettingsProvider();
+                _target = new ProxySettingsProvider(null);
                 _defaults = new DefaultProxySettingsProvider();
                 WebConfigurationAdapter.ClearAllAppSettings();
             };
@@ -46,18 +46,22 @@ namespace VersionOneTFSServer.Tests
 
             before = () =>
                 {
-                    _target = new ProxySettingsProvider();
-                    _defaults = new DefaultProxySettingsProvider();
-                    WebConfigurationAdapter.ClearAllAppSettings();
-                    
-                    WebConfigurationAdapter.SaveAppSettings(new Dictionary<string, string>()
+
+                    var settings = new Dictionary<string, string>()
                         {
                             {AppSettingKeys.ProxyIsEnabled, proxyIsEnabled},
                             {AppSettingKeys.ProxyDomain, proxyDomain},
                             {AppSettingKeys.ProxyUrl, proxyUrl},
                             {AppSettingKeys.ProxyUserName, proxyUserName},
                             {AppSettingKeys.ProxyPassword, proxyPassword}
-                        });
+                        };
+
+                    _target = new ProxySettingsProvider(settings);
+                    _defaults = new DefaultProxySettingsProvider();
+                    new ConfigurationProvider().ClearAllSettings();
+
+                    SettingsFileAdapter.SaveSettings(settings, Paths.ConfigurationDirectory, Paths.ConfigurationFileName);
+
                 };
 
             context["when i retrieve versionone specific settings"] = () =>

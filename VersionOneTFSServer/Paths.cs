@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web;
 
 namespace VersionOneTFSServer
 {
@@ -8,7 +9,22 @@ namespace VersionOneTFSServer
 
         public static string ConfigurationDirectory
         {
-            get{return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "V1TFSServer");}
+            get
+            {
+                string directory;
+
+                try
+                {
+                    directory = HttpRuntime.AppDomainAppPath;
+                }
+                catch (Exception)
+                {
+                    directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "V1TFSServer");
+                }
+
+                return directory;
+
+            }
         }
 
         public static string ConfigurationPath
