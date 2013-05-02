@@ -174,7 +174,7 @@ WIN_SIGNING_KEY="`winpath "$SIGNING_KEY"`"
 WIN_SIGNING_KEY="`winpath "$SIGNING_KEY"`"
 echo $Platform
 MSBuild.exe $SOLUTION_FILE \
-  -p:SignAssembly=$SIGN_ASSEMBLY \
+  -p:SignAssembly=false \
   -p:AssemblyOriginatorKeyFile=$WIN_SIGNING_KEY \
   -p:RequireRestoreConsent=false \
   -p:Configuration="$Configuration" \
