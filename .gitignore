@@ -3,6 +3,7 @@
 *.dll
 
 ## Visual Studio files ##
+error-*.xml
 *.ncrunchsolution
 *.[Oo]bj
 *.user
