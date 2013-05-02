@@ -14,7 +14,7 @@ namespace VersionOneTFSServer.Tests
                     var client = new ServiceProxy.ServiceClient();
                     try
                     {
-                        expect<NullReferenceException>(() => client.Notify(null, null));
+                        expect<FaultException<ExceptionDetail>>(() => client.Notify(null, null));
                     }
                     finally
                     {
