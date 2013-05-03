@@ -5,17 +5,17 @@
 
   <?include $(sys.CURRENTDIR)\Config.wxi ?>
 
-  <Product Name="VersionOne TFS Listener" 
+  <Product Name="VersionOne TFS Listener"
            Version="2.0.1.0"
            Manufacturer="VersionOne"
            Id="70439564-5E37-4B38-AEF4-91D86F50B282"
            UpgradeCode="003F3FE8-9A6D-445F-9ACB-5479FAD77A7D"
            Language="1033" >
 
-    <Package Id="*" Keywords="Installer" 
+    <Package Id="*" Keywords="Installer"
              Description="$(var.ProductName)"
-             Manufacturer="VersionOne" 
-             InstallerVersion="200" Compressed="yes" 
+             Manufacturer="VersionOne"
+             InstallerVersion="200" Compressed="yes"
              InstallPrivileges="elevated"
              InstallScope="perMachine" />
 
@@ -33,8 +33,8 @@
         <Directory Id="VersionOne" Name="VersionOne">
           <Directory Id="INSTALLLOCATION" Name="TFSListener">
             <Component Id="TFSListenerConfig" Guid="C2D48FB6-AA6D-4057-9C61-4506CDD2F521">
-              <File Id="VersionOneTFSServerConfigEXE" 
-                    Name="VersionOneTFSServerConfig.exe" 
+              <File Id="VersionOneTFSServerConfigEXE"
+                    Name="VersionOneTFSServerConfig.exe"
                     Source="$(var.VersionOneTFSServerConfig.TargetDir)"
                     DiskId="1" Vital="yes" KeyPath="yes" >
                 <Shortcut Id="desktopConfig" Directory="DesktopFolder" Name="Configure VersionOne Listener"
@@ -76,6 +76,27 @@
                   <iis:WebApplication Id='TFSListenerApp' WebAppPool='ASP_NET_4' Name='TFS Listener App' />
                 </iis:WebSite>
               </Component>
+              <Directory Id="AppData" Name="App_Data">
+                <Component Id="AppData"  Guid="c97386c2-e8b5-4f4e-a25b-94f770e7bebf">
+                  <CreateFolder>
+                    <Permission User="Everyone" GenericAll="yes" />
+                  </CreateFolder>
+                </Component>
+                <Directory Id="ElmahErrorLogs" Name="ElmahErrorLogs">
+                  <Component Id="ElmahErrorLogs"  Guid="0476021d-25b7-4e08-8cb3-d52c306d74c2">
+                    <CreateFolder>
+                      <Permission User="Everyone" GenericAll="yes" />
+                    </CreateFolder>
+                  </Component>
+                </Directory>
+                <Directory Id="ServiceTraceLogs" Name="ServiceTraceLogs">
+                  <Component Id="ServiceTraceLogs"  Guid="f9258ddf-dfdd-483d-b6ec-346c429c439b">
+                    <CreateFolder>
+                      <Permission User="Everyone" GenericAll="yes" />
+                    </CreateFolder>
+                  </Component>
+                </Directory>
+              </Directory>
             </Directory>
           </Directory>
         </Directory>
@@ -90,10 +111,10 @@
       </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
     </Directory>
-    <Feature Id="Complete" Title="$(var.ProductName)" 
+    <Feature Id="Complete" Title="$(var.ProductName)"
              Description="Install $(var.ProductName)"
-             Display="expand" 
-             ConfigurableDirectory="INSTALLLOCATION" 
+             Display="expand"
+             ConfigurableDirectory="INSTALLLOCATION"
              Level="1" >
       <ComponentRef Id="VersionOneSDKAPIClient" />
       <ComponentRef Id="VersionOneTFSDataLayer" />
@@ -101,6 +122,9 @@
       <ComponentRef Id="ProgramMenuDir" />
       <ComponentGroupRef Id="TFSListenerSite" />
       <ComponentRef Id="ListenerWebSite" />
+      <ComponentRef Id="AppData" />
+      <ComponentRef Id="ElmahErrorLogs" />
+      <ComponentRef Id="ServiceTraceLogs" />
     </Feature>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
