@@ -2,6 +2,7 @@
 using System.Reflection;
 using NSpec;
 using NSpec.Domain;
+using NSpec.Domain.Formatters;
 using NUnit.Framework;
 
 /*
@@ -26,6 +27,20 @@ namespace VersionOneTFSServer.Tests
     [TestFixture]
     public class DebuggerShim
     {
+
+		[Test]
+        public void DebugServiceSpecs()
+        {
+            const string tagOrClassName = "ServiceSpecs";
+
+            var types = GetType().Assembly.GetTypes();
+            var finder = new SpecFinder(types, "");
+            var builder = new ContextBuilder(finder, new Tags().Parse(tagOrClassName), new DefaultConventions());
+            var runner = new ContextRunner(builder, new ConsoleFormatter(), false);
+            var results = runner.Run(builder.Contexts().Build());
+            results.Failures().Count().should_be(0);
+
+        }
 
         [Test]
         public void DebugConfigurationControllerSpecs()

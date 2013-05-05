@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel.Activation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -12,11 +13,14 @@ using Microsoft.TeamFoundation.Build.Client;
 using VersionOne.ServerConnector.Entities;
 using VersionOne.TFS2010.DataLayer;
 using VersionOneTFSServer.Interfaces;
+using VersionOneTFSServer.ServiceErrors;
 using Environment = System.Environment;
 
 namespace VersionOneTFSServer
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
+    [ServiceErrorBehavior(typeof(ServiceErrorHandler))]
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service : IService
     {
         private readonly Lazy<V1Component> v1Component = new Lazy<V1Component>(() => 
@@ -34,6 +38,7 @@ namespace VersionOneTFSServer
 
         public void Notify(string eventXml, string tfsIdentityXml)
         {
+
             Debug.instance().WriteNotificationMessage(eventXml, tfsIdentityXml);
 
             var buildEvent = false;
@@ -64,9 +69,8 @@ namespace VersionOneTFSServer
                 }
             }
 
-            try
-            {
-                if (checkinEvent)
+            
+           if (checkinEvent)
                 {
                     Debug.instance().Write("CheckIn Event");
                     var checkInxs = new XmlSerializer(typeof(CheckinEvent));
@@ -79,7 +83,7 @@ namespace VersionOneTFSServer
                     }
                 }
 
-                if (buildEvent)
+           if (buildEvent)
                 {
                     Debug.instance().Write("Build Event");
                     var buildCompletionxs = new XmlSerializer(typeof(BuildCompletionEvent2));
@@ -91,12 +95,7 @@ namespace VersionOneTFSServer
                         OnBuildCompletionEvent(buildCompletionData);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.instance().Write(ex);
-                throw;
-            }
+            
         }
 
         /// <summary>
