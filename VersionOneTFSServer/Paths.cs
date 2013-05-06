@@ -15,9 +15,9 @@ namespace VersionOneTFSServer
 
                 try
                 {
-                    directory = HttpRuntime.AppDomainAppPath;
+                    directory = string.Concat(HttpRuntime.AppDomainAppPath, "/App_Data/");
                 }
-                catch (Exception)
+                catch(Exception)
                 {
                     directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "V1TFSServer");
                 }
