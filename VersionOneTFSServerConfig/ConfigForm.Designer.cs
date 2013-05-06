@@ -69,12 +69,12 @@ namespace VersionOneTFSServerConfig
             this.lblTfsServerUrl = new System.Windows.Forms.Label();
             this.TFSURLTB = new System.Windows.Forms.TextBox();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.txtDebugDescription = new System.Windows.Forms.TextBox();
             this.chkDebugMode = new System.Windows.Forms.CheckBox();
             this.SaveSettingsB = new System.Windows.Forms.Button();
             this.RegExTB = new System.Windows.Forms.TextBox();
             this.lblRegex = new System.Windows.Forms.Label();
             this.txtMatchesDescription = new System.Windows.Forms.TextBox();
-            this.txtDebugDescription = new System.Windows.Forms.TextBox();
             this.tcSettings.SuspendLayout();
             this.tpVersionOne.SuspendLayout();
             this.grpProxySettings.SuspendLayout();
@@ -216,6 +216,7 @@ namespace VersionOneTFSServerConfig
             this.chkUseProxy.TabIndex = 0;
             this.chkUseProxy.Text = "Use Proxy Server to Access VersionOne";
             this.chkUseProxy.UseVisualStyleBackColor = true;
+            this.chkUseProxy.CheckedChanged += new System.EventHandler(this.chkUseProxy_CheckedChanged);
             // 
             // UseIntegratedAuthenticationCB
             // 
@@ -468,6 +469,17 @@ namespace VersionOneTFSServerConfig
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
             // 
+            // txtDebugDescription
+            // 
+            this.txtDebugDescription.BackColor = System.Drawing.SystemColors.Control;
+            this.txtDebugDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDebugDescription.Location = new System.Drawing.Point(9, 140);
+            this.txtDebugDescription.Multiline = true;
+            this.txtDebugDescription.Name = "txtDebugDescription";
+            this.txtDebugDescription.ReadOnly = true;
+            this.txtDebugDescription.Size = new System.Drawing.Size(431, 45);
+            this.txtDebugDescription.TabIndex = 5;
+            // 
             // chkDebugMode
             // 
             this.chkDebugMode.AutoSize = true;
@@ -514,17 +526,6 @@ namespace VersionOneTFSServerConfig
             this.txtMatchesDescription.Size = new System.Drawing.Size(431, 47);
             this.txtMatchesDescription.TabIndex = 0;
             this.txtMatchesDescription.Text = resources.GetString("txtMatchesDescription.Text");
-            // 
-            // txtDebugDescription
-            // 
-            this.txtDebugDescription.BackColor = System.Drawing.SystemColors.Control;
-            this.txtDebugDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDebugDescription.Location = new System.Drawing.Point(9, 140);
-            this.txtDebugDescription.Multiline = true;
-            this.txtDebugDescription.Name = "txtDebugDescription";
-            this.txtDebugDescription.ReadOnly = true;
-            this.txtDebugDescription.Size = new System.Drawing.Size(431, 45);
-            this.txtDebugDescription.TabIndex = 5;
             // 
             // ConfigForm
             // 

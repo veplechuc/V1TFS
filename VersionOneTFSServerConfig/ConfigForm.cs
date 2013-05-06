@@ -19,6 +19,7 @@ namespace VersionOneTFSServerConfig
     {
 
         internal static TfsTeamProjectCollection TfsServer;
+        internal static TfsServerConfiguration _config;
 
         public ConfigForm()
         {
@@ -31,51 +32,38 @@ namespace VersionOneTFSServerConfig
             UnsubscribeB.Click += UnsubscribeB_Click;
             SaveSettingsB.Click += SaveSettingsB_Click;
             chkUseProxy.CheckedChanged += chkUseProxy_CheckedChanged;
+            UseIntegratedAuthenticationCB.CheckedChanged += chkUseIntegrationAuth_CheckChanged;
+
+            _config = new ConfigurationProxy().Retrieve();
 
             //Advanced setup
-            RegExTB.Text = RegistryProcessor.GetString(RegistryProcessor.V1RegexParameter, "[A-Z]{1,2}-[0-9]+");
+            RegExTB.Text = _config.TfsWorkItemRegex;
 
-            txtDebugDescription.Text = string.Format("Debug information is written to {0}",
-                                                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            txtDebugDescription.Text = string.Format("Debug information is written to {0}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
             //V1 setup
-            V1URLTB.Text = RegistryProcessor.GetString(RegistryProcessor.V1UrlParameter, "http://localhost/VersionOne/");
-            var username = WindowsIdentity.GetCurrent().Name;
-            var pos = username.IndexOf("\\");
+            V1URLTB.Text = _config.VersionOneUrl;
 
-            if(pos >= 0) 
-            {
-                username = username.Substring(pos + 1);
-            }
+            V1UsernameTB.Text = _config.VersionOneUserName;
+            V1PasswordTB.Text = _config.VersionOnePassword;
+            UseIntegratedAuthenticationCB.Checked = _config.IsWindowsIntegratedSecurity;
 
-            V1UsernameTB.Text = RegistryProcessor.GetString(RegistryProcessor.V1UsernameParameter, username);
-            V1PasswordTB.Text = RegistryProcessor.GetPassword(RegistryProcessor.V1PasswordParameter, string.Empty);
-            UseIntegratedAuthenticationCB.Checked = RegistryProcessor.GetBool(RegistryProcessor.V1WindowsAuthParameter, false);
-
-            chkUseProxy.Checked = RegistryProcessor.GetBool(RegistryProcessor.V1UseProxyParameter, false);
-            txtProxyUrl.Text = RegistryProcessor.GetString(RegistryProcessor.V1ProxyUrlParameter, string.Empty);
-            txtProxyUsername.Text = RegistryProcessor.GetString(RegistryProcessor.V1ProxyUsernameParameter, string.Empty);
-            txtProxyPassword.Text = RegistryProcessor.GetString(RegistryProcessor.V1ProxyPasswordParameter, string.Empty);
-            txtProxyDomain.Text = RegistryProcessor.GetString(RegistryProcessor.V1ProxyDomainParameter, string.Empty);
-            SetProxyRelatedFieldsEnabled(chkUseProxy.Checked);
+            chkUseProxy.Checked = _config.ProxyIsEnabled;
+            txtProxyUrl.Text = _config.ProxyUrl;
+            txtProxyUsername.Text = _config.ProxyUsername;
+            txtProxyPassword.Text = _config.ProxyPassword;
+            txtProxyDomain.Text = _config.ProxyDomain;
+            SetProxyRelatedFieldsEnabled(_config.ProxyIsEnabled);
 
             //TFS setup
-            TFSURLTB.Text = RegistryProcessor.GetString(RegistryProcessor.TfsUrlParameter, "http://localhost:8080");
-            TFSUsernameTB.Text = RegistryProcessor.GetString(RegistryProcessor.TfsUsernameParameter, WindowsIdentity.GetCurrent().Name);
-            TFSPasswordTB.Text = RegistryProcessor.GetPassword(RegistryProcessor.TfsPasswordParameter, string.Empty);
-            var port = RegistryProcessor.GetString(RegistryProcessor.ListenerPortParameter, "9090");
-            var folder = RegistryProcessor.GetString(RegistryProcessor.ListenerNameParameter, "VersionOne TFS Listener");
-            var host = Dns.GetHostName();
-            ListenerURLTB.Text = RegistryProcessor.GetString(RegistryProcessor.ListenerUrlParameter, "http://" + host + ":" + port + "/Service.svc");
+            TFSURLTB.Text = _config.TfsUrl;
+            TFSUsernameTB.Text = _config.TfsUserName;
+            TFSPasswordTB.Text = _config.TfsPassword;
+            ListenerURLTB.Text = _config.ListenerUrl;
 
 			// Debug Mode
-            chkDebugMode.Checked = RegistryProcessor.GetBool(RegistryProcessor.DebugEnabledParameter, false);
+            chkDebugMode.Checked = _config.DebugMode;
             UpdateStatus();
-        }
-
-        public TfsServerConfiguration RetrieveConfigurationData()
-        {
-            return new ConfigurationProxy().Retrieve();
         }
 
         public void StoreConfigurationData(TfsServerConfiguration config)
@@ -239,10 +227,8 @@ namespace VersionOneTFSServerConfig
 
         private ProxyConnectionSettings GetProxySettings() 
         {
-            if(!chkUseProxy.Checked) 
-            {
-                return null;
-            }
+
+            if (!chkUseProxy.Checked) return null;
 
             return new ProxyConnectionSettings 
             { 
@@ -377,10 +363,35 @@ namespace VersionOneTFSServerConfig
             }    
         }
 
+        private void chkUseIntegrationAuth_CheckChanged(object sender, EventArgs e)
+        {
+            ToggleV1Credentials();
+        }
+
+        private byte _bit = 0;
+        private void ToggleV1Credentials()
+        {
+            if (_bit == 0)
+            {
+                V1PasswordTB.Clear();
+                if (WindowsIdentity.GetCurrent() == null) return;
+                var windowsIdentity = WindowsIdentity.GetCurrent();
+                if (windowsIdentity != null) V1UsernameTB.Text = windowsIdentity.Name;
+                _bit = 1;
+            }
+            else
+            {
+                V1PasswordTB.Text = _config.VersionOnePassword;
+                V1UsernameTB.Text = _config.VersionOneUserName;
+                _bit = 0;
+            }
+        }
+
         private void SaveSettingsB_Click(object sender, EventArgs e)
         {
             RegistryProcessor.SetString(RegistryProcessor.V1RegexParameter, RegExTB.Text);
             RegistryProcessor.SetBool(RegistryProcessor.DebugEnabledParameter, chkDebugMode.Checked);
         }
+
     }
 }
