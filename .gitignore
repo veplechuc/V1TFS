@@ -3,6 +3,7 @@
 *.dll
 
 ## Visual Studio files ##
+settings.ini
 error-*.xml
 *.ncrunchsolution
 *.[Oo]bj
