@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Integrations.Core.DTO;
 using NSpec;

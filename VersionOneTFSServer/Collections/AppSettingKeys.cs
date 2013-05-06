@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace VersionOneTFSServer.Collections
+﻿namespace VersionOneTFSServer.Collections
 {
     /// <summary>
     /// The set of textual keys used to define settings in the webconfig.

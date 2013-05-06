@@ -1,5 +1,4 @@
-﻿using Integrations.Core.Adapters;
-using Integrations.Core.DTO;
+﻿using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using NSpec;
 using VersionOneTFSServer.Providers;

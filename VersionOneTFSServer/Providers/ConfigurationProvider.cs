@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Integrations.Core.Adapters;
 using Integrations.Core.Interfaces;
-using VersionOne.TFS2010.DataLayer;
 using VersionOneTFSServer.Collections;
 
 namespace VersionOneTFSServer.Providers
