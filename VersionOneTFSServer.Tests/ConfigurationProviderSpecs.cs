@@ -32,6 +32,7 @@ namespace VersionOneTFSServer.Tests
                             _target.VersionOneUrl.should_be(_defaults.VersionOneUrl);
                             _target.IsWindowsIntegratedSecurity.should_be(_defaults.IsWindowsIntegratedSecurity);
                             _target.TfsUrl.should_be(_defaults.TfsUrl);
+                            _target.TfsListenerUrl.should_be(_defaults.TfsListenerUrl);
                             _target.TfsUserName.should_be(_defaults.TfsUserName);
                             _target.TfsPassword.should_be(_defaults.TfsPassword);
                         };
@@ -44,6 +45,7 @@ namespace VersionOneTFSServer.Tests
             const string password = "P@ssword1";
             const string v1url = "https://www14.v1host.com/v1sdktesting/";
             const string tfsurl = "http://vsts2012:8080/tfs/DefaultCollection/";
+            const string tfsListenerUrl = "http://localhost:5050/servicesRus.svc";
             const string tfsuser = "TfsUser1";
             const string tfspass = "MySecretPw";
             const bool useWindowsSecurity = false;
@@ -60,6 +62,7 @@ namespace VersionOneTFSServer.Tests
                             {AppSettingKeys.VersionOneUrl, v1url},
                             {AppSettingKeys.IsWindowsIntegratedSecurity, useWindowsSecurity.ToString()},
                             {AppSettingKeys.TfsUrl, tfsurl.ToString()},
+                            {AppSettingKeys.TfsListenerUrl, tfsListenerUrl.ToString()},
                             {AppSettingKeys.TfsUserName, tfsuser},
                             {AppSettingKeys.TfsPassword, tfspass}
                         }, Paths.ConfigurationDirectory, FileName);
@@ -75,6 +78,7 @@ namespace VersionOneTFSServer.Tests
                             _target.VersionOneUrl.ToString().should_be(v1url);
                             _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
                             _target.TfsUrl.ToString().should_be(tfsurl);
+                            _target.TfsListenerUrl.ToString().should_be(tfsListenerUrl);
                             _target.TfsUserName.should_be(tfsuser);
                             _target.TfsPassword.should_be(tfspass);
                         };

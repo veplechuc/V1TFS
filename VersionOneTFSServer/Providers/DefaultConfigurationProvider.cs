@@ -30,6 +30,11 @@ namespace VersionOneTFSServer.Providers
             get { return new Uri("http://localhost:8080/tfs/DefaultCollection/"); }
         }
 
+        public Uri TfsListenerUrl
+        {
+            get{ return new Uri("http://localhost:9090/service.svc");}
+        }
+
         public string TfsUserName
         {
             get { return "Administrator"; }

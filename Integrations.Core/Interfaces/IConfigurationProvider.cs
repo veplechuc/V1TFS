@@ -9,6 +9,7 @@ namespace Integrations.Core.Interfaces
         string VersionOneUserName { get; } 
         string VersionOnePassword { get; }
         Uri TfsUrl { get; }
+        Uri TfsListenerUrl { get; }
         string TfsUserName { get; }
         string TfsPassword { get; }
         string TfsWorkItemRegex { get; }

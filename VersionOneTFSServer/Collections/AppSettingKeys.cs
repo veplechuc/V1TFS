@@ -10,6 +10,7 @@
         public const string VersionOneUserName = "V1_UserName";
         public const string VersionOnePassword = "V1_Password";
         public const string TfsUrl = "V1_TfsUrl";
+        public const string TfsListenerUrl = "V1_TfsListenerUrl";
         public const string TfsUserName = "V1_TfsUser";
         public const string TfsPassword = "V1_TfsPassword";
         public const string TfsWorkItemRegex = "V1_TfsWorkItemRegex";
