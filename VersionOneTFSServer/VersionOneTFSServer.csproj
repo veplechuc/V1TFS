@@ -177,10 +177,6 @@
     <Compile Include="Collections\AppSettingKeyCollection.cs" />
     <Compile Include="Collections\AppSettingKeys.cs" />
     <Compile Include="ConfigurationController.cs" />
-    <Compile Include="Diagnostics.aspx.cs">
-      <DependentUpon>Diagnostics.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Debug.cs" />
     <Compile Include="ErrorTest.aspx.cs">
       <DependentUpon>ErrorTest.aspx</DependentUpon>
