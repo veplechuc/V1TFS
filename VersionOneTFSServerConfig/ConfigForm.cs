@@ -31,7 +31,6 @@ namespace VersionOneTFSServerConfig
             TFSConnectB.Click += TFSConnectB_Click;
             TFSUpdateB.Click += TFSUpdateB_Click;
             UnsubscribeB.Click += UnsubscribeB_Click;
-            SaveSettingsB.Click += SaveSettingsB_Click;
             chkUseProxy.CheckedChanged += chkUseProxy_CheckedChanged;
             UseIntegratedAuthenticationCB.CheckedChanged += chkUseIntegrationAuth_CheckChanged;
 
