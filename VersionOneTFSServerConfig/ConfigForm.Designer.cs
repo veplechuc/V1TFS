@@ -43,7 +43,6 @@ namespace VersionOneTFSServerConfig
             this.lblProxyUrl = new System.Windows.Forms.Label();
             this.chkUseProxy = new System.Windows.Forms.CheckBox();
             this.UseIntegratedAuthenticationCB = new System.Windows.Forms.CheckBox();
-            this.V1StatusLabel = new System.Windows.Forms.Label();
             this.btnTestV1Connection = new System.Windows.Forms.Button();
             this.V1PasswordTB = new System.Windows.Forms.MaskedTextBox();
             this.lblVersionOnePassword = new System.Windows.Forms.Label();
@@ -75,6 +74,7 @@ namespace VersionOneTFSServerConfig
             this.RegExTB = new System.Windows.Forms.TextBox();
             this.lblRegex = new System.Windows.Forms.Label();
             this.txtMatchesDescription = new System.Windows.Forms.TextBox();
+            this.tbResults = new System.Windows.Forms.TextBox();
             this.tcSettings.SuspendLayout();
             this.tpVersionOne.SuspendLayout();
             this.grpProxySettings.SuspendLayout();
@@ -91,15 +91,15 @@ namespace VersionOneTFSServerConfig
             this.tcSettings.Location = new System.Drawing.Point(0, 0);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(456, 438);
+            this.tcSettings.Size = new System.Drawing.Size(456, 491);
             this.tcSettings.TabIndex = 0;
             // 
             // tpVersionOne
             // 
+            this.tpVersionOne.Controls.Add(this.tbResults);
             this.tpVersionOne.Controls.Add(this.btnSaveVersionOneSettings);
             this.tpVersionOne.Controls.Add(this.grpProxySettings);
             this.tpVersionOne.Controls.Add(this.UseIntegratedAuthenticationCB);
-            this.tpVersionOne.Controls.Add(this.V1StatusLabel);
             this.tpVersionOne.Controls.Add(this.btnTestV1Connection);
             this.tpVersionOne.Controls.Add(this.V1PasswordTB);
             this.tpVersionOne.Controls.Add(this.lblVersionOnePassword);
@@ -110,7 +110,7 @@ namespace VersionOneTFSServerConfig
             this.tpVersionOne.Location = new System.Drawing.Point(4, 22);
             this.tpVersionOne.Name = "tpVersionOne";
             this.tpVersionOne.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVersionOne.Size = new System.Drawing.Size(448, 412);
+            this.tpVersionOne.Size = new System.Drawing.Size(448, 465);
             this.tpVersionOne.TabIndex = 0;
             this.tpVersionOne.Text = "VersionOne Server";
             this.tpVersionOne.UseVisualStyleBackColor = true;
@@ -228,15 +228,6 @@ namespace VersionOneTFSServerConfig
             this.UseIntegratedAuthenticationCB.Text = "Use Windows Integrated Authentication";
             this.UseIntegratedAuthenticationCB.UseVisualStyleBackColor = true;
             // 
-            // V1StatusLabel
-            // 
-            this.V1StatusLabel.AutoSize = true;
-            this.V1StatusLabel.Location = new System.Drawing.Point(12, 375);
-            this.V1StatusLabel.Name = "V1StatusLabel";
-            this.V1StatusLabel.Size = new System.Drawing.Size(78, 13);
-            this.V1StatusLabel.TabIndex = 10;
-            this.V1StatusLabel.Text = "Not connected";
-            // 
             // btnTestV1Connection
             // 
             this.btnTestV1Connection.Location = new System.Drawing.Point(6, 343);
@@ -314,7 +305,7 @@ namespace VersionOneTFSServerConfig
             this.tpTfsServer.Location = new System.Drawing.Point(4, 22);
             this.tpTfsServer.Name = "tpTfsServer";
             this.tpTfsServer.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTfsServer.Size = new System.Drawing.Size(448, 412);
+            this.tpTfsServer.Size = new System.Drawing.Size(448, 465);
             this.tpTfsServer.TabIndex = 1;
             this.tpTfsServer.Text = "TFS Server";
             this.tpTfsServer.UseVisualStyleBackColor = true;
@@ -464,7 +455,7 @@ namespace VersionOneTFSServerConfig
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(448, 412);
+            this.tpAdvanced.Size = new System.Drawing.Size(448, 465);
             this.tpAdvanced.TabIndex = 2;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -527,12 +518,25 @@ namespace VersionOneTFSServerConfig
             this.txtMatchesDescription.TabIndex = 0;
             this.txtMatchesDescription.Text = resources.GetString("txtMatchesDescription.Text");
             // 
+            // tbResults
+            // 
+            this.tbResults.BackColor = System.Drawing.Color.Black;
+            this.tbResults.ForeColor = System.Drawing.Color.White;
+            this.tbResults.Location = new System.Drawing.Point(6, 372);
+            this.tbResults.Multiline = true;
+            this.tbResults.Name = "tbResults";
+            this.tbResults.ReadOnly = true;
+            this.tbResults.Size = new System.Drawing.Size(433, 85);
+            this.tbResults.TabIndex = 10;
+            this.tbResults.Text = "Not connected";
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 438);
+            this.ClientSize = new System.Drawing.Size(456, 491);
             this.Controls.Add(this.tcSettings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfigForm";
             this.Text = "VersionOne TFS Listener Configuration";
@@ -554,7 +558,6 @@ namespace VersionOneTFSServerConfig
         private System.Windows.Forms.TabControl tcSettings;
         private System.Windows.Forms.TabPage tpVersionOne;
         private System.Windows.Forms.TabPage tpTfsServer;
-        private System.Windows.Forms.Label V1StatusLabel;
         private System.Windows.Forms.Button btnTestV1Connection;
         private System.Windows.Forms.MaskedTextBox V1PasswordTB;
         private System.Windows.Forms.Label lblVersionOnePassword;
@@ -597,6 +600,7 @@ namespace VersionOneTFSServerConfig
         private System.Windows.Forms.CheckBox chkUseProxy;
         private System.Windows.Forms.Button btnSaveVersionOneSettings;
         private System.Windows.Forms.TextBox txtDebugDescription;
+        private System.Windows.Forms.TextBox tbResults;
     }
 }
 

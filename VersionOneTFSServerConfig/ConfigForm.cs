@@ -64,7 +64,7 @@ namespace VersionOneTFSServerConfig
 
 			// Debug Mode
             chkDebugMode.Checked = _config.DebugMode;
-            UpdateStatus();
+            UpdateFormControlStatus();
         }
 
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
@@ -96,20 +96,19 @@ namespace VersionOneTFSServerConfig
             var results = new ConfigurationProxy().Store(configToSave);
             if(results[StatusKey.Status] == StatusCode.Ok)
             {
-                V1StatusLabel.Text = "Settings saved successfully.";
+                UpdateStatusText("Save successful.", false);
                 return;
             }
 
             var missingFields = string.Join(", ", results.Keys.Where(key => key != "status"));
-            V1StatusLabel.Text = string.Format("The following values must be present in order to save settings:  {0}.", missingFields);
+            var text = string.Format("The following values must be present in order to save settings:  {0}.", missingFields);
+            UpdateStatusText(text, true);
         }
 
         private void btnTestV1Connection_Click(object sender, EventArgs e)
         {
-            V1StatusLabel.ForeColor = Color.Black;
 
-            V1StatusLabel.Text = "Connecting to " + V1URLTB.Text+ "...";
-            V1StatusLabel.Refresh();
+            UpdateStatusText("Connecting to " + V1URLTB.Text+ "...", false);
 
             try
             {
@@ -138,17 +137,23 @@ namespace VersionOneTFSServerConfig
             }
         }
 
+        private void UpdateStatusText(string text, bool isError)
+        {
+            tbResults.BackColor = isError ? Color.DarkRed : Color.DarkGreen;
+            tbResults.Text += string.Concat(Environment.NewLine, string.Format("({0}) {1}", DateTime.Now.ToLongTimeString(), text));
+            tbResults.Refresh();
+
+        }
+
         private void DisplayConnectionValidationStatus(bool status, string message = null) 
         {
             if(!status) 
             {
-                V1StatusLabel.ForeColor = Color.Red;
-                V1StatusLabel.Text = string.Format("Error connecting to {0}{1}", V1URLTB.Text, string.IsNullOrEmpty(message) ? string.Empty : ": " + message);
+                UpdateStatusText(string.Format("Error connecting to {0}{1}", V1URLTB.Text, string.IsNullOrEmpty(message) ? string.Empty : ": " + message), true);
             } 
             else 
             {
-                V1StatusLabel.ForeColor = Color.Black;
-                V1StatusLabel.Text = string.Format("Successfully connected to {0}", V1URLTB.Text);
+                UpdateStatusText(string.Format("Successfully connected to {0}", V1URLTB.Text), false);
             }
         }
 
@@ -183,7 +188,7 @@ namespace VersionOneTFSServerConfig
             finally
             {
                 Cursor.Current = Cursors.Default;
-                UpdateStatus();
+                UpdateFormControlStatus();
             }
         }
 
@@ -218,7 +223,7 @@ namespace VersionOneTFSServerConfig
                 eventService.SubscribeEvent("CheckinEvent", filter, dPref, tag);
                 eventService.SubscribeEvent("BuildCompletionEvent2", filter, dPref, tag);
 
-                UpdateStatus();
+                UpdateFormControlStatus();
             }
             finally
             {
@@ -232,7 +237,7 @@ namespace VersionOneTFSServerConfig
             {
                 Cursor.Current = Cursors.WaitCursor;
                 TFSUnsubscribe();
-                UpdateStatus();
+                UpdateFormControlStatus();
             }
             finally
             {
@@ -257,7 +262,7 @@ namespace VersionOneTFSServerConfig
             };
         }
 
-        private void UpdateStatus()
+        private void UpdateFormControlStatus()
         {
             if (TfsServer != null)
             {
