@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using Integrations.Core.DTO;
 using Newtonsoft.Json;
 
@@ -48,16 +49,12 @@ namespace VersionOneTFSServerConfig.Configuration
             _url = url ?? ProbeServerConfig();
         }
 
-        public void Store(TfsServerConfiguration config)
+        public Dictionary<string, string> Store(TfsServerConfiguration config)
         {
             var json = JsonConvert.SerializeObject(config);
             var result = _client.Put(_url, System.Text.Encoding.UTF8.GetBytes(json));
             var body = System.Text.Encoding.UTF8.GetString(result);
-            var response = JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, string>>(body);
-            if (response["status"] != "ok")
-            {
-                throw new System.Exception("Server didn't accept configuration");
-            }
+            return JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, string>>(body);
         }
 
         public TfsServerConfiguration Retrieve()

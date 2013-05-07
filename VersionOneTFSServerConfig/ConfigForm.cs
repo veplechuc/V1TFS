@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Security.Principal;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Integrations.Core.DTO;
+using Integrations.Core.Structures;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.DirectoryServices;
@@ -65,11 +67,6 @@ namespace VersionOneTFSServerConfig
             UpdateStatus();
         }
 
-        public void StoreConfigurationData(TfsServerConfiguration config)
-        {
-            new ConfigurationProxy().Store(config);
-        }
-
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
             txtProxyUrl.Enabled = txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyDomain.Enabled = enabled;
         }
@@ -96,8 +93,15 @@ namespace VersionOneTFSServerConfig
                     ProxyDomain = txtProxyDomain.Text
                 };
 
-            StoreConfigurationData(configToSave);
+            var results = new ConfigurationProxy().Store(configToSave);
+            if(results[StatusKey.Status] == StatusCode.Ok)
+            {
+                V1StatusLabel.Text = "Settings saved successfully.";
+                return;
+            }
 
+            var missingFields = string.Join(", ", results.Keys.Where(key => key != "status"));
+            V1StatusLabel.Text = string.Format("The following values must be present in order to save settings:  {0}.", missingFields);
         }
 
         private void btnTestV1Connection_Click(object sender, EventArgs e)

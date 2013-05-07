@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Integrations.Core.DTO;
+using Integrations.Core.Structures;
 using NSpec;
 using Newtonsoft.Json;
 using VersionOneTFSServerConfig.Configuration;
@@ -96,7 +97,11 @@ namespace VersionOneTFSServer.Tests
         {
             var mock = new PretendsToBeConnectedToHttpClient();
             var proxy = new ConfigurationProxy(mock);
-            it["can submit valid configuration"] = () => proxy.Store(_serializationTarget);
+            it["can submit valid configuration"] = () =>
+                {
+                    var result = proxy.Store(_serializationTarget);
+                    result[StatusKey.Status].should_be(StatusCode.Ok);
+                };
             it["gets back the object it stored"] = () => proxy.Retrieve().should_be(_serializationTarget);
         }
 
