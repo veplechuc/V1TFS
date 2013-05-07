@@ -52,35 +52,7 @@ namespace VersionOneTFSServer.Tests
             contexts.Failures().Count().should_be(0);
         }
 
-        [Test]
-        public void DebugProxySettingsProviderSpecs()
-        {
-            const string tagOrClassName = "ProxySettingsProviderSpecs";
-            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-            var contexts = invocation.Run();
-            //assert that there aren't any failures
-            contexts.Failures().Count().should_be(0);
-        }
-
-        [Test]
-        public void DebugConfigurationProviderSpecs()
-        {
-            const string tagOrClassName = "ConfigurationProviderSpecs";
-            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-            var contexts = invocation.Run();
-            //assert that there aren't any failures
-            contexts.Failures().Count().should_be(0);
-        }
-
-        [Test]
-        public void DebugAppSettingKeyCollectionSpecs()
-        {
-            const string tagOrClassName = "AppSettingKeyCollectionSpecs";
-            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
-            var contexts = invocation.Run();
-            //assert that there aren't any failures
-            contexts.Failures().Count().should_be(0);
-        }
+        
 
     }
 

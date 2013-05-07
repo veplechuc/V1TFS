@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Integrations.Core.Interfaces;
 using VersionOne.SDK.APIClient;
 using VersionOne.ServerConnector;
 using VersionOne.ServerConnector.Entities;
@@ -183,7 +184,7 @@ namespace VersionOne.TFS2010.DataLayer
                     Filter.Equal("Parent.Timebox.State.Code", "ACTV")));
         } 
 
-        public static VersionOneProcessorSettings ConvertSettings(VersionOneSettings settings) 
+        public static VersionOneProcessorSettings ConvertSettings(IVersionOneSettings settings) 
         {
             return new VersionOneProcessorSettings 
             {

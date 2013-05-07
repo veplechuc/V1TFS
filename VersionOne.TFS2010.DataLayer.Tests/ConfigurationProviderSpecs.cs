@@ -2,10 +2,10 @@
 using Integrations.Core.Adapters;
 using Integrations.Core.Interfaces;
 using NSpec;
-using VersionOneTFSServer.Collections;
-using VersionOneTFSServer.Providers;
+using VersionOneTFS2010.DataLayer.Collections;
+using VersionOneTFS2010.DataLayer.Providers;
 
-namespace VersionOneTFSServer.Tests
+namespace VersionOneTFS2010.DataLayer.Tests
 {
     public class ConfigurationProviderSpecs : nspec
     {

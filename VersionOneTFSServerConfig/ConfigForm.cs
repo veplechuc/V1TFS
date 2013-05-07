@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Drawing;
-using System.Net;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -83,16 +82,21 @@ namespace VersionOneTFSServerConfig
 
         private void btnSaveVersionOneSettings_Click(object sender, EventArgs e)
         {
-            RegistryProcessor.SetString(RegistryProcessor.V1UrlParameter, V1URLTB.Text);
-            RegistryProcessor.SetString(RegistryProcessor.V1UsernameParameter, V1UsernameTB.Text);
-            RegistryProcessor.SetPassword(RegistryProcessor.V1PasswordParameter, V1PasswordTB.Text);
-            RegistryProcessor.SetBool(RegistryProcessor.V1WindowsAuthParameter, UseIntegratedAuthenticationCB.Checked);
 
-            RegistryProcessor.SetBool(RegistryProcessor.V1UseProxyParameter, chkUseProxy.Checked);
-            RegistryProcessor.SetString(RegistryProcessor.V1ProxyUrlParameter, txtProxyUrl.Text);
-            RegistryProcessor.SetString(RegistryProcessor.V1ProxyUsernameParameter, txtProxyUsername.Text);
-            RegistryProcessor.SetString(RegistryProcessor.V1ProxyPasswordParameter, txtProxyPassword.Text);
-            RegistryProcessor.SetString(RegistryProcessor.V1ProxyDomainParameter, txtProxyDomain.Text);
+            var configToSave = new TfsServerConfiguration()
+                {
+                    VersionOneUrl = V1URLTB.Text,
+                    VersionOneUserName = V1UsernameTB.Text,
+                    VersionOnePassword = V1PasswordTB.Text,
+                    IsWindowsIntegratedSecurity = UseIntegratedAuthenticationCB.Checked,
+                    ProxyIsEnabled = chkUseProxy.Checked,
+                    ProxyUrl = txtProxyUrl.Text,
+                    ProxyUsername = txtProxyUsername.Text,
+                    ProxyPassword = txtProxyPassword.Text,
+                    ProxyDomain = txtProxyDomain.Text
+                };
+
+            StoreConfigurationData(configToSave);
 
         }
 
@@ -150,9 +154,15 @@ namespace VersionOneTFSServerConfig
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                RegistryProcessor.SetString(RegistryProcessor.TfsUrlParameter, TFSURLTB.Text);
-                RegistryProcessor.SetString(RegistryProcessor.TfsUsernameParameter, TFSUsernameTB.Text);
-                RegistryProcessor.SetPassword(RegistryProcessor.TfsPasswordParameter, TFSPasswordTB.Text);
+
+                var proxy = new ConfigurationProxy();
+                var config = proxy.Retrieve();
+
+                config.TfsUrl = TFSURLTB.Text;
+                config.TfsUserName = TFSUsernameTB.Text;
+                config.TfsPassword = TFSPasswordTB.Text;
+
+                proxy.Store(config);
 
                 TFSStatusLabel.Text = "Not connected";
 
@@ -179,14 +189,17 @@ namespace VersionOneTFSServerConfig
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var url = ListenerURLTB.Text;
-                RegistryProcessor.SetString(RegistryProcessor.ListenerUrlParameter, url);
+                var proxy = new ConfigurationProxy();
+                var config = proxy.Retrieve();
+
+                config.TfsUrl = ListenerURLTB.Text;
+                proxy.Store(config);
 
                 // Get Eventing Service
                 var eventService = (IEventService)TfsServer.GetService(typeof(IEventService));
 
                 // Set delivery preferences
-                var dPref = new DeliveryPreference { Schedule = DeliverySchedule.Immediate, Address = url, Type = DeliveryType.Soap };
+                var dPref = new DeliveryPreference { Schedule = DeliverySchedule.Immediate, Address = config.TfsUrl, Type = DeliveryType.Soap };
 
                 const string tag = "VersionOneTFSServer";
 
@@ -344,7 +357,7 @@ namespace VersionOneTFSServerConfig
         {
             var w3svc = new DirectoryEntry("IIS://localhost/w3svc");
 
-            var folder = RegistryProcessor.GetString("ListenerName", "VersionOne TFS Listener");
+            const string folder = "VersionOne TFS Listener";
 
             foreach (DirectoryEntry e in w3svc.Children)
             {
@@ -389,8 +402,15 @@ namespace VersionOneTFSServerConfig
 
         private void SaveSettingsB_Click(object sender, EventArgs e)
         {
-            RegistryProcessor.SetString(RegistryProcessor.V1RegexParameter, RegExTB.Text);
-            RegistryProcessor.SetBool(RegistryProcessor.DebugEnabledParameter, chkDebugMode.Checked);
+
+            var proxy = new ConfigurationProxy();
+            var config = proxy.Retrieve();
+
+            config.TfsWorkItemRegex = RegExTB.Text;
+            config.DebugMode = chkDebugMode.Checked;
+
+            proxy.Store(config);
+
         }
 
     }

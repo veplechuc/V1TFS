@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Integrations.Core.Interfaces;
-using VersionOneTFSServer.Collections;
+using VersionOneTFS2010.DataLayer.Collections;
 
-namespace VersionOneTFSServer.Providers
+namespace VersionOneTFS2010.DataLayer.Providers
 {
     /// <summary>
     /// Provides access to V1 specific settings in the appSettings section of the root web config.

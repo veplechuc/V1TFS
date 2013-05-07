@@ -1,7 +1,8 @@
 using System;
 using System.Net;
 using Microsoft.TeamFoundation.Client;
-using VersionOne.TFS2010.DataLayer;
+using VersionOne.ServiceHost.Core.Configuration;
+using VersionOneTFS2010.DataLayer.Providers;
 
 namespace VersionOneTFSServer
 {
@@ -10,11 +11,14 @@ namespace VersionOneTFSServer
     /// </summary>
     public class Utils
     {
-        public static TfsTeamProjectCollection ConnectToTFS()
+        public static TfsTeamProjectCollection ConnectToTfs()
         {
-            var url = RegistryProcessor.GetString(RegistryProcessor.TfsUrlParameter, string.Empty);
-            var user = RegistryProcessor.GetString(RegistryProcessor.TfsUsernameParameter, string.Empty);
-            var password = RegistryProcessor.GetPassword(RegistryProcessor.TfsPasswordParameter, string.Empty);
+
+            var config = new ConfigurationProvider();
+
+            var url = config.TfsListenerUrl;
+            var user = config.TfsUserName;
+            var password = config.TfsPassword;
 
             var domain = string.Empty;
             var pos = user.IndexOf('\\');
@@ -26,38 +30,30 @@ namespace VersionOneTFSServer
             }
 
             var creds = new NetworkCredential(user, password, domain);
-            var tfsServer = new TfsTeamProjectCollection(new Uri(url), creds);
+            var tfsServer = new TfsTeamProjectCollection(config.TfsListenerUrl, creds);
             tfsServer.Authenticate();
             return tfsServer;
         }
 
-        public static VersionOneSettings GetV1Settings()
+        /// <summary>
+        /// Yuck.  Why?
+        /// </summary>
+        /// <returns></returns>
+        public static VersionOne.TFS2010.DataLayer.VersionOneSettings GetV1Settings()
         {
-            return new VersionOneSettings 
+
+            var config = new ConfigurationProvider();
+
+            return new VersionOne.TFS2010.DataLayer.VersionOneSettings 
                 {
-                    Path = RegistryProcessor.GetString(RegistryProcessor.V1UrlParameter, string.Empty),
-                    Username = RegistryProcessor.GetString(RegistryProcessor.V1UsernameParameter, string.Empty),
-                    Password = RegistryProcessor.GetPassword(RegistryProcessor.V1PasswordParameter, string.Empty),
-                    Integrated = RegistryProcessor.GetBool(RegistryProcessor.V1WindowsAuthParameter, false),
-                    ProxySettings = GetProxySettings()
+                    Path = config.VersionOneUrl.ToString(),
+                    Username = config.VersionOneUserName,
+                    Password = config.VersionOnePassword,
+                    Integrated = config.IsWindowsIntegratedSecurity,
+                    ProxySettings = config.ProxySettings
                 };
         }
 
-        private static ProxyConnectionSettings GetProxySettings() 
-        {
-            if(!RegistryProcessor.GetBool(RegistryProcessor.V1UseProxyParameter, false)) 
-            {
-                return null;
-            }
 
-            return new ProxyConnectionSettings 
-            { 
-                ProxyIsEnabled = RegistryProcessor.GetBool(RegistryProcessor.V1UseProxyParameter, false), 
-                Url = new Uri(RegistryProcessor.GetString(RegistryProcessor.V1ProxyUrlParameter, string.Empty)), 
-                Username = RegistryProcessor.GetString(RegistryProcessor.V1ProxyUsernameParameter, string.Empty), 
-                Password = RegistryProcessor.GetString(RegistryProcessor.V1ProxyPasswordParameter, string.Empty),
-                Domain = RegistryProcessor.GetString(RegistryProcessor.V1ProxyDomainParameter, string.Empty)
-            };            
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Integrations.Core.Interfaces;
 
-namespace VersionOneTFSServer.Providers
+namespace VersionOneTFS2010.DataLayer.Providers
 {
     public class DefaultProxySettingsProvider : IProxyConnectionSettings
     {

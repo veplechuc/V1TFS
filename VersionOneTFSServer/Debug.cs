@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServer {
     /// <summary>
@@ -23,7 +24,11 @@ namespace VersionOneTFSServer {
         // Is debugging enabled
         public static bool Enabled
         {
-            get { return RegistryProcessor.GetBool(RegistryProcessor.DebugEnabledParameter, false); }
+            get
+            {
+                var config = new ConfigurationProxy().Retrieve();
+                return config.DebugMode;
+            }
         }
 
         // write the notification message

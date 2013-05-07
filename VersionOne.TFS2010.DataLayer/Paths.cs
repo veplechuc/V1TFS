@@ -2,7 +2,7 @@
 using System.IO;
 using System.Web;
 
-namespace VersionOneTFSServer
+namespace VersionOneTFS2010.DataLayer
 {
     public static class Paths
     {

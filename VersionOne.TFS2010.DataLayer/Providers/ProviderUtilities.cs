@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VersionOneTFSServer.Providers
+namespace VersionOneTFS2010.DataLayer.Providers
 {
     public class ProviderUtilities
     {

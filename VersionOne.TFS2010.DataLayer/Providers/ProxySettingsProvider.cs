@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Integrations.Core.Interfaces;
-using VersionOneTFSServer.Collections;
+using VersionOneTFS2010.DataLayer.Collections;
 
-namespace VersionOneTFSServer.Providers
+namespace VersionOneTFS2010.DataLayer.Providers
 {
     public class ProxySettingsProvider : IProxyConnectionSettings
     {

@@ -1,7 +1,7 @@
 ﻿using NSpec;
-using VersionOneTFSServer.Collections;
+using VersionOneTFS2010.DataLayer.Collections;
 
-namespace VersionOneTFSServer.Tests
+namespace VersionOneTFS2010.DataLayer.Tests
 {
     public class AppSettingKeyCollectionSpecs : nspec
     {

@@ -1,7 +1,7 @@
 ﻿using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using NSpec;
-using VersionOneTFSServer.Providers;
+using VersionOneTFS2010.DataLayer.Providers;
 
 namespace VersionOneTFSServer.Tests
 {

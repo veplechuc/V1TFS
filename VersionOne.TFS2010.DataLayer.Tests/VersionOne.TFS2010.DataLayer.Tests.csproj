@@ -46,7 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingKeyCollectionSpecs.cs" />
+    <Compile Include="ConfigurationProviderSpecs.cs" />
     <Compile Include="DebuggerShim.cs" />
+    <Compile Include="ProxySettingsProviderSpecs.cs" />
     <Compile Include="V1ComponentSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

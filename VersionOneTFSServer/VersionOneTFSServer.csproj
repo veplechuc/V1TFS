@@ -186,15 +186,9 @@
       <DependentUpon>ErrorTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModelBinders\TfsServerConfigurationModelBinder.cs" />
-    <Compile Include="Paths.cs" />
-    <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Providers\DefaultConfigurationProvider.cs" />
-    <Compile Include="Providers\DefaultProxySettingsProvider.cs" />
-    <Compile Include="Providers\ProviderUtilities.cs" />
-    <Compile Include="Providers\ProxySettingsProvider.cs" />
     <Compile Include="Service.svc.cs">
       <DependentUpon>Service.svc</DependentUpon>
     </Compile>
@@ -213,6 +207,10 @@
     <ProjectReference Include="..\Integrations.Core\Integrations.Core.csproj">
       <Project>{7147c00a-3070-4619-8597-bd9832160191}</Project>
       <Name>Integrations.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VersionOneTFSServerConfig\VersionOneTFSServerConfig.csproj">
+      <Project>{09ED3E0C-A814-4E44-87C0-14B5C20F4C8C}</Project>
+      <Name>VersionOneTFSServerConfig</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

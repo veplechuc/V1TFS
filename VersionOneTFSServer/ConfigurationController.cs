@@ -4,9 +4,10 @@ using System.Web.Http.ModelBinding;
 using Integrations.Core.Adapters;
 using Integrations.Core.DTO;
 using Integrations.Core.Structures;
+using VersionOneTFS2010.DataLayer;
+using VersionOneTFS2010.DataLayer.Providers;
 using VersionOneTFSServer.Collections;
 using VersionOneTFSServer.ModelBinders;
-using VersionOneTFSServer.Providers;
 using System.Linq;
 
 namespace VersionOneTFSServer

@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using Microsoft.TeamFoundation.Client;
-using VersionOne.TFS2010.DataLayer;
+using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServerConfig {
     /// <summary>
@@ -11,21 +11,20 @@ namespace VersionOneTFSServerConfig {
     {
         public static TfsTeamProjectCollection ConnectToTFS()
         {
-            var url = RegistryProcessor.GetString(RegistryProcessor.TfsUrlParameter, string.Empty);
-            var user = RegistryProcessor.GetString(RegistryProcessor.TfsUsernameParameter, string.Empty);
-            var password = RegistryProcessor.GetPassword(RegistryProcessor.TfsPasswordParameter, string.Empty);
 
+            var config = new ConfigurationProxy().Retrieve();
+            var user = config.TfsUserName;
             var domain = string.Empty;
-            var pos = user.IndexOf('\\');
+            var pos = config.TfsUserName.IndexOf('\\');
             
             if (pos >= 0)
             {
-                domain = user.Substring(0, pos);
+                domain = config.TfsUserName.Substring(0, pos);
                 user = user.Substring(pos + 1);
             }
             
-            var creds = new NetworkCredential(user, password, domain);
-            var tfsServer = new TfsTeamProjectCollection(new Uri(url), creds);
+            var creds = new NetworkCredential(user, config.TfsPassword, domain);
+            var tfsServer = new TfsTeamProjectCollection(new Uri(config.TfsUrl), creds);
             tfsServer.Authenticate();
             return tfsServer;
         }
