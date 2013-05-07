@@ -85,12 +85,17 @@ namespace VersionOneTFSServerConfig
                     VersionOneUrl = V1URLTB.Text,
                     VersionOneUserName = V1UsernameTB.Text,
                     VersionOnePassword = V1PasswordTB.Text,
+                    TfsUrl = TFSURLTB.Text,
+                    TfsUserName = TFSUsernameTB.Text,
+                    TfsPassword = TFSPasswordTB.Text,
+                    TfsWorkItemRegex = RegExTB.Text,
+                    DebugMode = chkDebugMode.Checked,
                     IsWindowsIntegratedSecurity = UseIntegratedAuthenticationCB.Checked,
                     ProxyIsEnabled = chkUseProxy.Checked,
                     ProxyUrl = txtProxyUrl.Text,
                     ProxyUsername = txtProxyUsername.Text,
                     ProxyPassword = txtProxyPassword.Text,
-                    ProxyDomain = txtProxyDomain.Text
+                    ProxyDomain = txtProxyDomain.Text,
                 };
 
             var results = new ConfigurationProxy().Store(configToSave);

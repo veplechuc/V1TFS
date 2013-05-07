@@ -526,6 +526,7 @@ namespace VersionOneTFSServerConfig
             this.tbResults.Multiline = true;
             this.tbResults.Name = "tbResults";
             this.tbResults.ReadOnly = true;
+            this.tbResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbResults.Size = new System.Drawing.Size(433, 85);
             this.tbResults.TabIndex = 10;
             this.tbResults.Text = "Not connected";
