@@ -31,7 +31,8 @@ namespace VersionOneTFSServer
                     TfsPassword = configProvider.TfsPassword,
                     TfsWorkItemRegex = configProvider.TfsWorkItemRegex,
                     IsWindowsIntegratedSecurity = configProvider.IsWindowsIntegratedSecurity,
-                    DebugMode = configProvider.DebugMode
+                    DebugMode = configProvider.DebugMode,
+                    BaseListenerUrl = configProvider.TfsListenerUrl.ToString()
                 };
             
             if (configProvider.ProxySettings.ProxyIsEnabled)
@@ -88,8 +89,12 @@ namespace VersionOneTFSServer
                 yield return RequiredFieldError("VersionOneUserName");
             if (string.IsNullOrEmpty(config.TfsUrl))
                 yield return RequiredFieldError("TfsUrl");
+            if (string.IsNullOrEmpty(config.TfsUserName))
+                yield return RequiredFieldError("TfsUserName");
             if (string.IsNullOrEmpty(config.TfsPassword))
                 yield return RequiredFieldError("TfsPassword");
+            if (string.IsNullOrEmpty(config.BaseListenerUrl))
+                yield return RequiredFieldError("ListerUrl");
         }
 
         private static KeyValuePair<string, string> RequiredFieldError(string fieldName)
