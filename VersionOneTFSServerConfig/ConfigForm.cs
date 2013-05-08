@@ -127,6 +127,7 @@ namespace VersionOneTFSServerConfig
                     ProxyUsername = txtProxyUsername.Text,
                     ProxyPassword = txtProxyPassword.Text,
                     ProxyDomain = txtProxyDomain.Text,
+                    BaseListenerUrl = tbBaseUrl.Text
                 };
 
             var results = new ConfigurationProxy().Store(configToSave);
