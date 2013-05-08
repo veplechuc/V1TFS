@@ -35,6 +35,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             _target.TfsListenerUrl.should_be(_defaults.TfsListenerUrl);
                             _target.TfsUserName.should_be(_defaults.TfsUserName);
                             _target.TfsPassword.should_be(_defaults.TfsPassword);
+                            _target.ConfigurationUrl.should_be(_defaults.ConfigurationUrl);
                         };
                 };
         }
@@ -48,6 +49,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
             const string tfsListenerUrl = "http://localhost:5050/servicesRus.svc";
             const string tfsuser = "TfsUser1";
             const string tfspass = "MySecretPw";
+            const string configUrl = "http://locahost:8181/";
             const bool useWindowsSecurity = false;
 
             before = () =>
@@ -64,7 +66,8 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             {AppSettingKeys.TfsUrl, tfsurl.ToString()},
                             {AppSettingKeys.TfsListenerUrl, tfsListenerUrl.ToString()},
                             {AppSettingKeys.TfsUserName, tfsuser},
-                            {AppSettingKeys.TfsPassword, tfspass}
+                            {AppSettingKeys.TfsPassword, tfspass},
+                            {AppSettingKeys.ConfigurationUrl, configUrl}
                         }, Paths.ConfigurationDirectory, FileName);
                 };
 
@@ -81,6 +84,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             _target.TfsListenerUrl.ToString().should_be(tfsListenerUrl);
                             _target.TfsUserName.should_be(tfsuser);
                             _target.TfsPassword.should_be(tfspass);
+                            _target.ConfigurationUrl.ToString().should_be(configUrl);
                         };
                 };
         }

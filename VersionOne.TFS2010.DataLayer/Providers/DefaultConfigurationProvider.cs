@@ -35,6 +35,11 @@ namespace VersionOneTFS2010.DataLayer.Providers
             get{ return new Uri("http://localhost:9090/service.svc");}
         }
 
+        public Uri ConfigurationUrl
+        {
+            get { return new Uri("http://localhost:9090/configuration/"); }
+        }
+
         public string TfsUserName
         {
             get { return "Administrator"; }

@@ -68,6 +68,10 @@
       <Project>{7147c00a-3070-4619-8597-bd9832160191}</Project>
       <Name>Integrations.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VersionOne.TFS2010.DataLayer\VersionOne.TFS2010.DataLayer.csproj">
+      <Project>{9b0896c0-dc42-44c0-b46d-813f34e55710}</Project>
+      <Name>VersionOne.TFS2010.DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VersionOneTFSServerConfig\VersionOneTFSServerConfig.csproj">
       <Project>{09ED3E0C-A814-4E44-87C0-14B5C20F4C8C}</Project>
       <Name>VersionOneTFSServerConfig</Name>

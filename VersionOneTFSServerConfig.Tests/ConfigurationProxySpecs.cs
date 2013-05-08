@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using NSpec;
 using Newtonsoft.Json;
+using VersionOneTFS2010.DataLayer.Providers;
 using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServer.Tests
@@ -87,6 +89,37 @@ namespace VersionOneTFSServer.Tests
                             var deserializedObject = JsonConvert.DeserializeObject<TfsServerConfiguration>(json);
                             deserializedObject.should_be(_serializationTarget);
                         };
+                };
+        }
+
+        public void given_a_url_is_not_provided_on_construction()
+        {
+            var target = new ConfigurationProxy();
+            context["when i retrieve the listener and configuration url from the configurationProxy instance"] = () =>
+                {
+                    var configUrl = target.ConfigurationUrl;
+                    var listenerUrl = target.ListenerUrl;
+                    var defaultProvider = new DefaultConfigurationProvider();
+                    var defaultConfigUrl = defaultProvider.ConfigurationUrl.ToString();
+                    var defaultListenerUrl = defaultProvider.TfsListenerUrl.ToString();
+                    it["then the default url is returned"] = () =>
+                        {
+                            configUrl.should_be(defaultConfigUrl);
+                            listenerUrl.should_be(defaultListenerUrl);
+                        };
+                };
+        }
+
+        public void given_a_url_is_provided_on_construction()
+        {
+            const string baseUrl = "http://www.google.com/";
+            string expectedUrl = new Uri(new Uri(baseUrl), "configuration/").ToString();
+            var target = new ConfigurationProxy(null, "http://www.google.com/");
+
+            context["when i retrieve the listener url form the configurationProxy instance"] = () =>
+                {
+                    var retrievedUrl = target.ConfigurationUrl;
+                    it["then the provided url is returned"] = () => retrievedUrl.should_be(expectedUrl);
                 };
         }
 
