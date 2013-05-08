@@ -35,6 +35,7 @@ namespace VersionOneTFSServer.Tests
                         VersionOnePassword = "password2",
                         ProxyIsEnabled = true,
                         TfsWorkItemRegex = "[]",
+                        BaseListenerUrl = "http://localhost:9090/",
                         DebugMode = true,
                         ProxyUrl = "http://192.168.1.1/home/",
                         ProxyDomain = "AD1",
@@ -64,6 +65,7 @@ namespace VersionOneTFSServer.Tests
                         VersionOneUserName = "admin2",
                         VersionOnePassword = "password2",
                         ProxyIsEnabled = false,
+                        BaseListenerUrl = "http://locahost:9090/",
                         TfsWorkItemRegex = "[]" //not a required field, but returns a default so needs to be set in order for a valid comparison to occur below.
                     };
 

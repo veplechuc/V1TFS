@@ -32,7 +32,7 @@ namespace VersionOneTFSServer
                     TfsWorkItemRegex = configProvider.TfsWorkItemRegex,
                     IsWindowsIntegratedSecurity = configProvider.IsWindowsIntegratedSecurity,
                     DebugMode = configProvider.DebugMode,
-                    BaseListenerUrl = configProvider.TfsListenerUrl.ToString()
+                    BaseListenerUrl = configProvider.BaseListenerUrl.ToString()
                 };
             
             if (configProvider.ProxySettings.ProxyIsEnabled)
@@ -69,7 +69,8 @@ namespace VersionOneTFSServer
                     {AppSettingKeys.ProxyUrl, config.ProxyUrl},
                     {AppSettingKeys.ProxyUserName, config.ProxyUsername},
                     {AppSettingKeys.ProxyPassword, config.ProxyPassword},
-                    {AppSettingKeys.ProxyDomain, config.ProxyDomain}
+                    {AppSettingKeys.ProxyDomain, config.ProxyDomain},
+                    {AppSettingKeys.BaseListenerUrl, config.BaseListenerUrl}
                 };
 
             var returnValue = enumerable.ToDictionary(x => x.Key, x => x.Value);
@@ -94,7 +95,7 @@ namespace VersionOneTFSServer
             if (string.IsNullOrEmpty(config.TfsPassword))
                 yield return RequiredFieldError("TfsPassword");
             if (string.IsNullOrEmpty(config.BaseListenerUrl))
-                yield return RequiredFieldError("ListerUrl");
+                yield return RequiredFieldError("BaseListenerUrl");
         }
 
         private static KeyValuePair<string, string> RequiredFieldError(string fieldName)

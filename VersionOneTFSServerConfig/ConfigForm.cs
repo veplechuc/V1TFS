@@ -28,15 +28,23 @@ namespace VersionOneTFSServerConfig
 
             btnTestV1Connection.Click += btnTestV1Connection_Click;
             btnSaveVersionOneSettings.Click += btnSaveVersionOneSettings_Click;
+            btnSetBaseListenerUrl.Click += UpdateForm;
             TFSConnectB.Click += TFSConnectB_Click;
             TFSUpdateB.Click += TFSUpdateB_Click;
             UnsubscribeB.Click += UnsubscribeB_Click;
             chkUseProxy.CheckedChanged += chkUseProxy_CheckedChanged;
             UseIntegratedAuthenticationCB.CheckedChanged += chkUseIntegrationAuth_CheckChanged;
 
-            var config = GetConfigurationData();
+            UpdateForm(null, null);
 
-            tbBaseUrl.Text = config.BaseListenerUrl;
+        }
+
+        private void UpdateForm(object sender, EventArgs e)
+        {
+
+            
+
+            var config = GetConfigurationData();
 
             //Advanced setup
             RegExTB.Text = config.TfsWorkItemRegex;
@@ -63,7 +71,7 @@ namespace VersionOneTFSServerConfig
             TFSPasswordTB.Text = config.TfsPassword;
             ListenerURLTB.Text = config.BaseListenerUrl;
 
-			// Debug Mode
+            // Debug Mode
             chkDebugMode.Checked = config.DebugMode;
             UpdateFormControlStatus();
         }
@@ -74,6 +82,8 @@ namespace VersionOneTFSServerConfig
             var tfsConfig = new TfsServerConfiguration();
             var proxy = new ConfigurationProxy(null, tbBaseUrl.Text);
 
+            UpdateStatusText(string.Format("Updating configuration information from {0}.", proxy.ConfigurationUrl), false);
+
             try
             {
                 tfsConfig = proxy.Retrieve();
@@ -82,6 +92,7 @@ namespace VersionOneTFSServerConfig
             {
                 UpdateStatusText(string.Format("Could find the to TFS Listener at url {0}.  Exception:  {1}.", proxy.ConfigurationUrl, e.Message), true);
             }
+            finally { tbBaseUrl.Text = proxy.BaseListenerUrl; }
 
             return tfsConfig;
 
@@ -119,11 +130,13 @@ namespace VersionOneTFSServerConfig
                 };
 
             var results = new ConfigurationProxy().Store(configToSave);
-            if(results[StatusKey.Status] == StatusCode.Ok)
+            if(results != null && results[StatusKey.Status] == StatusCode.Ok)
             {
                 UpdateStatusText("Save successful.", false);
                 return;
             }
+
+            if (results == null) throw new Exception("Unable to retrieve results from server.");
 
             var missingFields = string.Join(", ", results.Keys.Where(key => key != "status"));
             var text = string.Format("The following values must be present in order to save settings:  {0}.", missingFields);

@@ -76,14 +76,14 @@ namespace VersionOneTFSServerConfig.Configuration
         public Dictionary<string, string> Store(TfsServerConfiguration config)
         {
             var json = JsonConvert.SerializeObject(config);
-            var result = _client.Put(BaseListenerUrl, System.Text.Encoding.UTF8.GetBytes(json));
+            var result = _client.Put(ConfigurationUrl, System.Text.Encoding.UTF8.GetBytes(json));
             var body = System.Text.Encoding.UTF8.GetString(result);
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(body);
         }
 
         public TfsServerConfiguration Retrieve()
         {
-            var result = _client.Get(BaseListenerUrl);
+            var result = _client.Get(ConfigurationUrl);
             var body = System.Text.Encoding.UTF8.GetString(result);
             return JsonConvert.DeserializeObject<TfsServerConfiguration>(body);
         }

@@ -77,6 +77,7 @@ namespace VersionOneTFSServerConfig
             this.llClear = new System.Windows.Forms.LinkLabel();
             this.tbBaseUrl = new System.Windows.Forms.TextBox();
             this.lblTFSListenerUrl = new System.Windows.Forms.Label();
+            this.btnSetBaseListenerUrl = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpVersionOne.SuspendLayout();
             this.grpProxySettings.SuspendLayout();
@@ -518,7 +519,6 @@ namespace VersionOneTFSServerConfig
             this.tbResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbResults.Size = new System.Drawing.Size(441, 100);
             this.tbResults.TabIndex = 10;
-            this.tbResults.Text = "Not connected";
             // 
             // llClear
             // 
@@ -535,7 +535,7 @@ namespace VersionOneTFSServerConfig
             // 
             this.tbBaseUrl.Location = new System.Drawing.Point(121, 26);
             this.tbBaseUrl.Name = "tbBaseUrl";
-            this.tbBaseUrl.Size = new System.Drawing.Size(316, 20);
+            this.tbBaseUrl.Size = new System.Drawing.Size(243, 20);
             this.tbBaseUrl.TabIndex = 13;
             // 
             // lblTFSListenerUrl
@@ -547,11 +547,21 @@ namespace VersionOneTFSServerConfig
             this.lblTFSListenerUrl.TabIndex = 14;
             this.lblTFSListenerUrl.Text = "TFS Base Listener Url";
             // 
+            // btnSetBaseListenerUrl
+            // 
+            this.btnSetBaseListenerUrl.Location = new System.Drawing.Point(369, 26);
+            this.btnSetBaseListenerUrl.Name = "btnSetBaseListenerUrl";
+            this.btnSetBaseListenerUrl.Size = new System.Drawing.Size(75, 20);
+            this.btnSetBaseListenerUrl.TabIndex = 15;
+            this.btnSetBaseListenerUrl.Text = "Set";
+            this.btnSetBaseListenerUrl.UseVisualStyleBackColor = true;
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 636);
+            this.Controls.Add(this.btnSetBaseListenerUrl);
             this.Controls.Add(this.lblTFSListenerUrl);
             this.Controls.Add(this.tbBaseUrl);
             this.Controls.Add(this.llClear);
@@ -626,6 +636,7 @@ namespace VersionOneTFSServerConfig
         private System.Windows.Forms.LinkLabel llClear;
         private System.Windows.Forms.TextBox tbBaseUrl;
         private System.Windows.Forms.Label lblTFSListenerUrl;
+        private System.Windows.Forms.Button btnSetBaseListenerUrl;
     }
 }
 

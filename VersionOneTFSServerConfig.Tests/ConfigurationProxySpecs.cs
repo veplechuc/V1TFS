@@ -32,6 +32,7 @@ namespace VersionOneTFSServer.Tests
             config.VersionOneUrl.should_not_be_empty();
             config.VersionOneUserName.should_not_be_empty();
             config.VersionOnePassword.should_not_be_empty();
+            config.BaseListenerUrl.should_not_be_empty();
             if (config.ProxyIsEnabled)
             {
                 config.ProxyUrl.should_not_be_empty();
@@ -72,7 +73,8 @@ namespace VersionOneTFSServer.Tests
             TfsUserName = "admin3",
             TfsWorkItemRegex = null,
             VersionOneUserName = "admin2",
-            VersionOneUrl = "http://www.versionone.com/"
+            VersionOneUrl = "http://www.versionone.com/",
+            BaseListenerUrl = "http://localhost:9090/"
         };
 
         /// <summary>
@@ -130,12 +132,12 @@ namespace VersionOneTFSServer.Tests
         {
             var mock = new PretendsToBeConnectedToHttpClient();
             var proxy = new ConfigurationProxy(mock);
-            it["can submit valid configuration"] = () =>
+            it["then its possible to submit valid configuration"] = () =>
                 {
                     var result = proxy.Store(_serializationTarget);
                     result[StatusKey.Status].should_be(StatusCode.Ok);
                 };
-            it["gets back the object it stored"] = () => proxy.Retrieve().should_be(_serializationTarget);
+            it["then the original object is retrieved on get"] = () => proxy.Retrieve().should_be(_serializationTarget);
         }
 
 
