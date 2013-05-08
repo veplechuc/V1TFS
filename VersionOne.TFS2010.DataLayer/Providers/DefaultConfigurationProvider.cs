@@ -30,14 +30,19 @@ namespace VersionOneTFS2010.DataLayer.Providers
             get { return new Uri("http://localhost:8080/tfs/DefaultCollection/"); }
         }
 
+        public Uri BaseListenerUrl
+        {
+            get{ return new Uri("http://localhost:9090/");}
+        }
+
         public Uri TfsListenerUrl
         {
-            get{ return new Uri("http://localhost:9090/service.svc");}
+            get{ return new Uri(new Uri(BaseListenerUrl.ToString()), "service.svc");}
         }
 
         public Uri ConfigurationUrl
         {
-            get { return new Uri("http://localhost:9090/configuration/"); }
+            get { return new Uri(new Uri(BaseListenerUrl.ToString()), "configuration/"); }
         }
 
         public string TfsUserName

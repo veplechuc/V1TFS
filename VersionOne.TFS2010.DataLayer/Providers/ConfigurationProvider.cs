@@ -70,7 +70,12 @@ namespace VersionOneTFS2010.DataLayer.Providers
         {
             get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.TfsUrl, _configurationDefaults.TfsUrl); }
         }
-        
+
+        public Uri BaseListenerUrl
+        {
+            get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.BaseListenerUrl, _configurationDefaults.BaseListenerUrl); }
+        }
+
         public Uri TfsListenerUrl
         {
             get { return ProviderUtilities.GetUri(_savedSettings, AppSettingKeys.TfsListenerUrl, _configurationDefaults.TfsListenerUrl); }

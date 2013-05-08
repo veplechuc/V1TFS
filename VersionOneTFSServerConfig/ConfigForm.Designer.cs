@@ -31,7 +31,6 @@ namespace VersionOneTFSServerConfig
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpVersionOne = new System.Windows.Forms.TabPage();
-            this.btnSaveVersionOneSettings = new System.Windows.Forms.Button();
             this.grpProxySettings = new System.Windows.Forms.GroupBox();
             this.txtProxyDomain = new System.Windows.Forms.TextBox();
             this.lblProxyDomain = new System.Windows.Forms.Label();
@@ -73,8 +72,11 @@ namespace VersionOneTFSServerConfig
             this.RegExTB = new System.Windows.Forms.TextBox();
             this.lblRegex = new System.Windows.Forms.Label();
             this.txtMatchesDescription = new System.Windows.Forms.TextBox();
+            this.btnSaveVersionOneSettings = new System.Windows.Forms.Button();
             this.tbResults = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.llClear = new System.Windows.Forms.LinkLabel();
+            this.tbBaseUrl = new System.Windows.Forms.TextBox();
+            this.lblTFSListenerUrl = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpVersionOne.SuspendLayout();
             this.grpProxySettings.SuspendLayout();
@@ -87,11 +89,10 @@ namespace VersionOneTFSServerConfig
             this.tcSettings.Controls.Add(this.tpVersionOne);
             this.tcSettings.Controls.Add(this.tpTfsServer);
             this.tcSettings.Controls.Add(this.tpAdvanced);
-            this.tcSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tcSettings.Location = new System.Drawing.Point(0, 0);
+            this.tcSettings.Location = new System.Drawing.Point(10, 57);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(456, 403);
+            this.tcSettings.Size = new System.Drawing.Size(441, 439);
             this.tcSettings.TabIndex = 0;
             // 
             // tpVersionOne
@@ -108,19 +109,10 @@ namespace VersionOneTFSServerConfig
             this.tpVersionOne.Location = new System.Drawing.Point(4, 22);
             this.tpVersionOne.Name = "tpVersionOne";
             this.tpVersionOne.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVersionOne.Size = new System.Drawing.Size(448, 377);
+            this.tpVersionOne.Size = new System.Drawing.Size(433, 413);
             this.tpVersionOne.TabIndex = 0;
             this.tpVersionOne.Text = "VersionOne Server";
             this.tpVersionOne.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveVersionOneSettings
-            // 
-            this.btnSaveVersionOneSettings.Location = new System.Drawing.Point(153, 409);
-            this.btnSaveVersionOneSettings.Name = "btnSaveVersionOneSettings";
-            this.btnSaveVersionOneSettings.Size = new System.Drawing.Size(145, 48);
-            this.btnSaveVersionOneSettings.TabIndex = 9;
-            this.btnSaveVersionOneSettings.Text = "Save All Settings";
-            this.btnSaveVersionOneSettings.UseVisualStyleBackColor = true;
             // 
             // grpProxySettings
             // 
@@ -303,7 +295,7 @@ namespace VersionOneTFSServerConfig
             this.tpTfsServer.Location = new System.Drawing.Point(4, 22);
             this.tpTfsServer.Name = "tpTfsServer";
             this.tpTfsServer.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTfsServer.Size = new System.Drawing.Size(448, 377);
+            this.tpTfsServer.Size = new System.Drawing.Size(433, 413);
             this.tpTfsServer.TabIndex = 1;
             this.tpTfsServer.Text = "TFS Server";
             this.tpTfsServer.UseVisualStyleBackColor = true;
@@ -452,7 +444,7 @@ namespace VersionOneTFSServerConfig
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(448, 377);
+            this.tpAdvanced.Size = new System.Drawing.Size(433, 413);
             this.tpAdvanced.TabIndex = 2;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -506,35 +498,64 @@ namespace VersionOneTFSServerConfig
             this.txtMatchesDescription.TabIndex = 0;
             this.txtMatchesDescription.Text = resources.GetString("txtMatchesDescription.Text");
             // 
+            // btnSaveVersionOneSettings
+            // 
+            this.btnSaveVersionOneSettings.Location = new System.Drawing.Point(153, 502);
+            this.btnSaveVersionOneSettings.Name = "btnSaveVersionOneSettings";
+            this.btnSaveVersionOneSettings.Size = new System.Drawing.Size(145, 28);
+            this.btnSaveVersionOneSettings.TabIndex = 9;
+            this.btnSaveVersionOneSettings.Text = "Save All Settings";
+            this.btnSaveVersionOneSettings.UseVisualStyleBackColor = true;
+            // 
             // tbResults
             // 
             this.tbResults.BackColor = System.Drawing.Color.Black;
             this.tbResults.ForeColor = System.Drawing.Color.White;
-            this.tbResults.Location = new System.Drawing.Point(7, 480);
+            this.tbResults.Location = new System.Drawing.Point(10, 533);
             this.tbResults.Multiline = true;
             this.tbResults.Name = "tbResults";
             this.tbResults.ReadOnly = true;
             this.tbResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbResults.Size = new System.Drawing.Size(448, 100);
+            this.tbResults.Size = new System.Drawing.Size(441, 100);
             this.tbResults.TabIndex = 10;
             this.tbResults.Text = "Not connected";
             // 
-            // label1
+            // llClear
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 464);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Status Information:";
+            this.llClear.AutoSize = true;
+            this.llClear.Location = new System.Drawing.Point(420, 515);
+            this.llClear.Name = "llClear";
+            this.llClear.Size = new System.Drawing.Size(31, 13);
+            this.llClear.TabIndex = 12;
+            this.llClear.TabStop = true;
+            this.llClear.Text = "Clear";
+            this.llClear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClear_LinkClicked);
+            // 
+            // tbBaseUrl
+            // 
+            this.tbBaseUrl.Location = new System.Drawing.Point(121, 26);
+            this.tbBaseUrl.Name = "tbBaseUrl";
+            this.tbBaseUrl.Size = new System.Drawing.Size(316, 20);
+            this.tbBaseUrl.TabIndex = 13;
+            // 
+            // lblTFSListenerUrl
+            // 
+            this.lblTFSListenerUrl.AutoSize = true;
+            this.lblTFSListenerUrl.Location = new System.Drawing.Point(7, 29);
+            this.lblTFSListenerUrl.Name = "lblTFSListenerUrl";
+            this.lblTFSListenerUrl.Size = new System.Drawing.Size(110, 13);
+            this.lblTFSListenerUrl.TabIndex = 14;
+            this.lblTFSListenerUrl.Text = "TFS Base Listener Url";
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 586);
+            this.ClientSize = new System.Drawing.Size(456, 636);
+            this.Controls.Add(this.lblTFSListenerUrl);
+            this.Controls.Add(this.tbBaseUrl);
+            this.Controls.Add(this.llClear);
             this.Controls.Add(this.btnSaveVersionOneSettings);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbResults);
             this.Controls.Add(this.tcSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -602,7 +623,9 @@ namespace VersionOneTFSServerConfig
         private System.Windows.Forms.Button btnSaveVersionOneSettings;
         private System.Windows.Forms.TextBox txtDebugDescription;
         private System.Windows.Forms.TextBox tbResults;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel llClear;
+        private System.Windows.Forms.TextBox tbBaseUrl;
+        private System.Windows.Forms.Label lblTFSListenerUrl;
     }
 }
 

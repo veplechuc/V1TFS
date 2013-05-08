@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Integrations.Core.DTO;
 using Newtonsoft.Json;
+using VersionOneTFS2010.DataLayer.Providers;
 
 namespace VersionOneTFSServerConfig.Configuration
 {
@@ -34,32 +36,54 @@ namespace VersionOneTFSServerConfig.Configuration
     public class ConfigurationProxy
     {
         private readonly IHttpClient _client;
-        private readonly string _url;
+        private readonly string _baseUrl;
 
         public static string ProbeServerConfig()
         {
             // look in web.config
             // return convention
             // port-scan local box
-            return "http://localhost:9090/Configuration/";
+            return "http://localhost:9090/";
         }
-        public ConfigurationProxy(IHttpClient client = null, string url = null)
+        public ConfigurationProxy(IHttpClient client = null, string baseListenerUrl = null)
         {
             _client = client ?? new HttpClient();
-            _url = url ?? ProbeServerConfig();
+            if (string.IsNullOrEmpty(baseListenerUrl))
+            {
+                _baseUrl = new DefaultConfigurationProvider().BaseListenerUrl.ToString();
+            }
+            else
+            {
+                _baseUrl = baseListenerUrl;
+            }
+        }
+
+        public string BaseListenerUrl
+        {
+            get { return _baseUrl; }
+        }
+
+        public string ConfigurationUrl
+        {
+            get { return new Uri(new Uri(BaseListenerUrl), "configuration/").ToString(); }
+        }
+
+        public string ListenerUrl
+        {
+            get { return new Uri(new Uri(BaseListenerUrl), "service.svc").ToString(); }
         }
 
         public Dictionary<string, string> Store(TfsServerConfiguration config)
         {
             var json = JsonConvert.SerializeObject(config);
-            var result = _client.Put(_url, System.Text.Encoding.UTF8.GetBytes(json));
+            var result = _client.Put(BaseListenerUrl, System.Text.Encoding.UTF8.GetBytes(json));
             var body = System.Text.Encoding.UTF8.GetString(result);
-            return JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, string>>(body);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(body);
         }
 
         public TfsServerConfiguration Retrieve()
         {
-            var result = _client.Get(_url);
+            var result = _client.Get(BaseListenerUrl);
             var body = System.Text.Encoding.UTF8.GetString(result);
             return JsonConvert.DeserializeObject<TfsServerConfiguration>(body);
         }

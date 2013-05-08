@@ -20,10 +20,10 @@ namespace VersionOneTFSServerConfig
     {
 
         internal static TfsTeamProjectCollection TfsServer;
-        internal static TfsServerConfiguration _config;
 
         public ConfigForm()
         {
+
             InitializeComponent();
 
             btnTestV1Connection.Click += btnTestV1Connection_Click;
@@ -34,36 +34,57 @@ namespace VersionOneTFSServerConfig
             chkUseProxy.CheckedChanged += chkUseProxy_CheckedChanged;
             UseIntegratedAuthenticationCB.CheckedChanged += chkUseIntegrationAuth_CheckChanged;
 
-            _config = new ConfigurationProxy().Retrieve();
+            var config = GetConfigurationData();
+
+            tbBaseUrl.Text = config.BaseListenerUrl;
 
             //Advanced setup
-            RegExTB.Text = _config.TfsWorkItemRegex;
+            RegExTB.Text = config.TfsWorkItemRegex;
 
             txtDebugDescription.Text = string.Format("Debug information is written to {0}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
             //V1 setup
-            V1URLTB.Text = _config.VersionOneUrl;
+            V1URLTB.Text = config.VersionOneUrl;
 
-            V1UsernameTB.Text = _config.VersionOneUserName;
-            V1PasswordTB.Text = _config.VersionOnePassword;
-            UseIntegratedAuthenticationCB.Checked = _config.IsWindowsIntegratedSecurity;
+            V1UsernameTB.Text = config.VersionOneUserName;
+            V1PasswordTB.Text = config.VersionOnePassword;
+            UseIntegratedAuthenticationCB.Checked = config.IsWindowsIntegratedSecurity;
 
-            chkUseProxy.Checked = _config.ProxyIsEnabled;
-            txtProxyUrl.Text = _config.ProxyUrl;
-            txtProxyUsername.Text = _config.ProxyUsername;
-            txtProxyPassword.Text = _config.ProxyPassword;
-            txtProxyDomain.Text = _config.ProxyDomain;
-            SetProxyRelatedFieldsEnabled(_config.ProxyIsEnabled);
+            chkUseProxy.Checked = config.ProxyIsEnabled;
+            txtProxyUrl.Text = config.ProxyUrl;
+            txtProxyUsername.Text = config.ProxyUsername;
+            txtProxyPassword.Text = config.ProxyPassword;
+            txtProxyDomain.Text = config.ProxyDomain;
+            SetProxyRelatedFieldsEnabled(config.ProxyIsEnabled);
 
             //TFS setup
-            TFSURLTB.Text = _config.TfsUrl;
-            TFSUsernameTB.Text = _config.TfsUserName;
-            TFSPasswordTB.Text = _config.TfsPassword;
-            ListenerURLTB.Text = _config.ListenerUrl;
+            TFSURLTB.Text = config.TfsUrl;
+            TFSUsernameTB.Text = config.TfsUserName;
+            TFSPasswordTB.Text = config.TfsPassword;
+            ListenerURLTB.Text = config.BaseListenerUrl;
 
 			// Debug Mode
-            chkDebugMode.Checked = _config.DebugMode;
+            chkDebugMode.Checked = config.DebugMode;
             UpdateFormControlStatus();
+        }
+
+        private TfsServerConfiguration GetConfigurationData()
+        {
+
+            var tfsConfig = new TfsServerConfiguration();
+            var proxy = new ConfigurationProxy(null, tbBaseUrl.Text);
+
+            try
+            {
+                tfsConfig = proxy.Retrieve();
+            }
+            catch (Exception e)
+            {
+                UpdateStatusText(string.Format("Could find the to TFS Listener at url {0}.  Exception:  {1}.", proxy.ConfigurationUrl, e.Message), true);
+            }
+
+            return tfsConfig;
+
         }
 
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
@@ -166,7 +187,6 @@ namespace VersionOneTFSServerConfig
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-
 
                 var proxy = new ConfigurationProxy();
                 var config = proxy.Retrieve();
@@ -407,8 +427,9 @@ namespace VersionOneTFSServerConfig
             }
             else
             {
-                V1PasswordTB.Text = _config.VersionOnePassword;
-                V1UsernameTB.Text = _config.VersionOneUserName;
+                var config = GetConfigurationData();
+                V1PasswordTB.Text = config.VersionOnePassword;
+                V1UsernameTB.Text = config.VersionOneUserName;
                 _bit = 0;
             }
         }
@@ -424,6 +445,12 @@ namespace VersionOneTFSServerConfig
 
             proxy.Store(config);
 
+        }
+
+        private void llClear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            tbResults.Clear();
+            tbResults.BackColor = Color.Black;
         }
 
     }
