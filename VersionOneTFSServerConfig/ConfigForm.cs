@@ -42,8 +42,6 @@ namespace VersionOneTFSServerConfig
         private void UpdateForm(object sender, EventArgs e)
         {
 
-            
-
             var config = GetConfigurationData();
 
             //Advanced setup
@@ -181,7 +179,6 @@ namespace VersionOneTFSServerConfig
             tbResults.BackColor = isError ? Color.DarkRed : Color.DarkGreen;
             tbResults.Text += string.Concat(Environment.NewLine, string.Format("({0}) {1}", DateTime.Now.ToLongTimeString(), text));
             tbResults.Refresh();
-
         }
 
         private void DisplayConnectionValidationStatus(bool status, string message = null) 
@@ -446,19 +443,6 @@ namespace VersionOneTFSServerConfig
                 V1UsernameTB.Text = config.VersionOneUserName;
                 _bit = 0;
             }
-        }
-
-        private void SaveSettingsB_Click(object sender, EventArgs e)
-        {
-
-            var proxy = new ConfigurationProxy();
-            var config = proxy.Retrieve();
-
-            config.TfsWorkItemRegex = RegExTB.Text;
-            config.DebugMode = chkDebugMode.Checked;
-
-            proxy.Store(config);
-
         }
 
         private void llClear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
