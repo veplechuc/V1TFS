@@ -19,7 +19,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
             {
                 _target = new ProxySettingsProvider(null);
                 _defaults = new DefaultProxySettingsProvider();
-                WebConfigurationAdapter.ClearAllAppSettings();
+                new ConfigurationProvider().ClearAllSettings();
             };
 
             context["when i retrieve versionone specific settings"] = () =>
