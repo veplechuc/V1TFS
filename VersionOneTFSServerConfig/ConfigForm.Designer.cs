@@ -553,7 +553,7 @@ namespace VersionOneTFSServerConfig
             this.btnSetBaseListenerUrl.Name = "btnSetBaseListenerUrl";
             this.btnSetBaseListenerUrl.Size = new System.Drawing.Size(75, 20);
             this.btnSetBaseListenerUrl.TabIndex = 15;
-            this.btnSetBaseListenerUrl.Text = "Set";
+            this.btnSetBaseListenerUrl.Text = "Refresh";
             this.btnSetBaseListenerUrl.UseVisualStyleBackColor = true;
             // 
             // ConfigForm

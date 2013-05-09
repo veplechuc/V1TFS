@@ -91,11 +91,14 @@ namespace VersionOneTFSServerConfig
             }
             catch (Exception e)
             {
-                UpdateStatusText(string.Format("Could find the to TFS Listener at url {0}.  Exception:  {1}.", proxy.ConfigurationUrl, e.Message), true);
+                UpdateStatusText(string.Format("Could not use the to TFS Listener at url {0}.  Exception:  {1}.", proxy.ConfigurationUrl, e.Message), true);
                 tcSettings.Enabled = false;
                 btnSaveAllSettings.Enabled = false;
             }
-            finally { tbBaseUrl.Text = proxy.BaseListenerUrl; }
+            finally
+            {
+                tbBaseUrl.Text = proxy.BaseListenerUrl;
+            }
 
             return tfsConfig;
 
