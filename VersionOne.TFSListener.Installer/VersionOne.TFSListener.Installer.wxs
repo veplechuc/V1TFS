@@ -76,6 +76,12 @@
                   <iis:WebApplication Id='TFSListenerApp' WebAppPool='ASP_NET_4' Name='TFS Listener App' />
                 </iis:WebSite>
               </Component>
+              <Component Id="GlobalASAX" Guid="6a634630-b1be-442f-bbf1-5b81032cdf4c">
+                <File Id="GlobalASAX"
+                    Name="Global.asax"
+                    Source ="$(var.VersionOneTFSServer.ProjectDir)"
+                    DiskId="1" Vital="yes" KeyPath="no" />
+              </Component>
               <Directory Id="AppData" Name="App_Data">
                 <Component Id="AppData"  Guid="c97386c2-e8b5-4f4e-a25b-94f770e7bebf">
                   <CreateFolder>
@@ -116,6 +122,7 @@
              Display="expand"
              ConfigurableDirectory="INSTALLLOCATION"
              Level="1" >
+      <ComponentRef Id="GlobalASAX" />
       <ComponentRef Id="VersionOneSDKAPIClient" />
       <ComponentRef Id="VersionOneTFSDataLayer" />
       <ComponentRef Id="TFSListenerConfig" />
