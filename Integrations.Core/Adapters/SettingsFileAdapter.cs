@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Integrations.Core.Structures;
 
 namespace Integrations.Core.Adapters
 {
@@ -13,9 +14,10 @@ namespace Integrations.Core.Adapters
             {
                 foreach (var entry in configToSave)
                 {
-                    sw.WriteLine(string.Format("{0}, {1}", entry.Key, entry.Value));
+                    sw.WriteLine(string.Format("{0}{1}{2}", entry.Key, Seperators.Primary, entry.Value));
                 }
             }
         }
+
     }
 }

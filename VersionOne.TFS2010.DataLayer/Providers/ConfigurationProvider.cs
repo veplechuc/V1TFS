@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Integrations.Core.Interfaces;
+using Integrations.Core.Structures;
 using VersionOneTFS2010.DataLayer.Collections;
 
 namespace VersionOneTFS2010.DataLayer.Providers
@@ -29,10 +30,10 @@ namespace VersionOneTFS2010.DataLayer.Providers
 
             using (var reader = new StreamReader(Paths.ConfigurationPath))
             {
-                string commaDelimitedLine;
-                while ((commaDelimitedLine = reader.ReadLine()) != null)
+                string delimitedLine;
+                while ((delimitedLine = reader.ReadLine()) != null)
                 {
-                    var parsedValues = commaDelimitedLine.Split(',');
+                    var parsedValues = delimitedLine.Split(Seperators.Primary);
                     returnValue.Add(parsedValues[0], parsedValues[1]);
                 }
             }

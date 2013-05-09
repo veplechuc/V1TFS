@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Integrations.Core.Adapters;
+using Integrations.Core.Structures;
 using NSpec;
 
 namespace Integration.Core.Tests
@@ -30,7 +31,7 @@ namespace Integration.Core.Tests
                             string commaDelimitedLine;
                             while ((commaDelimitedLine = reader.ReadLine()) != null)
                             {
-                                var parsedValues = commaDelimitedLine.Split(',');
+                                var parsedValues = commaDelimitedLine.Split(Seperators.Primary);
                                 retrievedSettings.Add(parsedValues[0], parsedValues[1]);
                             }
                         }
