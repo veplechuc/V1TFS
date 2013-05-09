@@ -27,7 +27,7 @@ namespace VersionOneTFSServerConfig
             InitializeComponent();
 
             btnTestV1Connection.Click += btnTestV1Connection_Click;
-            btnSaveVersionOneSettings.Click += btnSaveVersionOneSettings_Click;
+            btnSaveAllSettings.Click += btnSaveVersionOneSettings_Click;
             btnSetBaseListenerUrl.Click += UpdateForm;
             TFSConnectB.Click += TFSConnectB_Click;
             TFSUpdateB.Click += TFSUpdateB_Click;
@@ -77,6 +77,9 @@ namespace VersionOneTFSServerConfig
         private TfsServerConfiguration GetConfigurationData()
         {
 
+            if (tcSettings.Enabled == false) tcSettings.Enabled = true;
+            if (btnSaveAllSettings.Enabled == false) btnSaveAllSettings.Enabled = true;
+
             var tfsConfig = new TfsServerConfiguration();
             var proxy = new ConfigurationProxy(null, tbBaseUrl.Text);
 
@@ -89,12 +92,16 @@ namespace VersionOneTFSServerConfig
             catch (Exception e)
             {
                 UpdateStatusText(string.Format("Could find the to TFS Listener at url {0}.  Exception:  {1}.", proxy.ConfigurationUrl, e.Message), true);
+                tcSettings.Enabled = false;
+                btnSaveAllSettings.Enabled = false;
             }
             finally { tbBaseUrl.Text = proxy.BaseListenerUrl; }
 
             return tfsConfig;
 
         }
+
+
 
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
             txtProxyUrl.Enabled = txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyDomain.Enabled = enabled;

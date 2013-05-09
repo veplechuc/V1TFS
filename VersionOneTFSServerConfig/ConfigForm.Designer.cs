@@ -72,7 +72,7 @@ namespace VersionOneTFSServerConfig
             this.RegExTB = new System.Windows.Forms.TextBox();
             this.lblRegex = new System.Windows.Forms.Label();
             this.txtMatchesDescription = new System.Windows.Forms.TextBox();
-            this.btnSaveVersionOneSettings = new System.Windows.Forms.Button();
+            this.btnSaveAllSettings = new System.Windows.Forms.Button();
             this.tbResults = new System.Windows.Forms.TextBox();
             this.llClear = new System.Windows.Forms.LinkLabel();
             this.tbBaseUrl = new System.Windows.Forms.TextBox();
@@ -499,14 +499,14 @@ namespace VersionOneTFSServerConfig
             this.txtMatchesDescription.TabIndex = 0;
             this.txtMatchesDescription.Text = resources.GetString("txtMatchesDescription.Text");
             // 
-            // btnSaveVersionOneSettings
+            // btnSaveAllSettings
             // 
-            this.btnSaveVersionOneSettings.Location = new System.Drawing.Point(153, 502);
-            this.btnSaveVersionOneSettings.Name = "btnSaveVersionOneSettings";
-            this.btnSaveVersionOneSettings.Size = new System.Drawing.Size(145, 28);
-            this.btnSaveVersionOneSettings.TabIndex = 9;
-            this.btnSaveVersionOneSettings.Text = "Save All Settings";
-            this.btnSaveVersionOneSettings.UseVisualStyleBackColor = true;
+            this.btnSaveAllSettings.Location = new System.Drawing.Point(153, 502);
+            this.btnSaveAllSettings.Name = "btnSaveAllSettings";
+            this.btnSaveAllSettings.Size = new System.Drawing.Size(145, 28);
+            this.btnSaveAllSettings.TabIndex = 9;
+            this.btnSaveAllSettings.Text = "Save All Settings";
+            this.btnSaveAllSettings.UseVisualStyleBackColor = true;
             // 
             // tbResults
             // 
@@ -565,7 +565,7 @@ namespace VersionOneTFSServerConfig
             this.Controls.Add(this.lblTFSListenerUrl);
             this.Controls.Add(this.tbBaseUrl);
             this.Controls.Add(this.llClear);
-            this.Controls.Add(this.btnSaveVersionOneSettings);
+            this.Controls.Add(this.btnSaveAllSettings);
             this.Controls.Add(this.tbResults);
             this.Controls.Add(this.tcSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -630,7 +630,7 @@ namespace VersionOneTFSServerConfig
         private System.Windows.Forms.TextBox txtProxyUrl;
         private System.Windows.Forms.Label lblProxyUrl;
         private System.Windows.Forms.CheckBox chkUseProxy;
-        private System.Windows.Forms.Button btnSaveVersionOneSettings;
+        private System.Windows.Forms.Button btnSaveAllSettings;
         private System.Windows.Forms.TextBox txtDebugDescription;
         private System.Windows.Forms.TextBox tbResults;
         private System.Windows.Forms.LinkLabel llClear;
