@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFS2010.DataLayer;
 using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServer {
@@ -47,7 +48,7 @@ namespace VersionOneTFSServer {
         private readonly Object sync = new object();
 
         private readonly string fileName =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "V1Debug.txt");
+            Path.Combine(Paths.LoggingPath, "V1Debug.txt");
         public override void WriteNotificationMessage(string xml, string identityXml)
         {
             lock (sync)

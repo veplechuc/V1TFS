@@ -7,6 +7,11 @@ namespace VersionOneTFS2010.DataLayer
     public static class Paths
     {
 
+        public static string LoggingPath
+        {
+            get { return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData); }
+        }
+
         public static string ConfigurationDirectory
         {
             get

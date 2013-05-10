@@ -11,6 +11,7 @@ using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.DirectoryServices;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFS2010.DataLayer;
 using VersionOneTFSServerConfig.Configuration;
 using Environment = System.Environment;
 
@@ -47,7 +48,7 @@ namespace VersionOneTFSServerConfig
             //Advanced setup
             RegExTB.Text = config.TfsWorkItemRegex;
 
-            txtDebugDescription.Text = string.Format("Debug information is written to {0}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            txtDebugDescription.Text = string.Format("Debug information is written to {0}", Paths.LoggingPath);
 
             //V1 setup
             V1URLTB.Text = config.VersionOneUrl;
