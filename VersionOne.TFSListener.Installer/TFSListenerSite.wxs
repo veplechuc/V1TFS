@@ -12,6 +12,7 @@
         <File Id="WebConfig" Name="Web.config"/>
         <File Id="ServiceSVC" Name="Service.svc"/>
         <File Id="ErrorTestAspx" Name="ErrorTest.aspx"/>
+        <File Id="GlobalASAX" Name="Global.asax" Source ="$(var.VersionOneTFSServer.ProjectDir)" />
       </Component>
       <Directory Id="WebDir_Bin" Name="bin" FileSource="$(var.VersionOneTFSServer.TargetDir)">
         <Component Id="SiteBin" Guid="{B61F8CA4-457D-423D-AC00-667F525ABA6B}">
@@ -22,6 +23,11 @@
           <File Id="SiteVersionOneServiceHostCore" Name="VersionOne.ServiceHost.Core.dll"/>
           <File Id="log4net" Name="log4net.dll"/>
           <File Id="Elmah" Name="Elmah.dll"/>
+          <File Id="IntegrationsCore" Name="Integrations.Core.dll" />
+          <File Id="NewtonsoftJson" Name="NewtonSoft.Json.dll" />
+          <File Id="SystemWebHttp" Name="System.Web.Http.dll" />
+          <File Id="SystemWebHttpWebhost" Name="System.Web.Http.WebHost.dll" />
+          <File Id="SystemNetHttpFormatting" Name="System.Net.Http.Formatting.dll" />
         </Component>
       </Directory>
     </DirectoryRef>
