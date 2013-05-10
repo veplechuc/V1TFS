@@ -458,7 +458,7 @@ namespace VersionOneTFSServerConfig
             this.txtDebugDescription.Multiline = true;
             this.txtDebugDescription.Name = "txtDebugDescription";
             this.txtDebugDescription.ReadOnly = true;
-            this.txtDebugDescription.Size = new System.Drawing.Size(431, 45);
+            this.txtDebugDescription.Size = new System.Drawing.Size(421, 45);
             this.txtDebugDescription.TabIndex = 5;
             // 
             // chkDebugMode
@@ -475,7 +475,7 @@ namespace VersionOneTFSServerConfig
             // 
             this.RegExTB.Location = new System.Drawing.Point(9, 23);
             this.RegExTB.Name = "RegExTB";
-            this.RegExTB.Size = new System.Drawing.Size(431, 20);
+            this.RegExTB.Size = new System.Drawing.Size(421, 20);
             this.RegExTB.TabIndex = 2;
             this.RegExTB.Text = "[A-Z]{1,2}-[0-9]+";
             // 
@@ -495,7 +495,7 @@ namespace VersionOneTFSServerConfig
             this.txtMatchesDescription.Multiline = true;
             this.txtMatchesDescription.Name = "txtMatchesDescription";
             this.txtMatchesDescription.ReadOnly = true;
-            this.txtMatchesDescription.Size = new System.Drawing.Size(431, 47);
+            this.txtMatchesDescription.Size = new System.Drawing.Size(421, 47);
             this.txtMatchesDescription.TabIndex = 0;
             this.txtMatchesDescription.Text = resources.GetString("txtMatchesDescription.Text");
             // 
