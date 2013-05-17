@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +23,7 @@ namespace VersionOneTFSServer
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
     [ServiceErrorBehavior(typeof(ServiceErrorHandler))]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class Service : IService
     {
         private readonly Lazy<V1Component> v1Component = new Lazy<V1Component>(() => 
