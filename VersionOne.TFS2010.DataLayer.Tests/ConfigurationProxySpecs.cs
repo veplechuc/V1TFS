@@ -5,8 +5,8 @@ using Integrations.Core.DTO;
 using Integrations.Core.Structures;
 using NSpec;
 using Newtonsoft.Json;
+using VersionOne.TFS2010.DataLayer;
 using VersionOneTFS2010.DataLayer.Providers;
-using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServer.Tests
 {

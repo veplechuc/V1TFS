@@ -54,6 +54,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
@@ -72,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Collections\AppSettingKeyCollection.cs" />
     <Compile Include="Collections\AppSettingKeys.cs" />
+    <Compile Include="ConfigurationProxy.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Providers\ConfigurationProvider.cs" />
     <Compile Include="Providers\DefaultConfigurationProvider.cs" />

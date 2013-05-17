@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using VersionOne.TFS2010.DataLayer;
 using VersionOneTFS2010.DataLayer;
-using VersionOneTFSServerConfig.Configuration;
 
 namespace VersionOneTFSServer {
     /// <summary>

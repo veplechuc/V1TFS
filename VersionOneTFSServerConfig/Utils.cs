@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using Microsoft.TeamFoundation.Client;
-using VersionOneTFSServerConfig.Configuration;
+using VersionOne.TFS2010.DataLayer;
 
 namespace VersionOneTFSServerConfig {
     /// <summary>

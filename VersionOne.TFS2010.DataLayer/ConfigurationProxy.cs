@@ -5,7 +5,7 @@ using Integrations.Core.DTO;
 using Newtonsoft.Json;
 using VersionOneTFS2010.DataLayer.Providers;
 
-namespace VersionOneTFSServerConfig.Configuration
+namespace VersionOne.TFS2010.DataLayer
 {
     public interface IHttpClient
     {

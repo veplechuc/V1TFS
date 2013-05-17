@@ -28,6 +28,16 @@ namespace VersionOneTFSServer.Tests
     {
 
         [Test]
+        public void DebugConfigurationProxySpecs()
+        {
+            const string tagOrClassName = "ConfigurationProxySpecs";
+            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+            var contexts = invocation.Run();
+            //assert that there aren't any failures
+            contexts.Failures().Count().should_be(0);
+        }
+
+        [Test]
         public void DebugProxySettingsProviderSpecs()
         {
             const string tagOrClassName = "ProxySettingsProviderSpecs";
