@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Integrations.Core.DTO;
+using Integrations.Core.Extensions;
 using Integrations.Core.Structures;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.DirectoryServices;
 using VersionOne.TFS2010.DataLayer;
 using VersionOneTFS2010.DataLayer;
+using VersionOneTFSServerConfig.Structures;
 using Environment = System.Environment;
 
 namespace VersionOneTFSServerConfig
@@ -67,7 +69,7 @@ namespace VersionOneTFSServerConfig
             TFSURLTB.Text = config.TfsUrl;
             TFSUsernameTB.Text = config.TfsUserName;
             TFSPasswordTB.Text = config.TfsPassword;
-            ListenerURLTB.Text = config.BaseListenerUrl;
+            ListenerURLTB.Text = new Uri(config.BaseListenerUrl).Append(UriElements.ServiceName).ToString();
 
             // Debug Mode
             chkDebugMode.Checked = config.DebugMode;
