@@ -106,8 +106,6 @@ namespace VersionOneTFSServerConfig
 
         }
 
-
-
         private void SetProxyRelatedFieldsEnabled(bool enabled) {
             txtProxyUrl.Enabled = txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyDomain.Enabled = enabled;
         }
@@ -443,9 +441,7 @@ namespace VersionOneTFSServerConfig
             if (_bit == 0)
             {
                 V1PasswordTB.Clear();
-                if (WindowsIdentity.GetCurrent() == null) return;
-                var windowsIdentity = WindowsIdentity.GetCurrent();
-                if (windowsIdentity != null) V1UsernameTB.Text = windowsIdentity.Name;
+                V1UsernameTB.Text = GetWindowsUserName();
                 _bit = 1;
             }
             else
@@ -455,6 +451,21 @@ namespace VersionOneTFSServerConfig
                 V1UsernameTB.Text = config.VersionOneUserName;
                 _bit = 0;
             }
+        }
+
+        /// <summary>
+        /// Formats the user name without the domain name.
+        /// </summary>
+        /// <param name="windowsIdentityName"></param>
+        /// <returns></returns>
+        private static string GetWindowsUserName()
+        {
+            const string backSlash = "\\";
+            var identity = WindowsIdentity.GetCurrent();
+            if (identity == null) return string.Empty;
+            if (!identity.Name.Contains(backSlash)) return identity.Name;
+            var index = identity.Name.IndexOf(backSlash, StringComparison.Ordinal);
+            return identity.Name.Remove(0, (index + 1));
         }
 
         private void llClear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
