@@ -45,6 +45,7 @@
     <Compile Include="Adapters\SettingsFileAdapter.cs" />
     <Compile Include="Adapters\WebConfigurationAdapter.cs" />
     <Compile Include="DTO\TfsServerConfiguration.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Interfaces\IConfigurationProvider.cs" />
     <Compile Include="Interfaces\IProxyConnectionSettings.cs" />
     <Compile Include="Interfaces\IVersionOneSettings.cs" />

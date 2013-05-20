@@ -23,6 +23,17 @@ using NUnit.Framework;
 [TestFixture]
 public class DebuggerShim
 {
+
+    [Test]
+    public void UriExtensionsSpecsDebugger()
+    {
+        const string tagOrClassName = "UriExtensionsSpecs";
+        var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+        var contexts = invocation.Run();
+        //assert that there aren't any failures
+        contexts.Failures().Count().should_be(0);
+    }
+
     [Test]
     public void SettingsFileAdapterSpecsDebugger()
     {
