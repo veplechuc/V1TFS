@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFS2010.DataLayer;
 
 namespace VersionOneTFSServer {
     /// <summary>
@@ -23,7 +24,11 @@ namespace VersionOneTFSServer {
         // Is debugging enabled
         public static bool Enabled
         {
-            get { return RegistryProcessor.GetBool(RegistryProcessor.DebugEnabledParameter, false); }
+            get
+            {
+                var config = new ConfigurationProxy().Retrieve();
+                return config.DebugMode;
+            }
         }
 
         // write the notification message
@@ -42,7 +47,7 @@ namespace VersionOneTFSServer {
         private readonly Object sync = new object();
 
         private readonly string fileName =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "V1Debug.txt");
+            Path.Combine(Paths.LoggingPath, "V1Debug.txt");
         public override void WriteNotificationMessage(string xml, string identityXml)
         {
             lock (sync)

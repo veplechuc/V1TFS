@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Integrations.Core.Interfaces;
 using VersionOne.SDK.APIClient;
 using VersionOne.ServerConnector;
 using VersionOne.ServerConnector.Entities;
@@ -183,7 +184,7 @@ namespace VersionOne.TFS2010.DataLayer
                     Filter.Equal("Parent.Timebox.State.Code", "ACTV")));
         } 
 
-        private static VersionOneProcessorSettings ConvertSettings(VersionOneSettings settings) 
+        public static VersionOneProcessorSettings ConvertSettings(IVersionOneSettings settings) 
         {
             return new VersionOneProcessorSettings 
             {
@@ -191,15 +192,15 @@ namespace VersionOne.TFS2010.DataLayer
                 Username = settings.Username,
                 Password = settings.Password,
                 IntegratedAuth = settings.Integrated,
-                ProxySettings = settings.ProxySettings == null || !settings.ProxySettings.UseProxy
+                ProxySettings = settings.ProxySettings == null || !settings.ProxySettings.ProxyIsEnabled
                                     ? null
                                     : new ProxySettings 
                                     {
-                                        Url = settings.ProxySettings.Url,
+                                        Url = settings.ProxySettings.Url.ToString(),
                                         Domain = settings.ProxySettings.Domain,
                                         Username = settings.ProxySettings.Username,
                                         Password = settings.ProxySettings.Password,
-                                        Enabled = settings.ProxySettings.UseProxy,
+                                        Enabled = settings.ProxySettings.ProxyIsEnabled,
                                     }
             };
         }

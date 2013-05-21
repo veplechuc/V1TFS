@@ -66,6 +66,14 @@
                     Name="log4net.dll"
                     Source ="$(var.VersionOne.TFS2010.DataLayer.TargetDir)"
                     DiskId="1" Vital="yes" KeyPath="no" />
+              <File Id="IntegrationsCoreDll"
+                    Name="Integrations.Core.dll"
+                    Source ="$(var.VersionOneTFSServerConfig.TargetDir)"
+                    DiskId="1" Vital="yes" KeyPath="no" />
+              <File Id="NewtonSoft.Json"
+                    Name="NewtonSoft.Json.dll"
+                    Source ="$(var.VersionOneTFSServerConfig.TargetDir)"
+                    DiskId="1" Vital="yes" KeyPath="no" />
             </Component>
             <Directory Id="WebDir" Name="web">
               <Component Id="ListenerWebSite" Guid="82E0F77A-ABBE-4247-A36D-468276FFFAB3">
@@ -76,6 +84,7 @@
                   <iis:WebApplication Id='TFSListenerApp' WebAppPool='ASP_NET_4' Name='TFS Listener App' />
                 </iis:WebSite>
               </Component>
+              
               <Directory Id="AppData" Name="App_Data">
                 <Component Id="AppData"  Guid="c97386c2-e8b5-4f4e-a25b-94f770e7bebf">
                   <CreateFolder>

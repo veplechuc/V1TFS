@@ -1,9 +1,14 @@
-﻿namespace VersionOne.TFS2010.DataLayer 
+﻿using System;
+using Integrations.Core.Interfaces;
+
+namespace VersionOne.TFS2010.DataLayer 
 {
-    public class ProxyConnectionSettings 
+    
+
+    public class ProxyConnectionSettings : IProxyConnectionSettings
     {
-        public bool UseProxy { get; set; }
-        public string Url { get; set; }
+        public bool ProxyIsEnabled { get; set; }
+        public Uri Url { get; set; }
         public string Domain { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -31,14 +36,14 @@
                 return true;
             }
             
-            return other.UseProxy.Equals(UseProxy) && Equals(other.Url, Url) && Equals(other.Domain, Domain) && Equals(other.Username, Username) && Equals(other.Password, Password);
+            return other.ProxyIsEnabled.Equals(ProxyIsEnabled) && Equals(other.Url, Url) && Equals(other.Domain, Domain) && Equals(other.Username, Username) && Equals(other.Password, Password);
         }
 
         public override int GetHashCode() 
         {
             unchecked 
             {
-                var result = UseProxy.GetHashCode();
+                var result = ProxyIsEnabled.GetHashCode();
                 result = (result*397) ^ (Url != null ? Url.GetHashCode() : 0);
                 result = (result*397) ^ (Domain != null ? Domain.GetHashCode() : 0);
                 result = (result*397) ^ (Username != null ? Username.GetHashCode() : 0);
