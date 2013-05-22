@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,6 +13,8 @@ using Microsoft.TeamFoundation.VersionControl.Common;
 using Microsoft.TeamFoundation.Build.Client;
 using VersionOne.ServerConnector.Entities;
 using VersionOne.TFS2010.DataLayer;
+using VersionOneTFS2010.DataLayer.Providers;
+using VersionOneTFSServer.Interfaces;
 using VersionOneTFSServer.ServiceErrors;
 using Environment = System.Environment;
 
@@ -20,6 +23,7 @@ namespace VersionOneTFSServer
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
     [ServiceErrorBehavior(typeof(ServiceErrorHandler))]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class Service : IService
     {
         private readonly Lazy<V1Component> v1Component = new Lazy<V1Component>(() => 
@@ -121,8 +125,8 @@ namespace VersionOneTFSServer
 
         private IEnumerable<PrimaryWorkitem> GetPrimaryWorkitemsInComment(string comment)
         {
-            var re = new Regex(RegistryProcessor.GetString(RegistryProcessor.V1RegexParameter, "[A-Z]{1,2}-[0-9]+"));
-            var numbers = re.Matches(comment).Cast<Match>().Select(x => x.Value).ToList();
+            var regex = new Regex(new ConfigurationProvider().TfsWorkItemRegex);
+            var numbers = regex.Matches(comment).Cast<Match>().Select(x => x.Value).ToList();
             return v1Component.Value.GetRelatedPrimaryWorkitems(numbers);
         }
 
@@ -130,7 +134,7 @@ namespace VersionOneTFSServer
         {
             Debug.instance().Write("Process Build Number " + e.BuildNumber + " from " + e.TeamProject);
 
-            var tfs = Utils.ConnectToTFS();
+            var tfs = Utils.ConnectToTfs();
             var buildStore = (IBuildServer) tfs.GetService(typeof(IBuildServer));
 
             var url = new Uri(e.Url);

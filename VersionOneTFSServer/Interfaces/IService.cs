@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace VersionOneTFSServer
+namespace VersionOneTFSServer.Interfaces
 {
     [ServiceContract(Namespace = "http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Notification/03")]
     public interface IService

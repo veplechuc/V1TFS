@@ -1,4 +1,5 @@
 ﻿using System;
+using VersionOne.ServiceHost.Core.Configuration;
 using log4net;
 
 namespace VersionOne.TFS2010.DataLayer 

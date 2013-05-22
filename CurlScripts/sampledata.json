@@ -1,0 +1,15 @@
+{ "DebugMode" : false,
+  "IsWindowsIntegratedSecurity" : true,
+  "ProxyDomain" : "AD",
+  "ProxyIsEnabled" : true,
+  "ProxyPassword" : "123456",
+  "ProxyUrl" : "http://myproxy:9191/proxy/",
+  "ProxyUsername" : "admin1",
+  "TfsPassword" : "abc123",
+  "TfsUrl" : "http://localhost/tfs/defaultcollection/",
+  "TfsUserName" : "admin3",
+  "TfsWorkItemRegex" : null,
+  "VersionOnePassword" : "admin",
+  "VersionOneUrl" : "http://www.versionone.com/",
+  "VersionOneUserName" : "admin2"
+}

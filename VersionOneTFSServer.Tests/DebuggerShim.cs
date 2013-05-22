@@ -1,4 +1,6 @@
-﻿using System.Linq;
+
+using System.Linq;
+using System.Reflection;
 using NSpec;
 using NSpec.Domain;
 using NSpec.Domain.Formatters;
@@ -8,7 +10,7 @@ using NUnit.Framework;
  * Howdy,
  * 
  * This is NSpec's DebuggerShim.  It will allow you to use TestDriven.Net or Resharper's test runner to run
- * NSpec tests that are in the same Assembly as this class.  
+ * NSpec tests.  
  * 
  * It's DEFINITELY worth trying specwatchr (http://nspec.org/continuoustesting). Specwatchr automatically
  * runs tests for you.
@@ -26,7 +28,8 @@ namespace VersionOneTFSServer.Tests
     [TestFixture]
     public class DebuggerShim
     {
-        [Test]
+
+		[Test]
         public void DebugServiceSpecs()
         {
             const string tagOrClassName = "ServiceSpecs";
@@ -39,5 +42,19 @@ namespace VersionOneTFSServer.Tests
             results.Failures().Count().should_be(0);
 
         }
+
+        [Test]
+        public void DebugConfigurationControllerSpecs()
+        {
+            const string tagOrClassName = "ConfigurationControllerSpecs";
+            var invocation = new RunnerInvocation(Assembly.GetExecutingAssembly().Location, tagOrClassName);
+            var contexts = invocation.Run();
+            //assert that there aren't any failures
+            contexts.Failures().Count().should_be(0);
+        }
+
+        
+
     }
+
 }
