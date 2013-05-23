@@ -11,5 +11,6 @@
   "TfsWorkItemRegex" : null,
   "VersionOnePassword" : "admin",
   "VersionOneUrl" : "http://www.versionone.com/",
-  "VersionOneUserName" : "admin2"
+  "VersionOneUserName" : "admin2",
+  "BaseListenerUrl" : "http://localhost:9090/"
 }
