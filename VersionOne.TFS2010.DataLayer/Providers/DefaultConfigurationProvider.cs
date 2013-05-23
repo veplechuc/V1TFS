@@ -1,5 +1,6 @@
 ﻿using System;
 using Integrations.Core.Interfaces;
+using Integrations.Core.Structures;
 
 namespace VersionOneTFS2010.DataLayer.Providers
 {
@@ -37,12 +38,12 @@ namespace VersionOneTFS2010.DataLayer.Providers
 
         public Uri TfsListenerUrl
         {
-            get{ return new Uri(new Uri(BaseListenerUrl.ToString()), "service.svc");}
+            get{ return new Uri(new Uri(BaseListenerUrl.ToString()), UriElements.ServiceName);}
         }
 
         public Uri ConfigurationUrl
         {
-            get { return new Uri(new Uri(BaseListenerUrl.ToString()), "configuration/"); }
+            get { return new Uri(new Uri(BaseListenerUrl.ToString()), UriElements.ConfigurationPath); }
         }
 
         public string TfsUserName

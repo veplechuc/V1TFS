@@ -13,7 +13,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
         private IConfigurationProvider _defaults = null;
         private const string FileName = "settings.ini";
 
-        public void given_versionOne_specific_settings_are_not_yet_saved_in_the_web_config()
+        public void given_versionOne_specific_settings_are_not_yet_saved_in_the_file()
         {
             before = () =>
                 {
@@ -36,11 +36,12 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             _target.TfsUserName.should_be(_defaults.TfsUserName);
                             _target.TfsPassword.should_be(_defaults.TfsPassword);
                             _target.ConfigurationUrl.should_be(_defaults.ConfigurationUrl);
+                            _target.BaseListenerUrl.should_be(_defaults.BaseListenerUrl);
                         };
                 };
         }
 
-        public void given_versionOne_specific_settings_are_saved_in_the_web_config()
+        public void given_versionOne_specific_settings_are_saved_in_the_file()
         {
             const string userName = "User1";
             const string password = "P@ssword1";
@@ -50,6 +51,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
             const string tfsuser = "TfsUser1";
             const string tfspass = "MySecretPw";
             const string configUrl = "http://locahost:8181/";
+            const string baseListenerUrl = "http://localhost:9090/";
             const bool useWindowsSecurity = false;
 
             before = () =>
@@ -67,7 +69,8 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             {AppSettingKeys.TfsListenerUrl, tfsListenerUrl.ToString()},
                             {AppSettingKeys.TfsUserName, tfsuser},
                             {AppSettingKeys.TfsPassword, tfspass},
-                            {AppSettingKeys.ConfigurationUrl, configUrl}
+                            {AppSettingKeys.ConfigurationUrl, configUrl},
+                            {AppSettingKeys.BaseListenerUrl, baseListenerUrl}
                         }, Paths.ConfigurationDirectory, FileName);
                 };
 
@@ -85,6 +88,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             _target.TfsUserName.should_be(tfsuser);
                             _target.TfsPassword.should_be(tfspass);
                             _target.ConfigurationUrl.ToString().should_be(configUrl);
+                            _target.BaseListenerUrl.ToString().should_be(baseListenerUrl);
                         };
                 };
         }
