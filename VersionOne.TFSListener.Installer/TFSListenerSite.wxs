@@ -28,6 +28,12 @@
           <File Id="SystemWebHttp" Name="System.Web.Http.dll" />
           <File Id="SystemWebHttpWebhost" Name="System.Web.Http.WebHost.dll" />
           <File Id="SystemNetHttpFormatting" Name="System.Net.Http.Formatting.dll" />
+          <File Id="MicrosoftWebInfrastructure" Name="Microsoft.Web.Infrastructure.dll" />
+          <File Id="SystemWebMvc" Name="System.Web.Mvc.dll" />
+          <File Id="SystemWebWebPagesRazor" Name="System.Web.WebPages.Razor.dll" />
+          <File Id="SystemWebWebPages" Name="System.Web.WebPages.dll" />
+          <File Id="SystemNetHttp" Name="System.Net.Http.dll" />
+          <File Id="SystemWebWebPagesDeployment" Name="System.Web.WebPages.Deployment.dll" />
         </Component>
       </Directory>
     </DirectoryRef>
