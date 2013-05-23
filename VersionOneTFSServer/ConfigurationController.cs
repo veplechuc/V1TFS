@@ -16,6 +16,7 @@ namespace VersionOneTFSServer
     public class ConfigurationController : ApiController
     {
         // GET <controller>
+        [HttpGet]
         public TfsServerConfiguration Get()
         {
 
@@ -49,6 +50,7 @@ namespace VersionOneTFSServer
         }
 
         //POST <controller>
+        [HttpPost]
         public Dictionary<string, string> Post([ModelBinder(typeof(TfsServerConfigurationModelBinder))] TfsServerConfiguration config)
         {
 

@@ -1,1 +1,1 @@
-curl -X POST http://localhost:9090/configuration -d @sampledata.json -H "Content-Type: application/json"
+curl -X POST http://localhost:9090/configuration/ -d @sampledata.json -H "Content-Type: application/json"
