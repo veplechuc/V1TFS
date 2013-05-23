@@ -13,7 +13,6 @@ using Microsoft.TeamFoundation.Framework.Client;
 using System.DirectoryServices;
 using VersionOne.TFS2010.DataLayer;
 using VersionOneTFS2010.DataLayer;
-using VersionOneTFSServerConfig.Structures;
 using Environment = System.Environment;
 
 namespace VersionOneTFSServerConfig
@@ -69,7 +68,7 @@ namespace VersionOneTFSServerConfig
             TFSURLTB.Text = config.TfsUrl;
             TFSUsernameTB.Text = config.TfsUserName;
             TFSPasswordTB.Text = config.TfsPassword;
-            ListenerURLTB.Text = new Uri(config.BaseListenerUrl).Append(UriElements.ServiceName).ToString();
+            ListenerURLTB.Text = new Uri(new ConfigurationProxy().BaseListenerUrl).Append(UriElements.ServiceName).ToString();
 
             // Debug Mode
             chkDebugMode.Checked = config.DebugMode;

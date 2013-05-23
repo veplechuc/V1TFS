@@ -53,6 +53,7 @@
     <Compile Include="Structures\Seperators.cs" />
     <Compile Include="Structures\StatusCode.cs" />
     <Compile Include="Structures\StatusKey.cs" />
+    <Compile Include="Structures\UriElements.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

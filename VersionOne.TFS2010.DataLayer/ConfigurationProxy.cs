@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Integrations.Core.DTO;
+using Integrations.Core.Structures;
 using Newtonsoft.Json;
 using VersionOneTFS2010.DataLayer.Providers;
 
@@ -65,12 +66,12 @@ namespace VersionOne.TFS2010.DataLayer
 
         public string ConfigurationUrl
         {
-            get { return new Uri(new Uri(BaseListenerUrl), "configuration/").ToString(); }
+            get { return new Uri(new Uri(BaseListenerUrl), UriElements.ConfigurationPath).ToString(); }
         }
 
         public string ListenerUrl
         {
-            get { return new Uri(new Uri(BaseListenerUrl), "service.svc").ToString(); }
+            get { return new Uri(new Uri(BaseListenerUrl), UriElements.ServiceName).ToString(); }
         }
 
         public Dictionary<string, string> Store(TfsServerConfiguration config)
