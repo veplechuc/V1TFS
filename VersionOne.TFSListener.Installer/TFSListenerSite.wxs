@@ -34,6 +34,7 @@
           <File Id="SystemWebWebPages" Name="System.Web.WebPages.dll" />
           <File Id="SystemNetHttp" Name="System.Net.Http.dll" />
           <File Id="SystemWebWebPagesDeployment" Name="System.Web.WebPages.Deployment.dll" />
+          <File Id="MicrosoftTeamFoundationWorkItemTrackingClientDataStoreLoader" Name="Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll" />
         </Component>
       </Directory>
     </DirectoryRef>
