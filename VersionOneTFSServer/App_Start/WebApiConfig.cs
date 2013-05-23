@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -12,7 +13,7 @@ namespace VersionOneTFSServer.App_Start
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { action = "Get", id = RouteParameter.Optional }
             );
 
             //configure json as the default, but allow xml if the proper media type is passed.
