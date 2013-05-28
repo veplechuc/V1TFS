@@ -52,7 +52,7 @@ packages/
 ~$*
 [Tt]humbs.db
 *.DS_Store
-Resources
+/Resources/*
 
 ## Subversion files ##
 .svn
