@@ -49,10 +49,10 @@ namespace VersionOneTFSServer.Tests
 
         }
 
-        private string GetLongXmlString()
+        private static string GetLongXmlString()
         {
             var doc = new XmlDocument();
-            doc.Load(@"Resources/LongXML.xml");
+            doc.Load(@".\Resources\LongXML.xml");
             var stringWriter = new StringWriter();
             var xmlTextWriter = new XmlTextWriter(stringWriter);
             doc.WriteTo(xmlTextWriter);
