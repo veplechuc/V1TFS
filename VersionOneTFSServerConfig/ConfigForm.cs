@@ -186,7 +186,7 @@ namespace VersionOneTFSServerConfig
         private void UpdateStatusText(string text, bool isError)
         {
             tbResults.BackColor = isError ? Color.DarkRed : Color.DarkGreen;
-            tbResults.Text += string.Concat(string.Format("({0}) {1}", DateTime.Now.ToLongTimeString(), text), Environment.NewLine);
+            tbResults.Text = string.Concat(string.Format("({0}) {1}", DateTime.Now.ToLongTimeString(), text), Environment.NewLine) + tbResults.Text;
             tbResults.Refresh();
         }
 
