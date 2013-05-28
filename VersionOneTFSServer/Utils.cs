@@ -16,7 +16,7 @@ namespace VersionOneTFSServer
 
             var config = new ConfigurationProvider();
 
-            var url = config.TfsListenerUrl;
+            var url = config.TfsUrl;
             var user = config.TfsUserName;
             var password = config.TfsPassword;
 
@@ -30,7 +30,7 @@ namespace VersionOneTFSServer
             }
 
             var creds = new NetworkCredential(user, password, domain);
-            var tfsServer = new TfsTeamProjectCollection(config.TfsListenerUrl, creds);
+            var tfsServer = new TfsTeamProjectCollection(url, creds);
             tfsServer.Authenticate();
             return tfsServer;
         }
