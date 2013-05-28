@@ -35,7 +35,15 @@ namespace VersionOneTFSServer.Tests
             it["then the message is processed successfully"] = () =>
                 {
                     var client = new ServiceProxy.ServiceClient();
-                    client.Notify(longXml, "<TeamFoundationServer url='http://localhost:8080/tfs/DefaultCollection/Services/v3.0/LocationService.asmx' />");
+
+                    try
+                    {
+                        client.Notify(longXml, "<TeamFoundationServer url='http://localhost:8080/tfs/DefaultCollection/Services/v3.0/LocationService.asmx' />");
+                    }
+                    finally
+                    {
+                        if (client.State != CommunicationState.Closed) client.Close();
+                    }
                 };
 
 
