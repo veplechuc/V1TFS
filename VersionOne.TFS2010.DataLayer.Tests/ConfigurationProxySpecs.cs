@@ -115,7 +115,7 @@ namespace VersionOneTFSServer.Tests
         public void given_a_url_is_provided_on_construction()
         {
             const string baseUrl = "http://www.google.com/";
-            string expectedUrl = new Uri(new Uri(baseUrl), UriElements.ConfigurationPath).ToString();
+            var expectedUrl = new Uri(new Uri(baseUrl), UriElements.ConfigurationPath).ToString();
             var target = new ConfigurationProxy(null, "http://www.google.com/");
 
             context["when i retrieve the listener url form the configurationProxy instance"] = () =>

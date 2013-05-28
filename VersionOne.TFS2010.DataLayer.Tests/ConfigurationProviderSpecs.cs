@@ -45,7 +45,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
         {
             const string userName = "User1";
             const string password = "P@ssword1";
-            const string v1url = "https://www14.v1host.com/v1sdktesting/";
+            const string v1Url = "https://www14.v1host.com/v1sdktesting/";
             const string tfsurl = "http://vsts2012:8080/tfs/DefaultCollection/";
             const string tfsListenerUrl = "http://localhost:5050/servicesRus.svc";
             const string tfsuser = "TfsUser1";
@@ -63,7 +63,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
                         {
                             {AppSettingKeys.VersionOneUserName, userName},
                             {AppSettingKeys.VersionOnePassword, password},
-                            {AppSettingKeys.VersionOneUrl, v1url},
+                            {AppSettingKeys.VersionOneUrl, v1Url},
                             {AppSettingKeys.IsWindowsIntegratedSecurity, useWindowsSecurity.ToString()},
                             {AppSettingKeys.TfsUrl, tfsurl.ToString()},
                             {AppSettingKeys.TfsListenerUrl, tfsListenerUrl.ToString()},
@@ -81,7 +81,7 @@ namespace VersionOneTFS2010.DataLayer.Tests
                             _target = new ConfigurationProvider();
                             _target.VersionOneUserName.should_be(userName);
                             _target.VersionOnePassword.should_be(password);
-                            _target.VersionOneUrl.ToString().should_be(v1url);
+                            _target.VersionOneUrl.ToString().should_be(v1Url);
                             _target.IsWindowsIntegratedSecurity.should_be(useWindowsSecurity);
                             _target.TfsUrl.ToString().should_be(tfsurl);
                             _target.TfsListenerUrl.ToString().should_be(tfsListenerUrl);
