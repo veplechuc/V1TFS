@@ -112,7 +112,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\LongXML.xml">
+    <Content Include="Resources\BuildEventExample.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LongCheckinEvent.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
