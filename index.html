@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>V1tfs by versionone</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>V1tfs</h1>
+          <h2>Links VersionOne Workitems to TFS Check-ins and Builds.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/versionone/V1TFS/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/versionone/V1TFS/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/versionone/V1TFS" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="versionone-integration-with-microsoft-team-foundation-server" class="anchor" href="#versionone-integration-with-microsoft-team-foundation-server"><span class="octicon octicon-link"></span></a>VersionOne Integration with Microsoft Team Foundation Server</h1>
+
+<p>V1TFS links VersionOne Workitems to TFS Check-ins and Builds. The link from Workitems to Check-ins makes it easier to track down the source of a defect and perform code reviews. The link from Workitems to Builds enables teams to measure progress in terms of working software and to identify problems sooner. Using the links from Workitems to Builds, the VersionOne BuildRun Report can help a Release Manager select an appropriate build for release and can be the starting point for release notes.</p>
+
+<p>V1TFS has 2 components: The TFS Listener and the VersionOne Check-in Policy.</p>
+
+<p>The TFS Listener is responsible for responding to check-in and build events from TFS. For each qualifying check-in event the listener creates a "ChangeSet" in VersionOne, providing the team visibility into the code changes for a story or defect. This visibility can be useful when tracking down defects or performing code reviews. For each qualifying build event, the listener creates a "BuildRun" in VersionOne. If possible, BuildRuns are associated with stories and/or defects in VersionOne providing the organization visibility into build contents. This visibility is useful when selecting a build to release, identifying problem builds, or generating release notes.</p>
+
+<p>In order for the Listener to create associations in VersionOne, the check-in comment must include a VersionOne story or defect ID, such as "S-01454". The VersionOne Check-in Policy ensures that this requirement is met. When this policy is enabled for a TFS project, each comments is scanned for a VersionOne ID. If not found, the Policy fails and prompts the user to select an ID from a dialog box. The user may select from items they own in active iterations, or from all items in active iterations.</p>
+
+<p>This product includes software developed at VersionOne (<a href="http://versionone.com/">http://versionone.com/</a>). This product is open source and is licensed under a modified BSD license, which reflects our intent that software built with a dependency on V1TFS can be commercial or open source, as the authors see fit.</p>
+
+<p><img src="https://raw.github.com/versionone/V1TFS/master/Doc/images/V1TFS_Integration_Sequence.png" alt="V1TFS Integration Sequence Diagram" title="V1TFS Integration Sequence Diagram"></p>
+
+<h2>
+<a name="system-requirements" class="anchor" href="#system-requirements"><span class="octicon octicon-link"></span></a>System Requirements</h2>
+
+<h3>
+<a name="versionone" class="anchor" href="#versionone"><span class="octicon octicon-link"></span></a>VersionOne</h3>
+
+<p>12.2 or above, including Team Edition</p>
+
+<h3>
+<a name="team-foundation-server" class="anchor" href="#team-foundation-server"><span class="octicon octicon-link"></span></a>Team Foundation Server</h3>
+
+<p>Microsoft Team Foundation Server 2010, 2012</p>
+
+<h3>
+<a name="clients" class="anchor" href="#clients"><span class="octicon octicon-link"></span></a>Clients</h3>
+
+<p>Visual Studio 2010, 2012 (not including Team Explorer)</p>
+
+<h2>
+<a name="install-tfs-listener" class="anchor" href="#install-tfs-listener"><span class="octicon octicon-link"></span></a>Install TFS Listener</h2>
+
+<p>The VersionOne TFS Listener is a WebService that must be installed on a machine that has access to your VersionOne Server and your Team Foundation Server. It is recommended that you install the Listener on the Team Foundation Server.</p>
+
+<p>To install the TFS Listener, execute VersionOne.TFS.Listener.Installer.msi on the appropriate machine and follow the steps in the installation wizard. You can verify the listener by typing the following URL into your browser:</p>
+
+<pre lang="url"><code>http://[machine]:[port]/Service.svc
+</code></pre>
+
+<p>Replace [machine] with the name of the machine hosting the service [port] with the TCP port number that you provided in the installer.</p>
+
+<p>For instance, if the machine hosting your TFS Server is called "TFS2010" and you specified port 9090 in the install, your URL would be:</p>
+
+<pre lang="url"><code>http://tfs2010:9090/Service.svc 
+</code></pre>
+
+<p>You should see a page similar to the following:
+<img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/ListenerWorks.png?raw=true" alt="Service Service" title="Listener Works"></p>
+
+<h2>
+<a name="configure-the-tfs-listener" class="anchor" href="#configure-the-tfs-listener"><span class="octicon octicon-link"></span></a>Configure the TFS Listener</h2>
+
+<p>In order for the TFS Listener to work it must know which VersionOne instance to use when creating assets and making associations and which TFS instance to use for listening to events. Configuring the TFS Listener is accomplished using the TFS Listener Configuration utility. This utility is installed as part of the TFS Listener installation. If you need to reconfigure the TFS Listener at a later date, this utility is available from the Start menu under Programs | VersionOne TFS Listener.</p>
+
+<p>The utility has 3 tabs</p>
+
+<h3>
+<a name="1-versionone-server" class="anchor" href="#1-versionone-server"><span class="octicon octicon-link"></span></a>1. VersionOne Server</h3>
+
+<p>This tab allows you to to configure VersionOne connectivity. All of these parameters are required.</p>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/V1Config.jpg?raw=true" alt="VersionOne Server Tab" title="VersionOne Server"></p>
+
+<h3>
+<a name="2-tfs-server" class="anchor" href="#2-tfs-server"><span class="octicon octicon-link"></span></a>2. TFS Server</h3>
+
+<p>This tab allows you to subscribe to TFS Events. All of these parameters are required</p>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/TFSConfig.jpg?raw=true" alt="TFS Server Tab" title="TFS Server"></p>
+
+<h3>
+<a name="3-advanced" class="anchor" href="#3-advanced"><span class="octicon octicon-link"></span></a>3. Advanced</h3>
+
+<p>This tab allows you to configure the regular expression used to match VersionOne IDs in Check-in comments and enable a debug log. This configuration is optional since we set the default value to a working expression. We do not recommend you change this unless necessary.</p>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/AdvancedConfig.jpg?raw=true" alt="Advanced Tab" title="Advanced"></p>
+
+<h2>
+<a name="install-the-versionone-check-in-policy" class="anchor" href="#install-the-versionone-check-in-policy"><span class="octicon octicon-link"></span></a>Install the VersionOne Check-in policy</h2>
+
+<p>The VersionOne Check-in Policy ensures that each TFS Check-in contains a VersionOne identifier. This policy must be installed on each machine running Visual Studio. To install the VersionOne Check-in policy, execute VersionOne.TFSPolicy.Installer.vsix on the client machine.</p>
+
+<h2>
+<a name="enable-the-versionone-check-in-policy-for-a-tfs-project" class="anchor" href="#enable-the-versionone-check-in-policy-for-a-tfs-project"><span class="octicon octicon-link"></span></a>Enable the VersionOne Check-in policy for a TFS Project</h2>
+
+<p>In order to be considered when performing a check-in, the VersionOne TFS Check-in policy must be enabled on a TFS project. Perform the following steps to enable the Check-in policy on a TFS Project.</p>
+
+<h3>
+<a name="1-open-visual-studio" class="anchor" href="#1-open-visual-studio"><span class="octicon octicon-link"></span></a>1. Open Visual Studio</h3>
+
+<h3>
+<a name="2-open-the-team-explorer" class="anchor" href="#2-open-the-team-explorer"><span class="octicon octicon-link"></span></a>2. Open the Team Explorer</h3>
+
+<h3>
+<a name="3-right-click-on-the-desired-project" class="anchor" href="#3-right-click-on-the-desired-project"><span class="octicon octicon-link"></span></a>3. Right click on the desired project</h3>
+
+<h3>
+<a name="4-select-team-project-settings" class="anchor" href="#4-select-team-project-settings"><span class="octicon octicon-link"></span></a>4. Select "Team Project Settings"</h3>
+
+<h3>
+<a name="5-select-source-control" class="anchor" href="#5-select-source-control"><span class="octicon octicon-link"></span></a>5. Select "Source Control..."</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.1.jpg?raw=true" alt="Team Project Settings -&gt; Source Control..." title="Team Project Settings -&gt; Source Control..."></p>
+
+<h3>
+<a name="6-select-the-check-in-policy-tab" class="anchor" href="#6-select-the-check-in-policy-tab"><span class="octicon octicon-link"></span></a>6. Select the "Check-in Policy" tab</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.2.jpg?raw=true" alt="Check-in Policy Tab" title="Check-in Policy"></p>
+
+<h3>
+<a name="7-click-add" class="anchor" href="#7-click-add"><span class="octicon octicon-link"></span></a>7. Click "Add"</h3>
+
+<h3>
+<a name="8-select-the-versionone-policy" class="anchor" href="#8-select-the-versionone-policy"><span class="octicon octicon-link"></span></a>8. Select the "VersionOne Policy"</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/TFS.EnablePolicy.3.jpg?raw=true" alt="VersionOne Policy" title="VersionOne Policy"></p>
+
+<h3>
+<a name="9-click-ok-to-close-the-add-check-in-policy-dialog" class="anchor" href="#9-click-ok-to-close-the-add-check-in-policy-dialog"><span class="octicon octicon-link"></span></a>9. Click Ok to close the "Add Check-in Policy" dialog</h3>
+
+<h3>
+<a name="10-click-ok-to-close-the-source-control-settings-dialog" class="anchor" href="#10-click-ok-to-close-the-source-control-settings-dialog"><span class="octicon octicon-link"></span></a>10. Click Ok to close the "Source Control Settings" dialog</h3>
+
+<h2>
+<a name="configure-versionone-build-integration" class="anchor" href="#configure-versionone-build-integration"><span class="octicon octicon-link"></span></a>Configure VersionOne Build Integration</h2>
+
+<p>In order to access TFS Build Runs in VersionOne you must configure the VersionOne application. The following steps describe how to enable build integration, create a build project, and assign that project to a project containing stories and defects.</p>
+
+<p>If you are using Team Edition, you need to manually create the Build Project. Instructions for doing this are available on the VersionOne Community Site. </p>
+
+<h3>
+<a name="1-log-into-the-versionone-application-as-admin" class="anchor" href="#1-log-into-the-versionone-application-as-admin"><span class="octicon octicon-link"></span></a>1. Log into the VersionOne application as admin</h3>
+
+<h3>
+<a name="2-navigate-to-the-admin---configuration---system-page" class="anchor" href="#2-navigate-to-the-admin---configuration---system-page"><span class="octicon octicon-link"></span></a>2. Navigate to the Admin -&gt; Configuration -&gt; System page</h3>
+
+<h3>
+<a name="3-check-the-enable-build-integration-checkbox-and-click-the-apply-button" class="anchor" href="#3-check-the-enable-build-integration-checkbox-and-click-the-apply-button"><span class="octicon octicon-link"></span></a>3. Check the "Enable Build Integration" checkbox and click the Apply button</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/EnableBuildIntegration.jpg?raw=true" alt="Enable Build Integration" title="Enable Build Integration"></p>
+
+<h3>
+<a name="4-navigate-to-the-admin---projects---build-project-page" class="anchor" href="#4-navigate-to-the-admin---projects---build-project-page"><span class="octicon octicon-link"></span></a>4. Navigate to the Admin -&gt; Projects -&gt; Build Project page</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/BuildProjects.jpg?raw=true" alt="Build Projects" title="Build Projects"></p>
+
+<h3>
+<a name="5-click-add-to-add-a-new-build-project" class="anchor" href="#5-click-add-to-add-a-new-build-project"><span class="octicon octicon-link"></span></a>5. Click Add to add a new Build Project</h3>
+
+<h3>
+<a name="6-specify-the-following" class="anchor" href="#6-specify-the-following"><span class="octicon octicon-link"></span></a>6. Specify the following</h3>
+
+<ol>
+<li>Name: this is how the Build Project will be known to VersionOne users</li>
+<li>Reference: this is the Build Project is known to TFS</li>
+</ol><h3>
+<a name="7-click-ok-to-save-the-new-build-project" class="anchor" href="#7-click-ok-to-save-the-new-build-project"><span class="octicon octicon-link"></span></a>7. Click Ok to save the new Build Project</h3>
+
+<h3>
+<a name="8-navigate-to-the-admin---projects---projects-page" class="anchor" href="#8-navigate-to-the-admin---projects---projects-page"><span class="octicon octicon-link"></span></a>8. Navigate to the Admin -&gt; Projects -&gt; Projects page</h3>
+
+<h3>
+<a name="9-click-edit-on-the-row-for-the-project-you-want-associated-with-a-build-project" class="anchor" href="#9-click-edit-on-the-row-for-the-project-you-want-associated-with-a-build-project"><span class="octicon octicon-link"></span></a>9. Click Edit on the row for the project you want associated with a Build Project</h3>
+
+<h3>
+<a name="10-using-the-build-projects-dropdown-add-the-appropriate-build-project" class="anchor" href="#10-using-the-build-projects-dropdown-add-the-appropriate-build-project"><span class="octicon octicon-link"></span></a>10. Using the "Build Projects" dropdown add the appropriate Build Project.</h3>
+
+<p><img src="https://github.com/versionone/V1TFS/blob/master/Doc/images/AssignBuildProjectToProject.jpg?raw=true" alt="Assign Build Project to Project" title="Assign Build Project to Project"></p>
+
+<h3>
+<a name="11-click-ok-to-accept-the-changes" class="anchor" href="#11-click-ok-to-accept-the-changes"><span class="octicon octicon-link"></span></a>11. Click Ok to accept the changes</h3>
+
+<h3>
+<a name="12-logout" class="anchor" href="#12-logout"><span class="octicon octicon-link"></span></a>12. Logout</h3>
+        </section>
+
+        <footer>
+          V1tfs is maintained by <a href="https://github.com/versionone">versionone</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
