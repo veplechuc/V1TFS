@@ -80,7 +80,7 @@ fi
 echo "Using $BUILDTOOLS_PATH for NuGet"
 
 if [ -z "$DOTNET_PATH" ]; then
-  for D in `bashpath "$SYSTEMROOT\\Microsoft.NET\\Framework\\*"`; do
+  for D in `bashpath "$SYSTEMROOT\\Microsoft.NET\\Framework\\v*"`; do
     if [ -d $D ]; then
       export DOTNET_PATH="$D"
     fi
