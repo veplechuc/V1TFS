@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -321,30 +322,45 @@ namespace VersionOne.TFS.Policy
 
         private void LoginAndFetchWorkItems()
         {
+	        var lable = "Failed to obtain workitems.";
             Cursor.Current = Cursors.WaitCursor;
             StatusLabel.Text = "Connecting to " + v1Url + "...";
             LoadingPanel.Visible = true;
             Refresh();
 
             Task.Factory.StartNew(() => {
-                                      try 
+                                      try
                                       {
-                                          UserLabel.Text = "Hello " + GetV1Component().GetLoggedInMemberUsername();
-                                          GetWorkitems();
-                                      } 
+	                                      UserLabel.Text = "Hello " + GetV1Component().GetLoggedInMemberUsername();
+	                                      GetWorkitems();
+                                      }
+                                      catch (AggregateException ax)
+                                      {
+	                                      HandleException(ax, lable);
+                                      }
                                       catch (Exception ex) 
                                       {
-                                          HandleException(ex, "Failed to obtain workitems");
+                                          HandleException(ex, lable);
                                       }
                                   }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void HandleException(Exception ex, string label)
         {
+			Trace.WriteLine(ex.Message);
+			Trace.WriteLine(ex.StackTrace);
             MessageBox.Show(ex.Message, label);
             Cursor.Current = Cursors.Default;
             LoadingPanel.Visible = false;
         }
+
+		private void HandleException(AggregateException ax, string label)
+		{
+			foreach (var inner in ax.InnerExceptions)
+			{
+				HandleException(inner, label);
+			}
+		}
 
         private void ClearWorkitems()
         {
