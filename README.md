@@ -39,7 +39,7 @@ For instance, if the machine hosting your TFS Server is called "TFS2010" and you
 http://tfs2010:9090/Service.svc 
 ```
 You should see a page similar to the following:
-![Service Service](https://raw.github.com/versionone/V1TFS/master/doc/images/images/ListenerWorks.png "Listener Works")
+![Service Service](https://raw.github.com/versionone/V1TFS/master/doc/images/ListenerWorks.png "Listener Works")
 
 ## Configure the TFS Listener
 
@@ -63,7 +63,7 @@ This tab allows you to subscribe to TFS Events. All of these parameters are requ
 
 This tab allows you to configure the regular expression used to match VersionOne IDs in Check-in comments and enable a debug log. This configuration is optional since we set the default value to a working expression. We do not recommend you change this unless necessary.
  
-![Advanced Tab](https://raw.github.com/versionone/V1TFS/master/doc/images//AdvancedConfig.jpg "Advanced")
+![Advanced Tab](https://raw.github.com/versionone/V1TFS/master/doc/images/AdvancedConfig.jpg "Advanced")
 
 ## Install the VersionOne Check-in policy
 The VersionOne Check-in Policy ensures that each TFS Check-in contains a VersionOne identifier. This policy must be installed on each machine running Visual Studio. To install the VersionOne Check-in policy, execute VersionOne.TFSPolicy.Installer.vsix on the client machine.
