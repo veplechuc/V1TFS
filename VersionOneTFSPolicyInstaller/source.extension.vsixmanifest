@@ -1,27 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-  <Metadata>
-    <Identity Id="VersionOneTFSPolicyInstaller.Microsoft.1c345753-005c-4fa9-a616-0fba5522df49" Version="2.0" Language="en-US" Publisher="VersionOne, Inc." />
-    <DisplayName>Check-in with VersionOne Workitem</DisplayName>
-    <Description>Code check-ins must contain an ID for a VersionOne workitem.</Description>
-    <License>LICENSE.md</License>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="VersionOneTFSPolicyInstaller.Microsoft.1c345753-005c-4fa9-a616-0fba5522df49">
+    <Name>VersionOneTFSPolicy</Name>
+    <Author>VersionOne</Author>
+    <Version>1.1</Version>
+    <Description xml:space="preserve">TFS Checkin policy from VersionOne.  Requires code commits to contain a VersionOne identifier</Description>
+    <Locale>1033</Locale>
+    <License>License.rtf</License>
     <Icon>logo.ico</Icon>
-  </Metadata>
-  <Installation>
-    <InstallationTarget Id="Microsoft.VisualStudio.IntegratedShell" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.Premium" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.Ultimate" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.VWDExpress" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.VPDExpress" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.VSWinExpress" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.VSLS" Version="[11.0,12.0)" />
-    <InstallationTarget Id="Microsoft.VisualStudio.VSWinDesktopExpress" Version="[11.0,12.0)" />
-  </Installation>
-  <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="4.5" />
-  </Dependencies>
-  <Assets>
-    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="File" Path="Policies.pkgdef" />
-  </Assets>
-</PackageManifest>
+    <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+        <Edition>Pro</Edition>
+      </VisualStudio>
+      <VisualStudio Version="11.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+        <Edition>Pro</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <References />
+  <Content>
+    <VsPackage>Policies.pkgdef</VsPackage>
+  </Content>
+</Vsix>
