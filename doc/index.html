@@ -103,7 +103,11 @@ V1TFS->VersionOne: BuildRun
 		<ul>
 			<li>VersionOne:
 				<ul>
-					<li>8.1 or above, including Team Edition</li>
+					<li>Tested with VersionOne 13.1.5.35. Expected to work with any version higher than 8.1.</li>
+					<li>Compatible with all VersionOne Editions.</li>
+					<li>Compatible with all Methodology choices.</li>
+					<li>VersionOne Authentication or Windows Integrated Authentication. (Does not work with other forms of SSO.)</li>
+					<li>A member with [Team Member role](http://community.versionone.com/Help-Center/Version101/Current/Administration/Roles-Project-Membership), or higher, on integrated projects.</li>
 				</ul>
 			</li>
 			<li>Team Foundation Server:
@@ -113,8 +117,8 @@ V1TFS->VersionOne: BuildRun
 			</li>
 			<li>VersionOne TFS Listener:
 				<ul>
-					<li>Recommended: Install on ssame host as TFS, which shares the 
-						following system requirements.</li>
+					<li>Bi-directional network access between VersionOne TFS Listener and TFS. Recommendation: install on the same host as TFS to avoid network issues such as firewalls.</li>
+					<li>TFS Client DLLs. TFS Client DLLs are not redistributable so they are not provided with the integration. Recommendation: install on the same host as TFS so DLLs will be available. Alternatively, install Visual Studio to provide the client DLLs.</li>
 					<li>IIS 6.0 or above</li>
 					<li>ASP.NET 4.0</li>
 				</ul>
