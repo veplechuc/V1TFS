@@ -6,7 +6,7 @@
     <Version>1.1</Version>
     <Description xml:space="preserve">TFS Checkin policy from VersionOne.  Requires code commits to contain a VersionOne identifier</Description>
     <Locale>1033</Locale>
-    <License>License.rtf</License>
+    <License>License.md</License>
     <Icon>logo.ico</Icon>
     <SupportedProducts>
       <VisualStudio Version="10.0">
