@@ -74,6 +74,16 @@ for D in $TOOLSDIRS; do
     export BUILDTOOLS_PATH="$D/bin"
   fi
 done
+
+echo $(which $BUILDTOOLS_PATH/NuGet.exe)
+echo $(which $WORKSPACE/.nuget/NuGet.exe)
+
+if [ ! $(which $BUILDTOOLS_PATH/NuGet.exe) ] && [ -d "$WORKSPACE/.nuget" ] && [ ! $(which "$WORKSPACE/.nuget/nuget.exe") ]; then
+  # Get the latest nuget.exe
+  echo "Build is downloading the latest nuget.exe"
+  powershell -NoProfile -ExecutionPolicy unrestricted -Command "(new-object System.Net.WebClient).Downloadfile('http://nuget.org/nuget.exe', './.nuget/nuget.exe')"
+fi
+
 if [ ! $(which $BUILDTOOLS_PATH/NuGet.exe) ] && [ $(which $WORKSPACE/.nuget/NuGet.exe) ]; then
   export BUILDTOOLS_PATH="$WORKSPACE/.nuget"
 fi
@@ -112,21 +122,6 @@ if [ -z "$BUILD_NUMBER" ]; then
   export BUILD_NUMBER=`date +%H%M`  # hour + minute
 fi
 
-function update_nuget_deps() {
-  install_nuget_deps
-  NuGet.exe update $SOLUTION_FILE -Verbose -Source $NUGET_FETCH_URL
-}
-
-function install_nuget_deps() {
-  PKGSDIRW=`winpath "$WORKSPACE/packages"`
-  for D in $WORKSPACE/*; do
-    if [ -d $D ] && [ -f $D/packages.config ]; then
-      PKGSCONFIGW=`winpath "$D/packages.config"`
-      NuGet.exe install "$PKGSCONFIGW" -o "$PKGSDIRW" -Source "$NUGET_FETCH_URL"
-    fi
-  done
-}
-
 # ---- Produce .NET Metadata --------------------------------------------------
 
 COMPONENTS="VersionOne.TFS2010.Common VersionOne.TFS2010.DataLayer VersionOneTFSPolicy VersionOneTFSPolicyInstaller VersionOneTFSServer VersionOneTFSServerConfig"
@@ -159,14 +154,13 @@ done
 
 # MSBuild.exe $SOLUTION_FILE /m /t:Clean
 
+# ---- Restore packages and update them to the latest compatible versions -----
 
+echo "Build is restoring NuGet packages"
+nuget restore $SOLUTION_FILE -Source $NUGET_FETCH_URL
 
-# ---- Update NuGet Packages --------------------------------------------------
-
-#removing update step to prevent version conflicts between ServerConnector and ServiceHost.Core, which require the same version of APIClient
-#update_nuget_deps
-
-install_nuget_deps
+echo "Build is updating NuGet packages to latest compatible versions"
+nuget update $SOLUTION_FILE -Source $NUGET_FETCH_URL
 
 # ---- Build solution using msbuild -------------------------------------------
 
