@@ -32,21 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NSpec">
-      <HintPath>..\packages\nspec.0.9.66\lib\NSpec.dll</HintPath>
+      <HintPath>..\packages\nspec.0.9.67\lib\NSpec.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="VersionOne.ServiceHost.Core, Version=1.0.141.0, Culture=neutral, PublicKeyToken=e0f410c10d2e7630, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.141.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
+    <Reference Include="VersionOne.ServerConnector">
+      <HintPath>..\packages\VersionOne.ServerConnector.1.0.122.0\lib\net40\VersionOne.ServerConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="VersionOne.ServiceHost.Core">
+      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.171.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
