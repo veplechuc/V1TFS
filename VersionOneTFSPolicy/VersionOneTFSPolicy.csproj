@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.TeamFoundation.VersionControl.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -76,10 +76,10 @@
       <HintPath>..\packages\VersionOne.SDK.APIClient.12.5.0.181\lib\net40\VersionOne.SDK.APIClient.dll</HintPath>
     </Reference>
     <Reference Include="VersionOne.ServerConnector">
-      <HintPath>..\packages\VersionOne.ServerConnector.1.0.122.0\lib\net40\VersionOne.ServerConnector.dll</HintPath>
+      <HintPath>..\packages\VersionOne.ServerConnector.1.0.139.0\lib\net40\VersionOne.ServerConnector.dll</HintPath>
     </Reference>
     <Reference Include="VersionOne.ServiceHost.Core">
-      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.171.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
+      <HintPath>..\packages\VersionOne.ServiceHost.Core.1.0.186.0\lib\net40\VersionOne.ServiceHost.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
