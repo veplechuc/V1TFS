@@ -2,6 +2,12 @@
 
 V1TFS links VersionOne Workitems to TFS Check-ins and Builds. 
 
+# Purpose #
+
+We want developers to be able to run the build script before Jenkins, so they can know if it will work with it.
+From time-to-time there are environment differences (like with NuGet) that get in the way, but that is the main idea.
+Developers should be able to build from Visual Studio too. This means that some extra packages could be installed so it works there too.
+
 # Build Prerequisites
 
 ## Step 1: Install or upgrade to the latest NuGet
