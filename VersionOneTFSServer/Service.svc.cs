@@ -17,6 +17,7 @@ using VersionOneTFS2010.DataLayer.Providers;
 using VersionOneTFSServer.Interfaces;
 using VersionOneTFSServer.ServiceErrors;
 using Environment = System.Environment;
+using System.Globalization;
 
 namespace VersionOneTFSServer
 {
@@ -163,8 +164,8 @@ namespace VersionOneTFSServer
 
             foreach (var buildProject in results)
             {
-                var ts = DateTime.Parse(e.FinishTime) - DateTime.Parse(e.StartTime);
-                var buildRun = v1Component.Value.CreateBuildRun(buildProject, e.BuildNumber, DateTime.Parse(e.FinishTime), ts.Seconds);
+                var ts = DateTime.Parse(e.FinishTime, CultureInfo.InvariantCulture) - DateTime.Parse(e.StartTime, CultureInfo.InvariantCulture);
+                var buildRun = v1Component.Value.CreateBuildRun(buildProject, e.BuildNumber, DateTime.Parse(e.FinishTime, CultureInfo.InvariantCulture), ts.Seconds);
                 
                 var statuses = v1Component.Value.GetBuildRunStatuses();
                 var status = e.StatusCode == "Succeeded"
