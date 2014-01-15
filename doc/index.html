@@ -3,34 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>VersionOne Integration with Microsoft Team Foundation
-	Server 2010</title>
+	Server</title>
 <link rel="stylesheet" href="styles/help.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div class="main">
-		<h1>VersionOne Integration with Microsoft Team Foundation Server
-			2010</h1>
+		<h1>VersionOne Integration with Microsoft Team Foundation Server</h1>
 		<h2>Introduction</h2>
 		<h2>Contents</h2>
 		<ul>
 			<li><a
 				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Description'>Description</a></li>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-SystemRequirements'>System
-					Requirements</a></li>
+				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-SystemRequirements'>System Requirements</a></li>
 			<li><a
 				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Installation'>Installation</a>
 				<ul>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTFSListener'>Install
-							TFS Listener</a></li>
+						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTFSListener'>Install TFS Listener</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfiguretheTFSListener'>Configure
-							the TFS Listener</a></li>
+						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfiguretheTFSListener'>Configure the TFS Listener</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstalltheVersionOneCheckinpolicy'>Install
-							the VersionOne Check-in policy</a></li>
+						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstalltheVersionOneCheckinpolicy'>Install the VersionOne Check-in policy</a></li>
 					<li><a
 						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-EnabletheVersionOneCheckinpolicyforaTFSProject'>Enable
 							the VersionOne Check-in policy for a TFS Project</a></li>
@@ -55,7 +50,7 @@
 
 		<p>VersionOne's integration with Microsoft Team Foundation Server
 			(V1TFS) provides your organization with visibility into change while
-			freeing the development team to focus on deliverable. This
+			freeing the development team to focus on deliverables. This
 			integration is comprised of two parts: The TFS Listener and the
 			VersionOne Check-in Policy.</p>
 
@@ -75,7 +70,7 @@
 			the check-in comment must include a VersionOne story or defect ID,
 			such as &quot;S-01454&quot;. The VersionOne Check-in Policy ensures
 			that this requirement is met. When this policy is enabled for a TFS
-			project, each comments is scanned for a VersionOne ID. If not found,
+			project, each comment is scanned for a VersionOne ID. If not found,
 			the Policy fails and prompts the user to select an ID from a dialog
 			box. The user may select from items they own in active iterations, or
 			from all items in active iterations.</p>
@@ -107,7 +102,7 @@ V1TFS->VersionOne: BuildRun
 					<li>Compatible with all VersionOne Editions.</li>
 					<li>Compatible with all Methodology choices.</li>
 					<li>VersionOne Authentication or Windows Integrated Authentication. (Does not work with other forms of SSO.)</li>
-					<li>A member with [Team Member role](http://community.versionone.com/Help-Center/Version101/Current/Administration/Roles-Project-Membership), or higher, on integrated projects.</li>
+					<li>A member with <a href="http://community.versionone.com/Help-Center/Version101/Current/Administration/Roles-Project-Membership">Team Member role</a>, or higher, on integrated projects.</li>
 				</ul>
 			</li>
 			<li>Team Foundation Server:
@@ -178,7 +173,7 @@ V1TFS->VersionOne: BuildRun
 			<code>http://[machine]:[port]/Service.svc</code>
 		</p>
 		<p>Replace [machine] with the name of the machine hosting the
-			service [port] with the TCP port number that you provided in the
+			service, and [port] with the TCP port number that you provided in the
 			installer.</p>
 
 		<p>
@@ -229,7 +224,7 @@ V1TFS->VersionOne: BuildRun
 			<li>TFS Server
 				<p>
 					This tab allows you to subscribe to TFS Events. All of these
-					parameters are required<br /> <a class="thumbnail"
+					parameters are required.<br /> <a class="thumbnail"
 						href='images/TFSConfig.jpg'><img
 						src="images/thumbnails/tfsconfig" border="0" /></a>
 				</p>
@@ -261,7 +256,7 @@ V1TFS->VersionOne: BuildRun
 		</h2>
 		<p>The VersionOne Check-in Policy ensures that each TFS Check-in
 			contains a VersionOne identifier. This policy must be installed on
-			each machine running Visual Studio 2010. To install the VersionOne
+			each machine running Visual Studio. To install the VersionOne
 			Check-in policy, execute VersionOne.TFSPolicy.Installer.vsix on the
 			client machine.</p>
 
@@ -281,7 +276,7 @@ V1TFS->VersionOne: BuildRun
 			Perform the following steps to enable the Check-in policy on a TFS
 			Project</p>
 		<ol>
-			<li>Open Visual Studio 2010</li>
+			<li>Open Visual Studio</li>
 			<li>Open the Team Explorer</li>
 			<li>Right click on the desired project</li>
 			<li>Select &quot;Team Project Settings&quot;</li>
