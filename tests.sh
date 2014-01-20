@@ -1,3 +1,5 @@
+set -ex
+
 function copyTestingResources() {
 	echo 'Copying testing resources...'
   	mkdir -p ./Resources;
