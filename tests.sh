@@ -1,5 +1,7 @@
 set -ex
 
+. ./build.properties
+
 function copyTestingResources() {
 	echo 'Copying testing resources...'
   	mkdir -p ./Resources;
