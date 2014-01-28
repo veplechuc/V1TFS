@@ -14,38 +14,38 @@
 		<h2>Contents</h2>
 		<ul>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Description'>Description</a></li>
+				href='#Description'>Description</a></li>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-SystemRequirements'>System Requirements</a></li>
+				href='#SystemRequirements'>System Requirements</a></li>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Installation'>Installation</a>
+				href='#Installation'>Installation</a>
 				<ul>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTFSListener'>Install TFS Listener</a></li>
+						href='#InstallTFSListener'>Install TFS Listener</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfiguretheTFSListener'>Configure the TFS Listener</a></li>
+						href='#ConfiguretheTFSListener'>Configure the TFS Listener</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstalltheVersionOneCheckinpolicy'>Install the VersionOne Check-in policy</a></li>
+						href='#InstalltheVersionOneCheckinpolicy'>Install the VersionOne Check-in policy</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-EnabletheVersionOneCheckinpolicyforaTFSProject'>Enable
+						href='#EnabletheVersionOneCheckinpolicyforaTFSProject'>Enable
 							the VersionOne Check-in policy for a TFS Project</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfigureVersionOneBuildIntegration'>Configure
+						href='#ConfigureVersionOneBuildIntegration'>Configure
 							VersionOne Build Integration</a></li>
 					<li><a
-						href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-VerifyEverythingWorks'>Verify
+						href='#VerifyEverythingWorks'>Verify
 							Everything Works</a></li>
 				</ul></li>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Troubleshootingtips'>Troubleshooting
+				href='#Troubleshootingtips'>Troubleshooting
 					tips</a></li>
 			<li><a
-				href='#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Technology'>Technology</a></li>
+				href='#Technology'>Technology</a></li>
 		</ul>
 
 		<h2>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Description"></a>Description
+				name="Description"></a>Description
 		</h2>
 
 		<p>VersionOne's integration with Microsoft Team Foundation Server
@@ -92,13 +92,13 @@ V1TFS->VersionOne: BuildRun
 
 		<h2>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-SystemRequirements"></a>System
+				name="SystemRequirements"></a>System
 			Requirements
 		</h2>
 		<ul>
 			<li>VersionOne:
 				<ul>
-					<li>Tested with VersionOne 13.1.5.35. Expected to work with any version higher than 8.1.</li>
+					<li>Tested with VersionOne 13.3.8.5316. Expected to work with any version higher than 8.1.</li>
 					<li>Compatible with all VersionOne Editions.</li>
 					<li>Compatible with all Methodology choices.</li>
 					<li>VersionOne Authentication or Windows Integrated Authentication. (Does not work with other forms of SSO.)</li>
@@ -107,26 +107,45 @@ V1TFS->VersionOne: BuildRun
 			</li>
 			<li>Team Foundation Server:
 				<ul>
-					<li>Microsoft Team Foundation Server 2010, 2012</li>
+					<li>Microsoft Team Foundation Server 2012</li>
 				</ul>
 			</li>
 			<li>VersionOne TFS Listener:
 				<ul>
-					<li>Bi-directional network access between VersionOne TFS Listener and TFS. Recommendation: install on the same host as TFS to avoid network issues such as firewalls.</li>
-					<li>TFS Client DLLs. TFS Client DLLs are not redistributable so they are not provided with the integration. Recommendation: install on the same host as TFS so DLLs will be available. Alternatively, install Visual Studio to provide the client DLLs.</li>
-					<li>IIS 6.0 or above</li>
-					<li>ASP.NET 4.0</li>
+					<li>Tested with Windows Server 2012. Expected to work with Windows Server 2008 or higher, provided the required version of .NET Framework can be installed (see below). Expected to work with Windows Vista or higher, provided the required versions of IIS and .NET Framework can be installed (see below). Windows must have the following features enabled:
+						<ul>
+							<li>NET-WCF-HTTP-Activation45</li>
+						</ul>
+					</li>
+					<li>Tested with .NET Framework 4.5. Expected to work with any subsequent version.</li>
+					<li>Tested with IIS 8.0. Expected to work with any version higher than 7.0. IIS must have the following features enabled:
+						<ul>
+							<li>IIS-WebServerRole</li>
+							<li>IIS-WebServer</li>
+							<li>IIS-ISAPIFilter</li>
+							<li>IIS-ISAPIExtensions</li>
+							<li>NetFx4Extended-ASPNET45</li>
+							<li>IIS-NetFxExtensibility45</li>
+							<li>IIS-ASPNET45</li>
+						</ul>
+						</li>
+					<li>Tested with TFS Client DLLs provided by Team Explorer. TFS Client DLLs are not redistributable so they are not provided with the integration. Expected to work as long as any version of Visual Studio is installed. Recommendation: install on the same host as TFS so DLLs will be available.</li>
+					<li>Bi-directional network access between VersionOne TFS Listener and TFS. This usually means TCP/IP port 9090 for the TFS Listener. Recommendation: install on the same host as TFS to avoid network issues such as firewalls.</li>
+					<li>Bi-directional network access between VersionOne TFS Listener and VersionOne. This usually means TCP/IP port 443 for https.</li>
 				</ul>
-			<li>Clients:
+			<li>Visual Studio (TFS Policy):
 				<ul>
-					<li>Visual Studio 2010, 2012</li>
+					<li>Requires .NET Framework 4.5 or higher.</li>
+					<li>Tested with VS2012 Update 3. Expected to work with any update to Visual Studio 2012.</li>
+					<li>Tested with Professional Edition. Expected to work with Premium and Ultimate Editions.</li>
+					<li>Tested on Windows 2012. Expected to work on any version of Windows where Visual Studio runs.</li>
 				</ul>
 			</li>
 		</ul>
 
 		<h2>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Installation"></a>Installation<a
+				name="Installation"></a>Installation<a
 				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTop"></a>
 		</h2>
 		<p>Before using the VersionOne VSTS integration you must perform
@@ -137,26 +156,26 @@ V1TFS->VersionOne: BuildRun
 				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTheTFSListener">Install
 					the TFS Listener</a></li>
 			<li><a
-				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfigureTheTFSListener">Configure
+				href="#ConfigureTheTFSListener">Configure
 					the TFS Listener</a></li>
 			<li><a
-				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTheVersionOneCheckInpolicy">Install
+				href="#InstallTheVersionOneCheckInpolicy">Install
 					the VersionOne Check-in policy</a></li>
 			<li><a
-				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-EnableTheVersionOneCheckInPolicyForATFSProject">Enable
+				href="#EnableTheVersionOneCheckInPolicyForATFSProject">Enable
 					the VersionOne Check-in policy for a TFS Project</a></li>
 			<li><a
-				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-ConfigureVersionOneBuildIntegration">Configure
+				href="#ConfigureVersionOneBuildIntegration">Configure
 					VersionOne Build Integration</a></li>
 			<li><a
-				href="#VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-VerifyEverythingWorks">Verify
+				href="#VerifyEverythingWorks">Verify
 					Everything Works</a></li>
 		</ol>
 
 
 		<h2>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTFSListener"></a>Install
+				name="InstallTFSListener"></a>Install
 			TFS Listener<a
 				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-InstallTheTFSListener"></a>
 		</h2>
@@ -408,7 +427,7 @@ V1TFS->VersionOne: BuildRun
 
 		<h1>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Troubleshootingtips"></a>Troubleshooting
+				name="Troubleshootingtips"></a>Troubleshooting
 			tips
 		</h1>
 
@@ -453,7 +472,7 @@ V1TFS->VersionOne: BuildRun
 
 		<h1>
 			<a
-				name="VersionOneIntegrationwithMicrosoftTeamFoundationServer2010-Technology"></a>Technology
+				name="Technology"></a>Technology
 		</h1>
 		<p>
 			The V1 TFS integration is built in C# using Visual Studio. The TFS
