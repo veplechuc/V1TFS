@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -xe
+. ./../build.properties
 
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
@@ -28,7 +29,7 @@ cat > "$NUSPEC" <<EOF
     <dependencies>
     </dependencies>
     <releaseNotes>
-    	`cat CHANGES.md`
+    	
     </releaseNotes>
   </metadata>
   <files>
@@ -38,9 +39,9 @@ cat > "$NUSPEC" <<EOF
 EOF
 
 
-cpack "$NUSPEC"   # output ./Whatever.Nupkg?????
+./.nuget/nuget.exe pack "$NUSPEC"   # output ./Whatever.Nupkg?????
 # NuGet SetApiKey <your key here> -source http://chocolatey.org/
 # $MYGET_APIKEY
-cpush $NUPKG -Source %MYGET_REPO_URL% -ApiKey %MYGET_API_KEY%
+./.nuget/nuget.exe push  $NUPKG -Source %MYGET_REPO_URL% -ApiKey %MYGET_API_KEY%
 
 
