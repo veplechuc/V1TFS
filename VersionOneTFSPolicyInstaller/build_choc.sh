@@ -6,6 +6,8 @@ set -xe
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
+MYGET_API_KEY="05c7fd08-2673-411f-90fb-c794e632f32d"
+MY_SOURCE="http://www.myget.org/F/versionone"
 
 cp "$BUILT_VSIX" "$PKGDIR"
 
@@ -15,9 +17,9 @@ cat > "$NUSPEC" <<EOF
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>VersionOne.TFS.Policy</id>
-    <title>$PRODUCT_NAME</title>
-    <version>$VERSION_NUMBER.$BUILD_NUMBER</version>
+    <id>VersionOne.TFS.PolicyInstaller</id>
+    <title>VersionOne.TFS.PolicyInstaller</title>
+    <version>1.0</version>
     <authors>$ORGANIZATION_NAME</authors>
     <owners>$ORGANIZATION_NAME</owners>
     <summary>Ensure that commits checked into TFS via Visual Studio have VersionOne annotation.</summary>
@@ -26,11 +28,6 @@ cat > "$NUSPEC" <<EOF
     <tags>VersionOne TFS Visual Studio VS2012 VS2013</tags>
     <licenseUrl>$GITHUB_WEB_URL/blob/master/LICENSE.md</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <dependencies>
-    </dependencies>
-    <releaseNotes>
-    	
-    </releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
@@ -38,10 +35,15 @@ cat > "$NUSPEC" <<EOF
 </package>
 EOF
 
+echo "$MYGET_API_KEY"
 
-./.nuget/nuget.exe pack "$NUSPEC"   # output ./Whatever.Nupkg?????
+../../.nuget/nuget.exe pack "$NUSPEC"   # output ./Whatever.Nupkg?????
 # NuGet SetApiKey <your key here> -source http://chocolatey.org/
 # $MYGET_APIKEY
-./.nuget/nuget.exe push  $NUPKG -Source %MYGET_REPO_URL% -ApiKey %MYGET_API_KEY%
+for NUPKG in VersionOne.TFS*.nupkg
+do
+    ../../.nuget/nuget.exe setApiKey "$MYGET_API_KEY" -Source "$MY_SOURCE"
+    ../../.nuget/nuget.exe push "$NUPKG" -Source "$MY_SOURCE"
+done
 
 
