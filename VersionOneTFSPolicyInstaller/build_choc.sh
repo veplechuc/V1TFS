@@ -41,6 +41,6 @@ EOF
 cpack "$NUSPEC"   # output ./Whatever.Nupkg?????
 # NuGet SetApiKey <your key here> -source http://chocolatey.org/
 # $MYGET_APIKEY
-cpush $NUPKG -Source $MYGET_URL 
+cpush $NUPKG -Source %MYGET_REPO_URL% -ApiKey %MYGET_API_KEY%
 
 
