@@ -7,7 +7,7 @@ PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
 MYGET_API_KEY="05c7fd08-2673-411f-90fb-c794e632f32d"
-MY_SOURCE="http://www.myget.org/F/versionone"
+MY_SOURCE="https://www.myget.org/F/versionone"
 
 cp "$BUILT_VSIX" "$PKGDIR"
 
