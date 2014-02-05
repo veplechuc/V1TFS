@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -xe
-. ./../build.properties
+. ./../../build.properties
 
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
