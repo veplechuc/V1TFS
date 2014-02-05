@@ -1,10 +1,10 @@
 #!/bin/sh
 
 set -xe
-#. ./../build.properties
 
 #obtain global api key value
-#MYGET_API_KEY = $1
+MYGET_API_KEY = "$2"
+
 Configuration="$1"
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
