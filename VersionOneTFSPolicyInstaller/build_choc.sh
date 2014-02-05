@@ -5,7 +5,7 @@ set -xe
 
 #obtain global api key value
 #MYGET_API_KEY = $1
-
+Configuration="$1"
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
