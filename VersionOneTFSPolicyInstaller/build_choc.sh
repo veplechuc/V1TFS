@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -xe
-. ./../build.properties
+#. ./../build.properties
 
 #obtain global api key value
 MYGET_API_KEY = $1
