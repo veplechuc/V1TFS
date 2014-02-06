@@ -11,7 +11,7 @@ NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
 MY_SOURCE="https://www.myget.org/F/versionone"
 
-cp "$BUILT_VSIX" "$PKGDIR"
+cp "$WORKSPACE/VersionOneTFSPolicyInstaller/$BUILT_VSIX" "$WORKSPACE/VersionOneTFSPolicyInstaller/$PKGDIR"
 
 pushd "$PKGDIR"
 
@@ -22,8 +22,8 @@ cat > "$NUSPEC" <<EOF
     <id>VersionOne.TFS.PolicyInstaller</id>
     <title>VersionOne.TFS.PolicyInstaller</title>
     <version>1.0</version>
-    <authors>$ORGANIZATION_NAME</authors>
-    <owners>$ORGANIZATION_NAME</owners>
+    <authors>VersionOne, Inc.</authors>
+    <owners>VersionOne, Inc.</owners>
     <summary>Ensure that commits checked into TFS via Visual Studio have VersionOne annotation.</summary>
     <description>VersionOne's TFS integration allows you to employ VersionOne in your TFS workflow.</description>
     <projectUrl>$GITHUB_WEB_URL</projectUrl>
