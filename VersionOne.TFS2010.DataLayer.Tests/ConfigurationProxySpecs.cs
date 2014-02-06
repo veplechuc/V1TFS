@@ -21,7 +21,7 @@ namespace VersionOneTFSServer.Tests
             _serializer = new JavaScriptSerializer();
         }
 
-        public new byte[] Put(string address, byte[] data)
+        public byte[] Put(string address, byte[] data)
         {
             var config = _serializer.Deserialize<TfsServerConfiguration>(
                     System.Text.Encoding.UTF8.GetString(data));
@@ -43,7 +43,7 @@ namespace VersionOneTFSServer.Tests
             return System.Text.Encoding.UTF8.GetBytes(_serializer.Serialize(new { status = "ok" })); // what would actual v1tfs server return?
         }
 
-        public new byte[] Get(string url)
+        public byte[] Get(string url)
         {
             if (!_stored.ContainsKey(url))
             {
