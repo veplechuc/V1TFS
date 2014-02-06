@@ -1,12 +1,14 @@
 #!/bin/sh
 
 set -xe
-. ./../build.properties
 
+#obtain global api key value
+MYGET_API_KEY="$2"
+
+Configuration="$1"
 PKGDIR="chocolateyPackage"
 NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
-MYGET_API_KEY="05c7fd08-2673-411f-90fb-c794e632f32d"
 MY_SOURCE="https://www.myget.org/F/versionone"
 
 cp "$BUILT_VSIX" "$PKGDIR"
@@ -35,7 +37,6 @@ cat > "$NUSPEC" <<EOF
 </package>
 EOF
 
-echo "$MYGET_API_KEY"
 
 ../../.nuget/nuget.exe pack "$NUSPEC"   # output ./Whatever.Nupkg?????
 # NuGet SetApiKey <your key here> -source http://chocolatey.org/
@@ -45,5 +46,3 @@ do
     ../../.nuget/nuget.exe setApiKey "$MYGET_API_KEY" -Source "$MY_SOURCE"
     ../../.nuget/nuget.exe push "$NUPKG" -Source "$MY_SOURCE"
 done
-
-
