@@ -3,7 +3,7 @@
 set -xe
 
 #obtain global api key value
-MYGET_API_KEY = "$2"
+MYGET_API_KEY="$2"
 
 Configuration="$1"
 PKGDIR="chocolateyPackage"
@@ -11,9 +11,9 @@ NUSPEC="VersionOne.TFS.PolicyInstaller.nuspec"
 BUILT_VSIX="bin/$Configuration/VersionOneTFSPolicyInstaller.vsix"
 MY_SOURCE="https://www.myget.org/F/versionone"
 
-cp "$BUILT_VSIX" "$PKGDIR"
+cp "$WORKSPACE/VersionOneTFSPolicyInstaller/$BUILT_VSIX" "$WORKSPACE/VersionOneTFSPolicyInstaller/$PKGDIR"
 
-pushd "$PKGDIR"
+pushd "$WORKSPACE/VersionOneTFSPolicyInstaller/$PKGDIR"
 
 cat > "$NUSPEC" <<EOF
 <?xml version="1.0"?>
@@ -46,5 +46,3 @@ do
     ../../.nuget/nuget.exe setApiKey "$MYGET_API_KEY" -Source "$MY_SOURCE"
     ../../.nuget/nuget.exe push "$NUPKG" -Source "$MY_SOURCE"
 done
-
-
